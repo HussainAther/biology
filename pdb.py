@@ -1,6 +1,6 @@
 from Bio.PDB.PDBParser import PDBParser
 
-# PDBParser
+# PDBParser for pdf information
 
 pdbfn = "/home/sb/bioinfo/1FAT.pdb"
 parser = PDBParser(PERMISSIVE=1)
