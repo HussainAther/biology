@@ -16,3 +16,13 @@ class Sequence:
             if x in ’ATCG’:
                 tt += Sequence.TranscriptionTable[x]
         return tt
+        
+class Plasmid(Sequence):
+    AbResDict = {"Tet":"ctagcat","Amp":"CACTACTG"}
+    def __init__(self,seqstring):
+        Sequence.__init__(self,seqstring)
+    def ABres(self,ab):
+        if self.AbResDict[ab] in self.seqstring:
+            return True
+        else:
+            return False
