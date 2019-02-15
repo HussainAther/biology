@@ -1,21 +1,41 @@
 class Sequence:
+    """
+    Storing general information about sequences
+    """
     TranscriptionTable = {"A":"U","T":"A","C":"G","G":"C"}
-    # Dictionary with the name of the restriction enzyme and
-    # the recognition sequence.
-    EnzDict = {"EcoRI":"GAATTC","EcoRV":"GATATC"}
+    CompTable = {"A":"T","T":"A","C":"G","G":"C"}
     def __init__(self, seqstring):
-        self.seqstring = seqstring.upper()
+        self.seqstring=seqstring.upper()
     def restriction(self,enz):
-        try:
-            return self.seqstring.count(Sequence.EnzDict[enz])
-        except:
+        EnzDict={"EcoRI":"ACTGG","EcoRV":"AGTGC"}
+        if EnzDict.get("EcoRI") in self.seqstring:
+            return self.seqstring.count(EnzDict[enz])
+        else:
             return 0
+    def __getitem__(self,index):
+        return self.seqstring[index]
+    def __getslice__(self,low,high):
+        return self.seqstring[low:high]
+    def __len__(self):
+        return len(self.seqstring)
+    def __str__(self):
+        if len(self.seqstring)>=28:
+            return self.seqstring[:25]+"..."+self.seqstring[-3:]
+        else:
+            return self.seqstring
     def transcription(self):
         tt = ""
         for x in self.seqstring:
             if x in ’ATCG’:
-                tt += Sequence.TranscriptionTable[x]
+                tt += self.TranscriptionTable[x]
         return tt
+    def complement(self):
+        tt=""
+        for x in self.seqstring:
+            if x in ’ATCG’:
+                tt += self.CompTable[x]
+        return tt
+
 
 class Plasmid(Sequence):
     """
@@ -53,3 +73,5 @@ class Reverse:
     def __init__(self, data):
         self.data = data
         self.index = len(data)
+
+
