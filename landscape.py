@@ -2,6 +2,8 @@ import fileinput # (1)
 import numpy
 from matplotlib import pylab
 
+# landscape.py - plotting a zero-mean cumulative sum of numbers.
+
 def plot(filename):
     """Read single-column numbers in filename and plot zero-mean
     cumulative sum"""
