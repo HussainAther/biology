@@ -3,7 +3,7 @@ import re
 # Search for a pattern within a FASTA file
 
 pattern = "[LIVM]{2}.RL[DE].{4}RLE"
-fh = open(’/home/sb/bioinfo/prot.fas’)
+fh = open("/home/sb/bioinfo/prot.fas")
 fh.readline() # Discard the first line.
 seq = ""
 for line in fh:
