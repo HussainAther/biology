@@ -30,7 +30,7 @@ middle of the widest margin in data classes, and this margin is itself determine
 """
 
 
-def svm(knowns, data, kernelFunc, kernelParams, limit=1.0, maxSteps=500, relax=1.3):
+def svmTrain(knowns, data, kernelFunc, kernelParams, limit=1.0, maxSteps=500, relax=1.3):
     """
     Successive over-relaxation that finds the optimal boundary between two sets of input data.
     """
@@ -105,3 +105,37 @@ def svmSeparation(knowns, supports, kernelArray):
             score += 1.0
 
     return 100.0 * score / len(knowns)
+
+numPoints = 20
+catData = []
+
+for x in range(1,6):
+    for y in range(1,6):
+        xNorm = x/6.0
+        yNorm = y/6.0
+
+        if x == 3 and y == 3 :
+            category = -1.0
+
+        elif x % 2 == and y % 2:
+            category = 1.0
+
+        else:
+            category = -1.0
+
+        xvals = np.random.normal(xNorm, 0.2, numPoints)
+        yvals = np.random.normal(yNorm, 0.2, numPoints)
+
+        for i in range(numPoints):
+            catData.append((xvals[i], yvals[i], category))
+    catData = array(catData)
+    np.random.shuffle(catData)
+
+knowns = catData [:, -1]
+data = catData [:,:-1]
+
+params = (0.1,)
+supports, steps, kernelArray = svmTrain(knowns, data, kernelGauss, params)
+
+score = svmSeparation(knowns, supports, kernelArray)
+print("Known data: %5.2%% correct" % (score))
