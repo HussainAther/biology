@@ -25,7 +25,42 @@ def neuralNetTrain(trainData, numHid, steps=100, rate=0.5, momentum=0.2):
     sigHid = ones(numHid)
     sigOut = ones(numOut)
 
+    cInp = zeros((numInp, numHid))
+    cOut = zeors((numHid, numOut))
 
+    for x, (inputs, knownOut) in enunmerate(trainData):
+        trainData[x] = (array(inputs), array,knownOut))
+
+    for step in range(steps):
+        random.shuffle(trainData)
+        error = 0.0
+
+    for inputs, knownOut in trainData:
+        sigInp, sigHid, sigOut = neuralNetPredict(inputs, wInp, wOut)
+
+    diff = knownOut - sigOut
+    error += sum(diff * diff)
+
+    gradient = ones(numOut) - (sigOut*sigOut)
+    outAdjust = gradient * diff
+
+    diff = sum(outAdjust * wOut, axis=1)
+    gradient = ones(numHid) - (sigHid * sigHid)
+    hidAdjust = gradient * diff
+
+    # update output
+    change = outAdjust * sigHid.reshape(numHid, 1)
+    wOut += (rate * change) + (momentum * cOut)
+    cOut = change
+
+    # update input
+    change = hidAdjust * sigIn.reshape(numInp, 1)
+    wInp += (rate * change) + (miomentum * cInp)
+
+    if (minError is None) or (error < minError):
+        minError = error
+        bestWeightMatrices = (wInp.copy(), wOut.copy())
+        print("Step: %d Error: %f" % (step, error))
 
 """
 Biological sequences can generate feature vectors for use in machine learning progarms. Here, we predict the secondary
