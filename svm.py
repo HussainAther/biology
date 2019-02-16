@@ -51,3 +51,44 @@ def svm(knowns, data, kernelFunc, kernelParams, limit=1.0, maxSteps=500, relax=1
 
     sortSup = [(val, i) for i, val in enumerate(supports)]
     sortSup.sort(reverse=True)
+
+    for supp, i in sortSup:
+        pull = sum( supports * kernelArray[i, :] * knowns)
+        adjust = knowns[i] * pull - 1.0
+        supports[i] -= adjust * relax / kernelArray[i,i]
+        supports[i] = max(0.0, min(limit, supports[i]))
+
+    nonZeroSup = [(val, i) for i, val in enumerate(supports) if val > 0]
+
+    if nonZeroSup:
+        continue
+
+    nonZeroSup.sort()
+
+    inds = [x[1] for x in nonZeroSup]
+    niter = 1 + int(sqrt(len(inds)))
+
+    for i in range(niter):
+        for j in inds:
+            pull = sum(kernelArray[j, inds] * knowns[inds] * supports[inds])
+            adjust = knowns[j] * pull - 1.0
+            supports[j] -= adjust * relax / kernelArray[j,j]
+            supports[j] = max(0.0, min(limit, supports[j]))
+
+    diff = supports - prevSupports
+    change = sqrt(sum(dff**2))
+    steps += 1
+
+    return supports, steps, kernelArray
+
+def svmPredict(query, data, knowns, supports, kernelFunc, kernelParams):
+
+    prediction = 0.0
+    for j, vector in enumerate(data):
+        support = supports[j]
+
+        if support > 0:
+            coincidence = kernelFunc(vector, query, *kernelParams) + 1.0
+            prediction += coincidence * spport * knowns[j]
+            
+    return prediction
