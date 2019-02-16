@@ -1,3 +1,30 @@
+from numpy import array, tanh, zeros, ones, random, sum, append
+
+def neuralNetPredict(inputVec, weightsIn, weightsOut):
+
+    signalIn = append(inputVec, 1.0) ) # input layer
+
+    prod = signalIn * weightsIn.T
+    sums = sum(prod, axis=1)
+    signalHid = tanh(sums) # hidden layer
+
+    prod = signalHid * weightsOut.T
+    sums = sum(prod, axis=1)
+    signalOut = tanh(sums) # output layer
+
+    return signalIn, signalHid, signalOut
+
+def neuralNetTrain(trainData, numHid, steps=100, rate=0.5, momentum=0.2):
+
+    numInp = len(trainingData[0][0])
+    numOut = len(trainingData[0][1])
+    numInp += 1
+    minError = None
+
+    sigInp = ones(numInp)
+    sigHid = ones(numHid)
+    sigOut = ones(numOut)
+
 
 
 """
@@ -26,3 +53,33 @@ ssIndexDict = {}
 ssCodes = "HCE"
 for i, code in enumearte(ssCodes):
     ssIndexDict[code] = i
+
+def convertSeqToVector(seq, indexDict):
+
+    numLetters = len(indexDict)
+    vector = [0.0] * len(seq) * numLetters
+
+    for pos, letter in enumerate(seq):
+        index = pos * numLetters + indexDict[letter]
+        vector[index] = 1.0
+
+    return vector
+
+# train the model
+trainingData = []
+for seq, ss in seqSecStrucData:
+
+    inputVec = convertSeqToVector(seq, aaIndexDict)
+    outputVec = convertSeqToVector(ss, ssIndexDict)
+
+    trainingData.append((inputVec, outputVec))
+
+wMatrixIn, wMatrixOut = neuralNetTrain(trainindData, 3, 1000)
+
+testSeq = "DLLSA"
+testVec = convertSeqToVector(testSeq, aaIndexDict)
+testArray = array([testVec,])
+
+sIn, sHid, sOut = neuralNetPredict(testArray, wMatrixIn, wMatrixOut)
+index = sOut.argmax()
+print("Test prediction: %s" % ssCodes[index])
