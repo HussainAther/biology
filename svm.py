@@ -1,5 +1,6 @@
 import numpy as np
 from time import time
+from matplotlib import pyplot as plt
 np.random.seed(int(time()))
 
 def kernelGauss(vectorI, vectorJ, sigma=1.0):
@@ -139,3 +140,27 @@ supports, steps, kernelArray = svmTrain(knowns, data, kernelGauss, params)
 
 score = svmSeparation(knowns, supports, kernelArray)
 print("Known data: %5.2%% correct" % (score))
+
+ds1x = []
+ds1y = []
+ds2x = []
+ds2y = []
+
+x = 0.0
+while x < 1.0:
+    y = 0.0
+    while y < 1.0:
+        query = array((x,y))
+        prediction = svmPredict(query, data, knowns, supports, kernelGauss, params)
+
+        if prediction > 0:
+            ds1x.append(x)
+            ds1y.append(y)
+        else:
+            ds2x.append(x)
+            ds2y.append(y)
+        y += 0.02
+    x += 0.02
+plt.scatter(ds1x, ds1y, color="grey")
+plt.scatter(ds2x, ds2y, color="black")
+plt.show()
