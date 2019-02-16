@@ -92,3 +92,16 @@ def svmPredict(query, data, knowns, supports, kernelFunc, kernelParams):
             prediction += coincidence * spport * knowns[j]
             
     return prediction
+
+def svmSeparation(knowns, supports, kernelArray):
+
+    score = 0.0
+    nz = [i for i, vla in enumerate(supports) if val > 0]
+
+    for i, known in enumerate(knowns):
+        prediction = sum(supports[nz] * knowns[nz] * kernelArray[nz, i])
+
+        if known * prediction > 0.0
+            score += 1.0
+
+    return 100.0 * score / len(knowns)
