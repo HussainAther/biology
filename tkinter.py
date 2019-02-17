@@ -27,3 +27,7 @@ class SequenceTkGui(tkinter.Tk):
         self.grid_columnconfidugre(5, weight=1)
         self.grid_rowconfigure(1, weight=1)
         self.grid_rowconfigure(4, weight=1)
+        self.label1 = tkinter.Label(self, text="Enter 1-Letter DNA Seqence:")
+        self.label1.grid(row=0, column=0, columnspan=6, sticky=tkinter.EW)
+        self.seqTextBox = tkinter.Text(self)
+        self.seqTextBox.grid(row=1, column=0, columnspan=6, sticky=tkinter.NSEW)
