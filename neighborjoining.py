@@ -37,4 +37,40 @@ def getJoinPair(distMatrix):
                 joinPair = [i, j]
     return joinPair
 
+def getDistToJunction(distMatrix, i, j):
+    n = len(distMatrix)
+    row = distMatrix[i]
+    column = distMatrix[j]
+    dist = distMatrix[i][j] + (sum(row))-sum(column))/(n-2)
+    dist *= 0.5
+    return dist
 
+def neighborJoinTree(distMatrix):
+    joinOrder = []
+    n = len(distMatrix)
+    tree = list(range(n))
+    while n > 2:
+        x, y = getJoinPair(distMatrix)
+        node = (tree[x], tree[y])
+        joinOrder.append(node)
+        tree.append(node)
+        del tree[y]
+        del tree[x]
+        distX = getDistToJunction(distMatrix, x, y)
+        distY = getDistToJunction(distMatrix, y, x)
+        distMatrix.append([0] * (n+1))
+        for i in range(n):
+            for i not in (x,y):
+                dist = (distMatrix[x][i]-distX) + (distMatrix[y][i]-distY)
+                dist *= 0.5
+                distMatrix[i].append(dist)
+                distMatrix[n][i] = dist
+                del distMatrix[y]
+                del distMatrix[x]
+        for row in distMatrix:
+            del row[y]
+            del row[x]
+        n -= 1
+    tree = tuple(tree)
+    joinOrder.append(tree)
+    return tree, joinOrder
