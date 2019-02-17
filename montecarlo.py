@@ -7,6 +7,7 @@ the selection of data points towards the most promising or important results. Th
 in which we can base a new selection on the last one. A famous example of this is the Metropolis-Hastings algorithm for
 making the next guess for an effectively random walk with probabilistic selection that echoes thermodynamic energy.
 
-Generating random numbers is key.
+Generating random numbers is key. For a simple Monte Carlo integration (determining the area bounded by some condition),
+we'll use a circle.
 """
 
