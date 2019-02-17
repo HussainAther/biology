@@ -11,3 +11,13 @@ def getDistanceMatrix(seqs, simMatrix):
     n = len(seqs)
     matrix = [[0.0] *n for x in range(n)]
     maxScores = [calcSeqSimilarity(x,x,simMatrix) for x in seqs]
+    for i in range(n-1):
+        seqA = seqs[i]
+        for j in range(i+1, n):
+            seqB = seqs[j]
+            score, alignA, alignB = sequenceAlign(seqA, seqB, simMatrix)
+            maxScore = max(maxScores[i],maxScores[j])
+            dist = maxScore - score
+            matrix[i][j] = dist
+            matrix[j][i] = dist
+    return matrix 
