@@ -1,3 +1,4 @@
+from numpy import zeros, sqrt
 
 """
 In integrating the various ways particles interact with one another, we can determine solutions that
@@ -13,3 +14,8 @@ chemBonds = {"H1": ["01",], "01" : ["H1", "C1"], "C1" : ["01", "C2", "C6"],
             "08" : ["C8"], "C9" : ["C8", "H9a", "H9b", "H9c"], "H9a" : ["C9"],
             "H9b" : ["C9"], "H9c" : ["C9"]
 }
+
+def chemParticleDynamics(bondDict, numSteps=5000, bondLen=1.0, timeStep=0.01):
+    atoms = list(bond.keys())
+    numAtoms = len(atoms)
+    atomCoords = uniform(-10.0, 10.0, (numAtoms, 3))
