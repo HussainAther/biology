@@ -19,3 +19,21 @@ def chemParticleDynamics(bondDict, numSteps=5000, bondLen=1.0, timeStep=0.01):
     atoms = list(bond.keys())
     numAtoms = len(atoms)
     atomCoords = uniform(-10.0, 10.0, (numAtoms, 3))
+    indices = range(numAtoms)
+    n = float(numSteps)
+    for step in range(numSteps):
+        temp = exp(-step/n)
+    for i in indices[1:]:
+        atom = atoms[i]
+        coords = atomCoords[i]
+        velocity = zeros(3, float)
+        for j in indices:
+            if i == j:
+                continue
+            delta = coords - atomCoords[j]
+            delta2 = delta**2
+            dist2 = delta2.sum()
+            bound = bondDict[atoms[j]]
+            if atom in bound:
+                force = bondLen - sqrt(dist2)
+
