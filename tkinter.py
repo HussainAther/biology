@@ -51,31 +51,83 @@ class SequenceTkGui(tkinter.Tk):
         self.closeButton.grid(row=5, column=5, sticky=tkinter.EW)
         self.closeButton.config(bg="yellow")
 
-def clearseq(self):
-    self.seqTextBox.delete("0.0", tkinter.END)
+    def clearseq(self):
+        self.seqTextBox.delete("0.0", tkinter.END)
 
-def setSequence(self, text):
-    self.clearSeq()
-    self.seqTextBox.insert(tkinter.END, text)
+    def setSequence(self, text):
+        self.clearSeq()
+        self.seqTextBox.insert(tkinter.END, text)
 
-def getSequence(self):
-    seq = self.seqTextBox.get("0.0", tkinter.END)
-    seq = re.sub("\s+","",seq)
-    seq = seq.upper()
-    return seq
+    def getSequence(self):
+        seq = self.seqTextBox.get("0.0", tkinter.END)
+        seq = re.sub("\s+","",seq)
+        seq = seq.upper()
+        return seq
 
-def showText(self, text):
-    if text[-1] != "\n":
-        text += "\n"
-    self.outTextBox.insert(tkinter.END, text)
+    def showText(self, text):
+        if text[-1] != "\n":
+            text += "\n"
+        self.outTextBox.insert(tkinter.END, text)
 
-def clearOutput(self):
-    self.outTextBox.delete("0.0", tkinter.END)
+    def clearOutput(self):
+        self.outTextBox.delete("0.0", tkinter.END)
 
-def loadfasta(self):
-    fileObj = filedialog.askopenfile(parent=self, mode="rU", title="Choose a FASTA file")
-    if fileObj:
-        from Bio import seqIO
-        for entry in SeqIO.parse(fileObj, "fasta"):
-            self.setSequence(entry.seq)
-            break
+    def loadfasta(self):
+        fileObj = filedialog.askopenfile(parent=self, mode="rU", title="Choose a FASTA file")
+        if fileObj:
+            from Bio import seqIO
+            for entry in SeqIO.parse(fileObj, "fasta"):
+                self.setSequence(entry.seq)
+                break
+            fileObj.close()
+
+    def seqTranslate(self):
+        seq = self.getSequence()
+        self.clearOutput()
+        self.showText("DNA sequence")
+        self.showText(seq)
+        self.showtext("Protein sequence")
+        for indent in range(3):
+            protenSeq = proteinTranslation(seq[indent:], STANDARD_GENETIC_CODE)
+            protenSeq = "".join(proteinSeq)
+            spaces = " " * indent
+            text = "Reading frame %d\n%s%s" % (indent, spaces, protenSeq)
+            self.showText(text)
+
+    def seqComposition(self):
+        self.clearOutput()
+        seq = self.getSequence()
+        n = 0.0
+        counts = {}
+        for letter in seq:
+            counts[letter] = counts.get(letter, 0) + 1
+            n += 1.0
+        letters = counts.keys()
+        letters.sort()
+        text = "Composition:"
+        for letter in letters:
+            text += " %s;%.2f%%" % (letter, counts[letter] * 100 / n)
+        self.showText(text)
+
+    def seqFind(self):
+        self.clearOutput()
+        query = self.findEntry.get()
+        query = query.strip()
+        if not query:
+            messagebox.showwarning("Warning", "Search sequence was blank")
+            return
+        seq = self.getSequence()
+        if query in seq:
+            text = "Locations of %s" % (query)
+            self.showText(text)
+            win = len(query)
+            for i in range(len(seq)-win):
+                if seq[i:i+win] == query:
+                    self.showText(" %d" % i)
+        else:
+            text = "Sub-sequence %s not found" % (query)
+            self.showText(text)
+
+if __name__ == "__main__":
+    window = SequenceTkGui()
+    window.mainloop()
