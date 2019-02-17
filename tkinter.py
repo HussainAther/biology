@@ -41,3 +41,14 @@ class SequenceTkGui(tkinter.Tk):
         self.compButton.grid(row=2, column=3, sticky=tkinter.W)
         self.findButton = tkinter.Button(self, text="Find:", command=self.seqFind)
         self.findButton.grid(row=2, column=4, sticky=tkinter.EW)
+        self.findEntry = tkinter.Entry(self)
+        self.findEntry.grid(row=2, column=5, sticky=tkinter.EW)
+        self.label2 = tkinter.Label(self, text="Text output:")
+        self.label2.grid(row=3, column=0, columnspan=6, sticky=tkinter.W)
+        self.outTextBox = tkinter.Text(self)
+        self.outTextBox.grid(row=4, column=0, columnspan=6, sticky=tkinter.NSEW)
+        self.closeButton = tkinter.Button(self, text="Quit", command=self.destroy)
+        self.closeButton.grid(row=5, column=5, sticky=tkinter.EW)
+        self.closeButton.config(bg="yellow")
+
+
