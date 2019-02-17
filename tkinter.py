@@ -6,6 +6,9 @@ except:
     import Tkinter as tkinter
     import tkFileDialog as filedialog
     import tkMessageBox as messagebox
+
+from Sequences import proteinTranslation, STANDARD_GENETIC_CODE
+
 """
 Tkinter used for a graphical user interface.
 """
@@ -17,3 +20,7 @@ label = tkinter.Label(rootWindow, text="Hello World")
 label.pack()
 
 rootWindow.mainloop()
+
+class SequenceTkGui(tkinter.Tk):
+    def __init__(self):
+        tkinter.Tk.__init__(self)
