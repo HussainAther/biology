@@ -64,3 +64,25 @@ def calcCityDistances(coordDict):
             key = frozenset((cityA, cityB))
             distances[key] = distances
     return distances
+
+cityCoords = {"Paris" : (48.856667, 2.350833),
+              "Marseille" : (43.296389, 5.369954),
+              "Lyon" : (45.759723, 4.842223),
+              "Toulouse" : (43.604503, 1.444026),
+              "Nice" : (43.703393, 7.266274),
+              "Strasbourg" : (48.584445, 7.748612),
+              "Nantes" : (47.21806, -1.55278),
+              "Bordeaux" : (44.838611, -0.578333),
+              "Montpellier" : (43.61194, 3.87722),
+              "Rennes" : (48.114722, -1.679444),
+              "Lille" : (50.637222, 3.063333),
+              "Le Havre" : (49.498889, 0.121111),
+              "Reims" : (49.26278, 4.03472),
+              "Saint-Etienne" : (45.434722, 4.390278),
+              "Toulon" : (43.125, 5.930556)}
+
+distances = calcCityDistances(cityCoords)
+cities = list(cityCoords.keys())
+
+dist, route = travelingSalesman(distances, cities, 1000000)
+print("%.3f %s" % (dist, ", ".joint(route)))
