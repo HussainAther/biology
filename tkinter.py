@@ -51,4 +51,15 @@ class SequenceTkGui(tkinter.Tk):
         self.closeButton.grid(row=5, column=5, sticky=tkinter.EW)
         self.closeButton.config(bg="yellow")
 
+def clearseq(self):
+    self.seqTextBox.delete("0.0", tkinter.END)
 
+def setSequence(self, text):
+    self.clearSeq()
+    self.seqTextBox.insert(tkinter.END, text)
+
+def getSequence(self):
+    seq = self.seqTextBox.get("0.0", tkinter.END)
+    seq = re.sub("\s+","",seq)
+    seq = seq.upper()
+    return seq
