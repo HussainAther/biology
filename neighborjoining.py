@@ -20,4 +20,21 @@ def getDistanceMatrix(seqs, simMatrix):
             dist = maxScore - score
             matrix[i][j] = dist
             matrix[j][i] = dist
-    return matrix 
+    return matrix
+
+def getJoinPair(distMatrix):
+    n = len(distMatrix)
+    minQ = None
+    joinPair = None
+    for i in range(n-1):
+        sumRow = sum(distMatrix[i])
+        for j in range(i+1, n):
+            sumCol = sum(distMatrix[j])
+            dist = distMatrix[i][j]
+            q = (n-2)*dist - sumRow - sumCol
+            if (minQ is None) or (q < minQ):
+                minQ = q
+                joinPair = [i, j]
+    return joinPair
+
+
