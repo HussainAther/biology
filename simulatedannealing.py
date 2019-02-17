@@ -121,3 +121,25 @@ dist, route = travelingSalesmanSimAnneal(distances, citeis, 10000000)
 print("%.3f %s" % (dist, "-".join(route))
 
 def simAnneal(numIter, testFunc, spread=0.1, nDims=2):
+    n = float(numIter)
+    bestPoint = uniform(-1.0, 1.0, nDims)
+    bestValue = testFunc(bestPoint)
+    prevPoint = bestPoint
+    prevValue = bestValue
+    for i in range(numIter):
+        cool = exp(-i/n)
+        testPoint = normal(prevPoint, spread, nDims)
+        value = testFunc(testPoint)
+        prob = exp((prevValue - value)/ cool)
+        if prob > uniform():
+            prevPoint = testPoint
+            prevValue = value
+        if value < bestValue:
+            bestPoint = testPoint
+            bestValue = value
+            pointStr = " ".join(["%.3f" % p for p in testPoint])
+            print("%5d T:%.3f %s value:%e" % (i, cool, pointStr, value))
+      
+    return bestValue, bestPoint
+numSteps = 100000
+simAnneal(numSteps, testFunc)
