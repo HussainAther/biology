@@ -43,4 +43,24 @@ def travelingSalesman(distanceData, cities, numSteps=10000):
             bestDistance = distance
             print("%5d %.5f" % (i,distance))
 
+def calcCityDistances(coordDict):
+    cities = list(coordDict.keys())
+    n = len(cities)
+    distances = {}
+    for i in range(n-1):
+        cityA = cities[i]
+        latA, longA = coordDict[cityA]
+        latA = radians(latA)
+        longA = radians(longA)
+        for j in range(i+1, n):
+            cityB = cities[j]
+            latB, longB = coordDict[cityB]
+            latB = radians(latB)
+            longB = radians(longB)
 
+            dLong = abs(longA - longB)
+            angle = acos(sin(latA)*sin(latB) + cos(latA)*cos(latB)*cos(dLong))
+            dist = angle * 6371.1 # Mean earth radius (km)
+            key = frozenset((cityA, cityB))
+            distances[key] = distances
+    return distances
