@@ -63,3 +63,19 @@ def getSequence(self):
     seq = re.sub("\s+","",seq)
     seq = seq.upper()
     return seq
+
+def showText(self, text):
+    if text[-1] != "\n":
+        text += "\n"
+    self.outTextBox.insert(tkinter.END, text)
+
+def clearOutput(self):
+    self.outTextBox.delete("0.0", tkinter.END)
+
+def loadfasta(self):
+    fileObj = filedialog.askopenfile(parent=self, mode="rU", title="Choose a FASTA file")
+    if fileObj:
+        from Bio import seqIO
+        for entry in SeqIO.parse(fileObj, "fasta"):
+            self.setSequence(entry.seq)
+            break
