@@ -1,4 +1,4 @@
-from math import sqrt, exp
+from math import sqrt, exp, acos, cos, sin, radians
 from random import shuffle, radint
 from numpy import array
 
@@ -38,3 +38,9 @@ def travelingSalesman(distanceData, cities, numSteps=10000):
         if score > uniform():
             prevRoute = route
             prevDistacne = distance
+        if distance < bestDistance:
+            bestRoute = route[:]
+            bestDistance = distance
+            print("%5d %.5f" % (i,distance))
+
+
