@@ -36,4 +36,12 @@ def chemParticleDynamics(bondDict, numSteps=5000, bondLen=1.0, timeStep=0.01):
             bound = bondDict[atoms[j]]
             if atom in bound:
                 force = bondLen - sqrt(dist2)
+            else:
+                force = 1.0 / (dist2**2)
+            force = min(max(-200.0, force), 200.0)
+            velocity += delta * force * temp * timeStep
+            atomCoords[i] += velocity
+    center = atomCoords.mean(axis=0)
+    atomCoords = atomCoords - center
+    return atomCoords
 
