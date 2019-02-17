@@ -54,7 +54,7 @@ def svmTrain(knowns, data, kernelFunc, kernelParams, limit=1.0, maxSteps=500, re
     sortSup.sort(reverse=True)
 
     for supp, i in sortSup:
-        pull = sum( supports * kernelArray[i, :] * knowns)
+        pull = np.sum( supports * kernelArray[i, :] * knowns)
         adjust = knowns[i] * pull - 1.0
         supports[i] -= adjust * relax / kernelArray[i,i]
         supports[i] = max(0.0, min(limit, supports[i]))
@@ -67,17 +67,17 @@ def svmTrain(knowns, data, kernelFunc, kernelParams, limit=1.0, maxSteps=500, re
     nonZeroSup.sort()
 
     inds = [x[1] for x in nonZeroSup]
-    niter = 1 + int(sqrt(len(inds)))
+    niter = 1 + int(np.sqrt(len(inds)))
 
     for i in range(niter):
         for j in inds:
-            pull = sum(kernelArray[j, inds] * knowns[inds] * supports[inds])
+            pull = np.sum(kernelArray[j, inds] * knowns[inds] * supports[inds])
             adjust = knowns[j] * pull - 1.0
             supports[j] -= adjust * relax / kernelArray[j,j]
             supports[j] = max(0.0, min(limit, supports[j]))
 
     diff = supports - prevSupports
-    change = sqrt(sum(dff**2))
+    change = np.sqrt(np.sum(dff**2))
     steps += 1
 
     return supports, steps, kernelArray
@@ -100,7 +100,7 @@ def svmSeparation(knowns, supports, kernelArray):
     nz = [i for i, vla in enumerate(supports) if val > 0]
 
     for i, known in enumerate(knowns):
-        prediction = sum(supports[nz] * knowns[nz] * kernelArray[nz, i])
+        prediction = np.sum(supports[nz] * knowns[nz] * kernelArray[nz, i])
 
         if known * prediction > 0.0
             score += 1.0
