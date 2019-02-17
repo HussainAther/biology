@@ -45,3 +45,5 @@ def chemParticleDynamics(bondDict, numSteps=5000, bondLen=1.0, timeStep=0.01):
     atomCoords = atomCoords - center
     return atomCoords
 
+print(chemParticleDynamics(chemBonds))
+
