@@ -119,3 +119,5 @@ distances = calcCityDistances(cityCoords)
 cities = list(cityCoords.keys())
 dist, route = travelingSalesmanSimAnneal(distances, citeis, 10000000)
 print("%.3f %s" % (dist, "-".join(route))
+
+def simAnneal(numIter, testFunc, spread=0.1, nDims=2):
