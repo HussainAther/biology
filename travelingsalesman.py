@@ -17,3 +17,24 @@ def getRouteLength(distanceData, route):
         distance += distanceData[key]
 
     return distance
+
+def travelingSalesman(distanceData, cities, numSteps=10000):
+    n = len(cities)
+    bestRoute = cities[:]
+    shuffle(bestRoute)
+    dists = list(distanceData.values())
+    scale = 0.5 * array(dists).std()
+    bestDistance = getRouteLength(distanceData, bestRoute)
+    prevRoute = bestRoute
+    prevDistacne = bestDistance
+    for i in range(numSteps):
+        a = radint(0, n-1)
+        b = radint(0, n-1)
+        route = prevRoute[:]
+        route[a] = prevRoute[b]
+        route[b] = prevRoute[a]
+        distance = getRouteLength(distanceData, route)
+        score = exp((prevDistacne-distance)/scale)
+        if score > uniform():
+            prevRoute = route
+            prevDistacne = distance
