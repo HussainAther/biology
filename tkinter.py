@@ -24,3 +24,6 @@ rootWindow.mainloop()
 class SequenceTkGui(tkinter.Tk):
     def __init__(self):
         tkinter.Tk.__init__(self)
+        self.grid_columnconfidugre(5, weight=1)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_rowconfigure(4, weight=1)
