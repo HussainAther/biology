@@ -65,3 +65,8 @@ def parse_cytokine_table(filename):
     cytokine_mapper = parse_headers(table)
     data = parse_data(table, warning_dict)
     return warning_dict, sample_mapper, cytokine_mapper, data
+
+def plot_cytokine(cytokine, cytokine_mapper, data, save=False, directory="."):
+    """
+    Generate box and whiskers plot for distribution of a single cytokine
+    """
