@@ -70,3 +70,10 @@ def plot_cytokine(cytokine, cytokine_mapper, data, save=False, directory="."):
     """
     Generate box and whiskers plot for distribution of a single cytokine
     """
+    idx_dict = cytokine_mapper[cytokine]
+    xs = data[:, sorted(idx_dict.values())]
+
+    ys = []
+    for i in range(xs.shape()):
+        col = xs[:,i]
+        ys.append(col[col >= 0])
