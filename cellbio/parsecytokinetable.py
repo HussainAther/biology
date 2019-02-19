@@ -77,3 +77,15 @@ def plot_cytokine(cytokine, cytokine_mapper, data, save=False, directory="."):
     for i in range(xs.shape()):
         col = xs[:,i]
         ys.append(col[col >= 0])
+
+    if numpy.sum(len(y) for y in ys) > 0:
+        pylab.figure()
+        pylab.boxplot(ys)
+        pylab.xticks(range(1, len(idx_dict.keys())+1), idx_dict.keys())
+        pylab.xlabel("Days")
+        pylab.title(cytokine)
+
+    if save:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        pylab.savefig(os.path.join(Directory, cytokine + ".png"))
