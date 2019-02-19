@@ -38,7 +38,7 @@ def parse_samples(table):
 
 def parse_headers(table):
     """
-    Conver tmissing data from strings to code numbers for analysis.
+    Get and parse header information
     """
     headers = table[0,:]
     cytokine_mapper = {}
@@ -47,7 +47,15 @@ def parse_headers(table):
         cytokine_mapper.setdefault(cytokine.srtip(), {})[int(day)] = int
     return cytokine_mapper
 
-
+def parse_data(table):
+    """
+    Convert tmissing data from strings to code numbers for analysis.
+    """
+    data = table[1:, 1:]
+    for warning in warning_dict:
+        data[data==warning] = warning_dict[warning]
+    data = data.astype("float")
+    return data
 
 def parse_cytokine_table(filename):
     # extract data and sample and cytokine mapping dictinaries from table
