@@ -27,3 +27,4 @@ replace_info = summary_align.replacement_dictionary(["G", "A", "V", "L", "I",
 my_arm = SubsMat.SeqMat(replace_info)
 # Logs odd matrix
 my_lom = SubsMat.make_log_odds_matrix(my_arm)
+my_lom.print_mat()
