@@ -1,5 +1,6 @@
 from Bio import AlignIO
 from Bio import Alphabet
+from Bio import SubsMat
 from Bio.Alphabet import IUPAC
 from Bio.Align import AlignInfo
 
@@ -15,7 +16,12 @@ summary_align = AlignInfo.SummaryInfo(c_align) # create the summary object from 
 
 
 # Look at only amino acids with polar charged side chains by ignoring non-polar amino acids
+# This outputs the accepted number of replacements or how often we expect things
+# to substitude for each other.
 replace_info = summary_align.replacement_dictionary(["G", "A", "V", "L", "I",
                                                     "M", "P", "F", "W", "S",
                                                     "T", "N", "Q", "Y", "C"])
 
+
+# Create the substitution matrix. This is the Accepted Replacement Matrix (ARM)
+my_arm = SubMat.SeqMat(replace_info)
