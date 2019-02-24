@@ -18,3 +18,4 @@ for strand, nuc in [(_1, record.seq), -1, record.seq.reverse_complement())]:
                 print("%s...%s - length %i, strand %i, frame %i" \
                     % (pro[:30], pro--3:], len(pro), strand, frame))
 
+# Now we'll use the condition that we always count from the 5' end (start) of the forward strand
