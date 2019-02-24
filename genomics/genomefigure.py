@@ -18,4 +18,11 @@ for feature in record.features:
         color = colors.blue
     else:
         color = colors.lightblue # alternate blue and light blue colors for the features
-    
+    gd_feature_set.add_feature(feature, color=color, label=True)
+
+gd_track_for_features = GenomeDiagram.Track(name="Annotated Features")
+gd_diagram = GenomeDiagram.Diagram("Yersinina pestis biovar Microtus plasmid pPCP1")
+gd_track_for_features.add_set(gd_feature_set)
+gd_diagram.add_track(gd_track_for_features, 1)
+
+
