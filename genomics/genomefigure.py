@@ -8,4 +8,14 @@ record = SEqIO.read("https://raw.githubusercontent.com/biopython/biopython/maste
 """
 Create different objects directly to produce figures of a genome in linear and circular diagram
 """
-
+# Feature set and objects
+gd_feature_set = GenomeDiagram.FeatureSet()
+for feature in record.features:
+    if feature.type != "gene":
+        # We're only looking at genes right now.
+        continue
+    if len(gd_feature_set) % 2 == 0:
+        color = colors.blue
+    else:
+        color = colors.lightblue # alternate blue and light blue colors for the features
+    
