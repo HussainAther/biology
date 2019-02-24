@@ -24,4 +24,6 @@ replace_info = summary_align.replacement_dictionary(["G", "A", "V", "L", "I",
 
 
 # Create the substitution matrix. This is the Accepted Replacement Matrix (ARM)
-my_arm = SubMat.SeqMat(replace_info)
+my_arm = SubsMat.SeqMat(replace_info)
+# Logs odd matrix
+my_lom = SubsMat.make_log_odds_matrix(my_arm)
