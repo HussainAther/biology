@@ -12,4 +12,6 @@ with open(url) as in_handle:
     rec_two = next(record_iterator)
 
 window = 7
-
+seq_one = str(rec_one.seq).upper()
+seq_two = str(rec_two.seq).upper()
+data = 
