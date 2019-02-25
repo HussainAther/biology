@@ -14,4 +14,6 @@ with open(url) as in_handle:
 window = 7
 seq_one = str(rec_one.seq).upper()
 seq_two = str(rec_two.seq).upper()
-data = 
+data = [[(seq_one[i:i + window] != seq_two[j:j + windpw])
+        for j in range(len(seq_one) - window)]
+        for i in range(len(seq_two) - window)]
