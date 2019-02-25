@@ -1,4 +1,5 @@
 from Bio import SeqIO
+import pylab
 
 """
 Use dot plot to visually compare nucleotide sequences for similarity to each other.
@@ -17,3 +18,10 @@ seq_two = str(rec_two.seq).upper()
 data = [[(seq_one[i:i + window] != seq_two[j:j + windpw])
         for j in range(len(seq_one) - window)]
         for i in range(len(seq_two) - window)]
+
+pylab.gray()
+pylab.imshow(data)
+pylab.xlabel("%s (length %i bp)" % (rec_one.id, len(rec_one)))
+pylab.ylabel("%s (length %i bp)" % (rec_two.id, len(rec_two)))
+pylabe.title("Dot plot using window size %i\n(allowing no mis-matches)" % window)
+pylab.show()
