@@ -46,3 +46,16 @@ def rk4(t, y, h, Neqs): # rk4 method
 graph1 = gdisplay(x= 0,y= 0, width = 500, height = 400,
     title = "Prey p(green) and predator P(yellow) vs time" ,
     xtitle = "t", ytitle = "P, p", xmin=0, xmax=500, ymin=0, ymax=3.5)
+
+funct1 = gcurve(color = color.yellow)
+funct2 = gcurve(color = color.green)
+graph2 = gdisplay(x=0, y=400, width=500, height=400, title="Predator P vs prey p",
+                xtitle="P", ytitle="p", xmin=0, xmax=2.5, ymin=0, ymax=3.5)
+funct3 = gcurve(color = color.red)
+
+for t in range(Tmin, Tmax + 1, h):
+    funct1.plot(pos=(t, y[0]))
+    funct2.plot(pos=(t, y[1]))
+    funct3.plot(pos=(y[0], y[[1]]))
+    rate(60)
+    rk4(t, y, h, 2)
