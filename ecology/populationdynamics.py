@@ -54,7 +54,7 @@ class LMatrix():
         """
         Add the values for survival of organisms remaining in the same stage.
         This is for stage-structured population models only. The input as the vector recur, and
-        its values replace those in the m matrix along the main diagnol from [1, 1] to [N-1, N-1].
+        its values replace those in the m matrix along the main diagonal from [1, 1] to [N-1, N-1].
         """
         if (recur.shape[0] == (self.stAges -1)):
             for i in range(1, self.stAges):
@@ -64,4 +64,13 @@ class LMatrix():
             print("Mismatch in size %s vs. %s" % (self.stAges - 1, recur.shape[0]))
 
     def LM_SetOneRelation(self, fromState, toState, value):
-        
+        """
+        Set a relation that doens't fall on the survivla diagonal or the recurrence diagonal.
+        This is useful for more complex stage-structured population modeling in which organisms
+        from one stage may graduate to multiple other stages at defined rates.
+        """
+        i = interval.Interval.between(0, self.stAges-1)
+        if (fromState in i) and (toState in i):
+            print("current matrix " + str(self.m))
+            self.m[toState, fromState] = value
+            print("with interval " + str(self.m))
