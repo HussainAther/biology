@@ -29,7 +29,7 @@ for n in range(N_t+1):
     N[n+1] = N[n] + r*dt*N[n]
 
 numerical_sol = 'bo' if N_t < 70 else 'b-'
-plt.plot(t, N, numerical_sol, t, N_0*exp(r*t), 'r-')
+plt.plot(t, N, numerical_sol, t, N0*exp(r*t), 'r-')
 plt.legend(['numerical', 'exact'], loc='upper left')
 plt.xlabel('t'); plt.ylabel('N(t)')
 filestem = 'growth1_%dsteps' % N_t
