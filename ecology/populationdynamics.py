@@ -32,3 +32,36 @@ class LMatrix():
         between the length of the vector and the width of the matrix.
         Leave those positions unchanged.
         """
+        if (fvector.shape[0] == self.stAges):
+            self.m[0] = fvector
+            self.fecundity = fvector
+        else:
+            print("Mismatch in size: %s vs. %s" %(self.stAges-1, fvector.shape[0]))
+
+    def LM_AddSurvival(self, survival):
+        """
+        Add the values for survival that shift population members from one age/stage
+        to the next. The values come in as the "survival vector" which is a numpy array.
+        """
+        if survival.shape[0] == (self.stAges -1)):
+            for j in range(1, self.stAges):
+                self.m[j, j-1] = survival[j-1]
+                self.survival = survival
+        else:
+            print("Mismatch in size: %svs %s" %(self.stAges -1, survival.shape[0]))
+
+    def LM_AddRecurrence(self, recur):
+        """
+        Add the values for survival of organisms remaining in the same stage.
+        This is for stage-structured population models only. The input as the vector recur, and
+        its values replace those in the m matrix along the main diagnol from [1, 1] to [N-1, N-1].
+        """
+        if (recur.shape[0] == (self.stAges -1)):
+            for i in range(1, self.stAges):
+                self.m[i, i] = recur[o-1]
+                self.recurrence = recur
+        else:
+            print("Mismatch in size %s vs. %s" % (self.stAges - 1, recur.shape[0]))
+
+    def LM_SetOneRelation(self, fromState, toState, value):
+        
