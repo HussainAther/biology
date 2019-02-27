@@ -110,3 +110,19 @@ def timevolution():
         for i in range(0, Natom):
             PE = Forces(t1, w, PE, 1)
             x[i] = x[i] + h*(vx[i] + hover2*fx[i][t1]) # velocity Verlet
+            y[i] = y[i] + h*(vy[i] + hover2*fy[i][t1])
+            if x[i] <= 0:
+                x[i] = x[i] + L # periodic boundary conditions
+            if x[i] >= L:
+                x[i] = x[i] - L
+            if y[i] <= 0:
+                y[i] = y[i] + L
+            if y[i] >= L:
+                y[i] = y[i] - L
+
+            xc = 2*x[i] - 4
+            yc = 2*y[i] - 4
+            atoms[i].pos=(xc, yc)
+            
+        PE = 0
+        
