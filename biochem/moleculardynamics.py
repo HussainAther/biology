@@ -90,7 +90,7 @@ def Forces(t, w, PE, PEorW): # set the forces on each of the 25 particles
         return w
 
 def timevolution():
-    avT = 0
+    avT = 0 # initial all the variables
     avP = 0
     Pavg = 0
     avKE = 0
@@ -99,4 +99,14 @@ def timevolution():
     PE = 0
     h = .031
     hover2 = h/2
-    
+    KE = 0
+    w = 0
+    initialposvel()
+    for i in range(0, Natom):
+        KE = KE+(vx[i]*vx[i]+vy[i]*vy[i])/2
+    PE = Forces(t1, w, PE, 1)
+    time = 1
+    while 1:
+        for i in range(0, Natom):
+            PE = Forces(t1, w, PE, 1)
+            x[i] = x[i] + h*(vx[i] + hover2*fx[i][t1]) # velocity Verlet
