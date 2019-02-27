@@ -14,7 +14,7 @@ Conway's Game of Life. A cell can either be dead (0) or alive (1).
 
 scene = display(width=500, height=500, title="Game of Life")
 cell = np.zeros((50, 50))
-cellu = zeros((50,50))
+cellu = np.zeros((50,50))
 curve(pos=[(-49, -49), (-49, 49), (49, 49), (49, -49), (-49, -49)], color=color.white)
 boxes = points(shape="square", size=8, color=color.cyan)
 
