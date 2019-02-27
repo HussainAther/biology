@@ -58,5 +58,17 @@ def sign(a, b):
         return -abs(a)
 
 def Forces(t, w, PE, PEorW): # set the forces on each of the 25 particles
+    r2cut = 0
+    PE = 0
+    for i in range(0, Natom):
+        fx[i][t] = fy[i][t] = 0 # to make sums, start in 0
+    for i in range(0, Natom - 1):
+        for j in range(i+1, Natom):
+            dx = x[i] - x[j] # atom separation x
+            dy = y[i] - y[j] # atom separation y
+            if abs(dx) > .5*L: # smallest r from part/image
+                dx = dx - sign(L, dx): # interact with closer image
+                
+
 
 
