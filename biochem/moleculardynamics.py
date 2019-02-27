@@ -5,7 +5,7 @@ import numpy as np
 """
 Perform a one-dimensional molecular dynamics simulation with too small a number of large steps
 for just a few particles. To be realistic, we need to change the parameters and the number of random
-numbers added to form the Gaussian distribution.
+numbers added to form the Gaussian distribution. Uses the velocity-Verlet algorithm.
 """
 scene = display(x=0,y=0,width=350,height=350, title="Molecular Dynamics", range=10)
 sceneK = gidsplay(x=0, y=350, width=600, height=150, title="Average KE", ymin=0, ymax=5,
