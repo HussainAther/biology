@@ -1,5 +1,6 @@
 from vpython.graph import *
 import random
+import numpy as np
 
 """
 Perform a one-dimensional molecular dynamics simulation with too small a number of large steps
@@ -16,3 +17,11 @@ Tcurve = gcurve(color=color.cyan)
 Natom = 25
 Nmax = 25
 Tinit = 2
+
+dens = 1
+t1 = 0
+x = np.zeros((Nmax), float) # x position
+y = np.zeros((Nmax), float) # y position
+vx = np.zeros((Nmax), float) # x velocity
+vy = np.zeros((Nmax), float) # y velocity 
+
