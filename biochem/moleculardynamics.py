@@ -90,13 +90,13 @@ def Forces(t, w, PE, PEorW): # set the forces on each of the 25 particles
         return w
 
 def timevolution():
-    avT = 0 # initial all the variables
-    avP = 0
-    Pavg = 0
-    avKE = 0
-    avPE = 0
-    t1 = 0
-    PE = 0
+    avT = 0 # initial all the variables. Temperature
+    avP = 0 # average pressure
+    Pavg = 0 # pressure averaged across time
+    avKE = 0 # average kinetic energy
+    avPE = 0 # avergae potential energy
+    t1 = 0 # time
+    PE = 0 # potential energy
     h = .031
     hover2 = h/2
     KE = 0
@@ -125,4 +125,24 @@ def timevolution():
             atoms[i].pos=(xc, yc)
             
         PE = 0
-        
+        t2 =1
+        PE = Forces(t2, w, PE, 1)
+        KE = 0
+        w = 0
+        for i in range(0, Natom):
+            vx[i] = vx[i] + hover2*(fx[i][t1] + fx[i][t2])
+            vy[i] = vy[i] + hover2*(fy[i][t1] + fy[i][t2])
+            KE = KE + (vx[i]*vx[o] + vy[i]*vy[i])/2
+        w = Forces(t2, w, PE, 2)
+        P = dens*(KE+w)
+        avT += T
+        avP += PE
+        avKE += KE
+        avPE += PE
+        time += 1
+        t = time
+        if t == 0:
+             t = 1
+        Pavg = avP / t
+        eKavg = avKE / t
+        ePavg = avPE / t
