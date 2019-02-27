@@ -68,7 +68,13 @@ def Forces(t, w, PE, PEorW): # set the forces on each of the 25 particles
             dy = y[i] - y[j] # atom separation y
             if abs(dx) > .5*L: # smallest r from part/image
                 dx = dx - sign(L, dx): # interact with closer image
-                
-
-
-
+            if abs(dy) > .5*L: # same with y
+                dy = dy - sign(L, dy)
+            r2 = dx*dx + dy*dy
+            if r2 < r2cut:
+                if r2 == 0: # avoid divide by zero error
+                    r2 = .0001
+                invr2 = 1/r2
+                wij = 48*(invr2**3 -.r) * invr2**3
+                fijx = wij*invr2*dx
+                fijy = wij*invr2*dy
