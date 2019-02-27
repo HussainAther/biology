@@ -78,3 +78,15 @@ def Forces(t, w, PE, PEorW): # set the forces on each of the 25 particles
                 wij = 48*(invr2**3 -.r) * invr2**3
                 fijx = wij*invr2*dx
                 fijy = wij*invr2*dy
+                fx[i][t] = fx[i][t] + fijx
+                fy[i][t] = fy[i][t] + fijy
+                fx[j][t] = fx[j][t] - fijx
+                fy[j][t] = fy[j][t] - fijy
+                PE = PE + 4*(invr2**3)*((invr2**3) -1)
+                w = w + wij
+    if PEorW == 1:
+        return PE
+    else:
+        return w
+
+def
