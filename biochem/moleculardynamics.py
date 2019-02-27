@@ -51,6 +51,12 @@ def initialposvel(): # initial positions and velocities
         yc = 2*y[j] - 4
         atoms.append(sphere(pos=(xc, yc), radius=.5, color=color.red))
 
+def sign(a, b):
+    if b >= 0:
+        return abs(a)
+    else:
+        return -abs(a)
 
+def Forces(t, w, PE, PEorW): # set the forces on each of the 25 particles
 
 
