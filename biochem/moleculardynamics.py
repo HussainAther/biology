@@ -143,6 +143,17 @@ def timevolution():
         t = time
         if t == 0:
              t = 1
-        Pavg = avP / t
+        Pavg = avP / t # average them over the time interval
         eKavg = avKE / t
         ePavg = avPE / t
+        Tavg = avT /t
+        pre = int(Pavg*1000)
+        Pavg = pre/1000.0
+        kener = int(eKavg*1000)
+        eKavg = kener/1000
+        Kavegraph.plot(pos=(t, eKavg))
+        pener = int(ePavg*1000)
+        tempe = int(Tavg*1000000)
+        Tcurve.plot(pos=(t, ePavg) display=sceneT)
+
+timevolution()
