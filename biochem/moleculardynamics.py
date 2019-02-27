@@ -89,4 +89,14 @@ def Forces(t, w, PE, PEorW): # set the forces on each of the 25 particles
     else:
         return w
 
-def
+def timevolution():
+    avT = 0
+    avP = 0
+    Pavg = 0
+    avKE = 0
+    avPE = 0
+    t1 = 0
+    PE = 0
+    h = .031
+    hover2 = h/2
+    
