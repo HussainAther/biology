@@ -38,6 +38,11 @@ def needlemanWunsch(matrix, match = 1,mismatch = -1, gap = -2):
     """
     n = np.zeros(len(matrix)) # alignment matrix with zeros
     m = np.zeros(len(matrix[0]))
-    for i in range(len(n)):
+    for i in range(len(n)): # gap penalty for first row
         n[i][0] = penaltydict["GAP"] * i
-
+        m[i][0] = "V"
+    for i in range(len(m)): # gap penalty of first column
+        n[0][i] = penaltydict["GAP"] * i
+        m[0][i] = "H"
+    # the rest of the matrix
+    
