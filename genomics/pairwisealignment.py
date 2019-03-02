@@ -80,28 +80,31 @@ Smith-Waterman finds similar regions between two strings by comparing local segm
 and optimizes the similarity measure.
 """
 
-def back(H, b, bb='', old_i=0):
-    
-
+def loopstep(M, b, bb='', old_i=0):
+    """
+    Flip the matrix M to get the last occurence of the maximum value of M.
+    """
+    Mf = np.flip(np.flip(M, 0), 1) # flip it
+    ii, jj = np.unravel_index(Mf.argmax(), Mf.shape) # the final coordinates
+    i, j = np.subtract(M.shape, (ii + 1, jj +1)) # the last indices
+    if M[i, j] = 0: # the final index is 0
+         return bb, j # return the string and the second index
+    if old_i -i > 1:
+        bb = b[j-1] + "-" + bb
+    else:
+        bb = b[j-1] + bb
+    return loopstep(M[0:1, 0:j], b, bb, i)
 
 def smithWaterman(a, b, match_score=3, gap_cost=2):
     """
-    Return
+    Use itertools instead of two different arrays.
     """
     a, b = a.upper(), b.upper() # convert to uppercase
-    n = np.zeros(len(a)) # alignment arrays with zeros
-    m = np.zeros(len(b))
-    for i in range(1, len(m)):
-        for j in range(1, len(n)):
-            if a[i-1] == b[j-1]:
-                ma = n[i-1][j-1] + match_score
-            else:
-                ma = n[i-1][j-1] - match_score
-            d = n[i-1][j] - gap_cost # deletion
-            v = H[i][j - 1] - gap_cost # insertion
-            n[i][j] = max(ma, d, v) # determine which of ma, d, and v have the most points
-            m[i][j] = point(ma, d, h) # convert it to a code
-    H_flip = np.flip(np.flip(H, 0), 1) # reverse the array order along the first axis
-    ii, jj = np.unravel_index(H_flip.argmax(), H_flip.shape)
-    i, j = np.subtract(H.shape, (ii + 1, jj + 1))
+    M = np.zeros((len(a)+1, len(b)+1))
+    for i, j in itertools.product(range(1, M.shape[0]), range(1, M.shape[1])):
+        c = M[i - 1, j - 1] + (match_score if a[i - 1] == b[j - 1] else - match_score) # score if there's a match
+        d = M[i - 1, j] - gap_cost # deletion
+        v = M[i, j - 1] - gap_cost # insertion
+        M[i, j] = max(c, d, v, 0) # add the maximum of the possible scores
+    bb, pos = loopstep(M, b) # loop through the second string locally until the final matrix index is 0
     return pos, pos + len(bb)
