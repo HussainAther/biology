@@ -24,5 +24,12 @@ for alignment of two protein sequences and it was the first application of dynam
 sequence analysis. The Needleman-Wunsch algorithm finds the best-scoring global alignment between two sequences.
 """
 
+penaltydict =
+    {
+    "MATCH": match,
+    "MISMATCH": mismatch,
+    "GAP": gap
+}
+
 def needlemanWunsch(s1,s2,match = 1,mismatch = -1, gap = -2):
-    
+
