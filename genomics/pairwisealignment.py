@@ -1,4 +1,6 @@
 import numpy as np
+import itertools
+
 """
 Among types of pairwise alignment (Comparing two sequences), we discuss local and global alignment.
 
@@ -54,6 +56,7 @@ def needlemanWunsch(a, b, match = 1,mismatch = -1, gap = -2):
     """
     matrix is numpy array of len for rows and columns of the sizes of the two sequences.
     """
+    a, b = a.upper(), b.upper() # convert to uppercase
     n = np.zeros(len(a)) # alignment arrays with zeros
     m = np.zeros(len(b))
     for i in range(len(n)): # gap penalty for first row
@@ -78,7 +81,13 @@ and optimizes the similarity measure.
 """
 
 def smithWaterman(a, b, match_score=3, gap_cost=2):
-    a, b = a.upper(), b.upper()
-    H = matrix(a, b, match_score, gap_cost)
+    a, b = a.upper(), b.upper() # convert to uppercase
+    H = np.zeros((len(a) + 1, len(b) + 1), np.int)
+
+    for i, j in itertools.product(range(1, H.shape[0]), range(1, H.shape[1])):
+        match = H[i - 1, j - 1] + (match_score if a[i - 1] == b[j - 1] else - match_score)
+        delete = H[i - 1, j] - gap_cost
+        insert = H[i, j - 1] - gap_cost
+        H[i, j] = max(match, delete, insert, 0)
     b_, pos = traceback(H, b)
     return pos, pos + len(b_)
