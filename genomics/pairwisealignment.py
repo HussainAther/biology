@@ -50,12 +50,12 @@ penaltydict =
     "GAP": gap
 }
 
-def needlemanWunsch(matrix, match = 1,mismatch = -1, gap = -2):
+def needlemanWunsch(a, b, match = 1,mismatch = -1, gap = -2):
     """
     matrix is numpy array of len for rows and columns of the sizes of the two sequences.
     """
-    n = np.zeros(len(matrix)) # alignment matrix with zeros
-    m = np.zeros(len(matrix[0]))
+    n = np.zeros(len(a)) # alignment arrays with zeros
+    m = np.zeros(len(b))
     for i in range(len(n)): # gap penalty for first row
         n[i][0] = penaltydict["GAP"] * i
         m[i][0] = "V"
@@ -65,14 +65,20 @@ def needlemanWunsch(matrix, match = 1,mismatch = -1, gap = -2):
     # the rest of the matrix
     for i in range(1, len(m)):
         for j in range(1, len(n)):
-            d = n[i-1][j-1] + diag(n[j-1], m[i-1], penaltydict) # match or mismatch on the diagnol
+            d = n[i-1][j-1] + diag(a[j-1], b[i-1], penaltydict) # match or mismatch on the diagnol
             h = n[i][j-1] + penaltydict["GAP"] # gap horizontal
-            v = n[i-1][j] + penaltydict["GAP"] # gap horizontal
-            n[i][j] = max(d, h, v)
-            m[i][j] = point(d, h, v)
+            v = n[i-1][j] + penaltydict["GAP"] # gap vertical
+            n[i][j] = max(d, h, v) # determine which of d, h, and v have the most points
+            m[i][j] = point(d, h, v) # convert it to a code
     return np.matrix(n, m)
 
 """
 Smith-Waterman finds similar regions between two strings by comparing local segments of all possible lengths
 and optimizes the similarity measure.
 """
+
+def smithWaterman(a, b, match_score=3, gap_cost=2):
+    a, b = a.upper(), b.upper()
+    H = matrix(a, b, match_score, gap_cost)
+    b_, pos = traceback(H, b)
+    return pos, pos + len(b_)
