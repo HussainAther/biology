@@ -85,15 +85,15 @@ def loopstep(M, b, bb='', old_i=0):
     Flip the matrix M to get the last occurence of the maximum value of M.
     """
     Mf = np.flip(np.flip(M, 0), 1) # flip it
-    ii, jj = np.unravel_index(Mf.argmax(), Mf.shape) # the final coordinates
-    i, j = np.subtract(M.shape, (ii + 1, jj +1)) # the last indices
+    ii, jj = np.unravel_index(Mf.argmax(), Mf.shape) # given a linear index, find the corresponding Mf.shape-dimensinoal index
+    i, j = np.subtract(M.shape, (ii+1, jj+1)) # subtract the final Mf.shape-dimensional indices from the shape of our matrix
     if M[i, j] = 0: # the final index is 0
-         return bb, j # return the string and the second index
-    if old_i -i > 1:
-        bb = b[j-1] + "-" + bb
+        return bb, j # return the string and the second index
+    if old_i - i > 1: # check if we ned to add a gap. if we have found ourselves one or more base ahead
+        bb = b[j-1] + "-" + bb # add the gap
     else:
         bb = b[j-1] + bb
-    return loopstep(M[0:1, 0:j], b, bb, i)
+    return loopstep(M[0:1, 0:j], b, bb, i) # loop again until we find the 0 index
 
 def smithWaterman(a, b, match_score=3, gap_cost=2):
     """
@@ -107,4 +107,4 @@ def smithWaterman(a, b, match_score=3, gap_cost=2):
         v = M[i, j - 1] - gap_cost # insertion
         M[i, j] = max(c, d, v, 0) # add the maximum of the possible scores
     bb, pos = loopstep(M, b) # loop through the second string locally until the final matrix index is 0
-    return pos, pos + len(bb)
+    return (pos, pos + len(bb))
