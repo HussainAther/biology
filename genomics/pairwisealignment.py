@@ -65,4 +65,9 @@ def needlemanWunsch(matrix, match = 1,mismatch = -1, gap = -2):
     # the rest of the matrix
     for i in range(1, len(m)):
         for j in range(1, len(n)):
-            d = n[i-1][j-1] + Di
+            d = n[i-1][j-1] + diag(n[j-1], m[i-1], penaltydict) # match or mismatch on the diagnol
+            h = n[i][j-1] + penaltydict["GAP"] # gap horizontal
+            v = n[i-1][j] + penaltydict["GAP"] # gap horizontal
+            n[i][j] = max(d, h, v)
+            m[i][j] = point(d, h, v)
+    return np.matrix(n, m)
