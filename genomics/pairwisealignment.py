@@ -25,18 +25,19 @@ for alignment of two protein sequences and it was the first application of dynam
 sequence analysis. The Needleman-Wunsch algorithm finds the best-scoring global alignment between two sequences.
 """
 
-def Diagonal(n1, n2, pt):
-    # Return match or mismatch
+def diag(n1, n2, pt):
+    # Return match or mismatch along diagnol
     if(n1 == n2):
         return pt["MATCH"]
     else:
         return pt["MISMATCH"]
 
-def Pointers(di,ho,ve):
-    pointer = max(di,ho,ve)
-    if(di == pointer):
+def point(d, h, v):
+    # Return pointer matrix
+    p = max(d, h, v)
+    if(d == p):
         return "D"
-    elif(ho == pointer):
+    elif(h == p):
         return "H"
     else:
          return "V"
@@ -64,4 +65,4 @@ def needlemanWunsch(matrix, match = 1,mismatch = -1, gap = -2):
     # the rest of the matrix
     for i in range(1, len(m)):
         for j in range(1, len(n)):
-            d = n[i-1][j-1] +
+            d = n[i-1][j-1] + Di
