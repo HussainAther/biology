@@ -22,6 +22,7 @@ def classicalScore():
 Needleman-Wunsch algorithm for global alignment. This algorithm was published by Needleman and Wunsch in 1970
 for alignment of two protein sequences and it was the first application of dynamic programming to biological
 sequence analysis. The Needleman-Wunsch algorithm finds the best-scoring global alignment between two sequences.
-
-
 """
+
+def needlemanWunsch(s1,s2,match = 1,mismatch = -1, gap = -2):
+    
