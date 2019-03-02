@@ -71,3 +71,8 @@ def needlemanWunsch(matrix, match = 1,mismatch = -1, gap = -2):
             n[i][j] = max(d, h, v)
             m[i][j] = point(d, h, v)
     return np.matrix(n, m)
+
+"""
+Smith-Waterman finds similar regions between two strings by comparing local segments of all possible lengths
+and optimizes the similarity measure.
+"""
