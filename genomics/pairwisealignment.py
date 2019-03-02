@@ -42,7 +42,7 @@ def point(d, h, v):
     elif(h == p):
         return "H"
     else:
-         return "V"
+        return "V"
 
 
 penaltydict =
@@ -80,24 +80,28 @@ Smith-Waterman finds similar regions between two strings by comparing local segm
 and optimizes the similarity measure.
 """
 
+def back(H, b, bb='', old_i=0):
+    
+
+
 def smithWaterman(a, b, match_score=3, gap_cost=2):
     """
-    
+    Return
     """
     a, b = a.upper(), b.upper() # convert to uppercase
-    H = np.zeros((len(a) + 1, len(b) + 1)) # initialize scoring matrix
-    for i, j in itertools.product(range(1, H.shape[0]), range(1, H.shape[1])): # create scoring matrix
-        m = H[i - 1, j - 1] + (match_score if a[i - 1] == b[j - 1] else - match_score)
-        d = H[i - 1, j] - gap_cost # deletion
-        v = H[i, j - 1] - gap_cost # insertion
+    n = np.zeros(len(a)) # alignment arrays with zeros
+    m = np.zeros(len(b))
+    for i in range(1, len(m)):
+        for j in range(1, len(n)):
+            if a[i-1] == b[j-1]:
+                ma = n[i-1][j-1] + match_score
+            else:
+                ma = n[i-1][j-1] - match_score
+            d = n[i-1][j] - gap_cost # deletion
+            v = H[i][j - 1] - gap_cost # insertion
+            n[i][j] = max(ma, d, v) # determine which of ma, d, and v have the most points
+            m[i][j] = point(ma, d, h) # convert it to a code
     H_flip = np.flip(np.flip(H, 0), 1) # reverse the array order along the first axis
-    i_, j_ = np.unravel_index(H_flip.argmax(), H_flip.shape) # create coordinate arrays of the matrix
-    i, j = np.subtract(H.shape, (i_ + 1, j_ + 1))  # (i, j) are **last** indexes of H.max()
-    if H[i, j] == 0:
-        return b_, j
-    if old_i - i > 1:
-        b_ = b[j - 1] + '-' + b_
-    else:
-        b[j - 1] + b_
-    H[i, j] = max(m, d, v, 0)
-    return pos, pos + len(b_)
+    ii, jj = np.unravel_index(H_flip.argmax(), H_flip.shape)
+    i, j = np.subtract(H.shape, (ii + 1, jj + 1))
+    return pos, pos + len(bb)
