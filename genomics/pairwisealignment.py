@@ -1,3 +1,4 @@
+import numpy as np
 """
 Among types of pairwise alignment (Comparing two sequences), we discuss local and global alignment.
 
@@ -31,5 +32,12 @@ penaltydict =
     "GAP": gap
 }
 
-def needlemanWunsch(s1,s2,match = 1,mismatch = -1, gap = -2):
+def needlemanWunsch(matrix, match = 1,mismatch = -1, gap = -2):
+    """
+    matrix is numpy array of len for rows and columns of the sizes of the two sequences.
+    """
+    n = np.zeros(len(matrix)) # alignment matrix with zeros
+    m = np.zeros(len(matrix[0]))
+    for i in range(len(n)):
+        n[i][0] = penaltydict["GAP"] * i
 
