@@ -81,13 +81,23 @@ and optimizes the similarity measure.
 """
 
 def smithWaterman(a, b, match_score=3, gap_cost=2):
+    """
+    
+    """
     a, b = a.upper(), b.upper() # convert to uppercase
-    H = np.zeros((len(a) + 1, len(b) + 1), np.int)
-
-    for i, j in itertools.product(range(1, H.shape[0]), range(1, H.shape[1])):
-        match = H[i - 1, j - 1] + (match_score if a[i - 1] == b[j - 1] else - match_score)
-        delete = H[i - 1, j] - gap_cost
-        insert = H[i, j - 1] - gap_cost
-        H[i, j] = max(match, delete, insert, 0)
-    b_, pos = traceback(H, b)
+    H = np.zeros((len(a) + 1, len(b) + 1)) # initialize scoring matrix
+    for i, j in itertools.product(range(1, H.shape[0]), range(1, H.shape[1])): # create scoring matrix
+        m = H[i - 1, j - 1] + (match_score if a[i - 1] == b[j - 1] else - match_score)
+        d = H[i - 1, j] - gap_cost # deletion
+        v = H[i, j - 1] - gap_cost # insertion
+    H_flip = np.flip(np.flip(H, 0), 1) # reverse the array order along the first axis
+    i_, j_ = np.unravel_index(H_flip.argmax(), H_flip.shape) # create coordinate arrays of the matrix
+    i, j = np.subtract(H.shape, (i_ + 1, j_ + 1))  # (i, j) are **last** indexes of H.max()
+    if H[i, j] == 0:
+        return b_, j
+    if old_i - i > 1:
+        b_ = b[j - 1] + '-' + b_
+    else:
+        b[j - 1] + b_
+    H[i, j] = max(m, d, v, 0)
     return pos, pos + len(b_)
