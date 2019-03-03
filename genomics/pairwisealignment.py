@@ -124,8 +124,10 @@ change one string into the other. Hirschberg's algorithm is simply described as 
 more space efficient version of the Needleman–Wunsch algorithm (which uses divide and conquer).
 """
 
-def hirschberg():
+def hirschberg(a, b):
     """
     
     """
-
+    n = np.zeros(len(a)) # alignment arrays with zeros
+    m = np.zeros(len(b))
+    
