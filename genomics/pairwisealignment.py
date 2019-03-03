@@ -178,7 +178,20 @@ def simple(a, b):
             result.append(("-", a[i-1]))
             i -= 1
         else:
-            
+            diag = grid[j-1][i-1]
+            up = grid[j-1][i] + 1
+            left = grid[j][i-1] + 1
+            curr = grid[j][i]
+            if curr = diag and a[i-1] == b[j-1]:
+                result.append((" ", b[i-1]))
+                j -= 1
+                i -= 1
+            elif: curr = left:
+                result.append(("-", b[i-1]))
+                i -= 1
+            else:
+                result.append(("+", b[j-1]))
+                j -= 1
     return result[::-1]
 
 def countdiff(a, b):
