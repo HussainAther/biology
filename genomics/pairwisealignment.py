@@ -171,8 +171,15 @@ def simple(a, b):
     result = []
     i, j = len(a), len(b)
     while i != 0 and j != 0: # loop through this till we cover the lengths of both a and b.
-        
-    return
+        if i == 0:
+            result.append(("+", b[j-1]))
+            j -= 1
+        elif j == 0:
+            result.append(("-", a[i-1]))
+            i -= 1
+        else:
+            
+    return result[::-1]
 
 def countdiff(a, b):
     """
