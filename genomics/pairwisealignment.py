@@ -150,3 +150,25 @@ def hirschberg(a, b):
         ymid = scores.index(max(scores))+1 # find the index of the largest score between the two
         (z, w) = hirschberg(a[:n/2+1], b[:ymid+1]) + hirschberg(a[n/2:], b[ymid:])
     return (z, w)
+
+
+"""
+Myers and Miller's algorithm can align two sequences using O(n) space, with n being the length of the
+shorter sequence.
+"""
+
+def simple(a, b):
+    """
+    
+    """
+    grid = np.zeros(len(a), len(b))
+    
+    return
+
+def countdiff(a, b):
+    """
+    """
+    return
+
+def mm(a, b):
+    return
