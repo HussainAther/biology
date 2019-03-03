@@ -128,14 +128,24 @@ def hirschberg(a, b):
     """
     Find the longest common subsequence between sequences a and b, and return the least score result of sequences a and b.
     """
-    n = np.zeros(len(a)) # alignment arrays with zeros
-    m = np.zeros(len(b))
-    
-    lscore = needlemanWunsch(a[:n/2+1], b)[-1] # score of the left-hand of a with the entirety of b
-    rscore = needlemanWunsch(a[n/2:], b[::-1])[-1] # score of the right-hand of a with the reverse of b
-    scores = lscore + rscore # combine the two so we can comapre them
-    ymid = scores.index(max(scores))+1 # find the index of the largest score between the two
-    
-    (z, w) = hirschberg(a[:n/2+1], b[:ymid+1]) + hirschberg(a[n/2:], b[ymid:])
-
+    z = ""
+    w = ""
+    if len(a) == 0: # if we've reduced the first string to nothing through the recursive loop
+        for i in range(len(b)):
+            z += "-"
+            w += i # add the remaining bit of the second string to our second output
+    elif len(b) == 0: # the second is gone
+        for i in range(len(a)):
+            z += i
+            w += "-"
+    elif len(a) == 1 or len(b) == 1:
+        (z,w) = needlemanWunsch(a,b)
+    else:
+        n = np.zeros(len(a)) # alignment arrays with zeros
+        m = np.zeros(len(b))
+        lscore = needlemanWunsch(a[:n/2+1], b)[-1] # score of the left-hand of a with the entirety of b
+        rscore = needlemanWunsch(a[n/2:], b[::-1])[-1] # score of the right-hand of a with the reverse of b
+        scores = lscore + rscore # combine the two so we can comapre them
+        ymid = scores.index(max(scores))+1 # find the index of the largest score between the two
+        (z, w) = hirschberg(a[:n/2+1], b[:ymid+1]) + hirschberg(a[n/2:], b[ymid:])
     return (z, w)
