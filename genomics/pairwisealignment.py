@@ -168,6 +168,10 @@ def simple(a, b):
             grid[i][j] = min(grid[i-1][j] + 1, grid[i][j-1] + 1, grid[i-1][j-1])
             if a[j-1] == b[i-1]:
                 grid[i][j] = min(grid[i][j], grid[i-1][j-1])
+    result = []
+    i, j = len(a), len(b)
+    while i != 0 and j != 0: # loop through this till we cover the lengths of both a and b.
+        
     return
 
 def countdiff(a, b):
