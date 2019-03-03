@@ -77,7 +77,7 @@ def needlemanWunsch(a, b, match = 1,mismatch = -1, gap = -2):
             v = n[i-1][j] + penaltydict["GAP"] # gap vertical
             n[i][j] = max(d, h, v) # determine which of d, h, and v have the most points
             m[i][j] = point(d, h, v) # convert it to a code
-    return np.matrix(n, m)
+    return (n, m)
 
 """
 Smith-Waterman finds similar regions between two strings by comparing local segments of all possible lengths
@@ -127,7 +127,8 @@ def NWScore(x, y):
     """
     Return the last line of the Needleman-Wunsch score matrix.
     """
-    
+    np.matrix(n, m)
+
 
 def hirschberg(a, b):
     """
