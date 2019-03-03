@@ -162,7 +162,12 @@ def simple(a, b):
     
     """
     grid = np.zeros(len(a), len(b))
-    
+    for i in range(1, len(b) + 1):
+        grid[i][0] = grid[i-1][0] + 1 # move it and increase the number
+        for j in range(1, len(a) + 1):
+            grid[i][j] = min(grid[i-1][j] + 1, grid[i][j-1] + 1, grid[i-1][j-1])
+            if a[j-1] == b[i-1]:
+                grid[i][j] = min(grid[i][j], grid[i-1][j-1])
     return
 
 def countdiff(a, b):
