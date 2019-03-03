@@ -31,9 +31,9 @@ for alignment of two protein sequences and it was the first application of dynam
 sequence analysis. The Needleman-Wunsch algorithm finds the best-scoring global alignment between two sequences.
 """
 
-def diag(n1, n2, pd):
+def diag(x, y, pd):
     # Return match or mismatch along diagnol
-    if(n1 == n2):
+    if(x == y):
         return pd["MATCH"]
     else:
         return pd["MISMATCH"]
@@ -233,8 +233,12 @@ def mm(a, b):
 
 """
 Finally the Method of Four Russians partitions the matrix into small square blocks and uses a lookup
-table to perform the algorithm quickyl within each block. The lookup table encodes an index from the upper
+table to perform the algorithm quickly within each block. The lookup table encodes an index from the upper
 left quadrant of the block to the boundary cells on the lower right of the block. It improves the overall
 speed from (n/t)^2 blocks instead of n^2 matrix cells in which n is the side length of the matrix.
 """
 
+lookup = {}
+
+def fourRussians(a, b):
+    return
