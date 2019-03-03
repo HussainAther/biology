@@ -126,7 +126,8 @@ more space efficient version of the Needleman–Wunsch algorithm (which uses div
 
 def hirschberg(a, b):
     """
-    Find the longest common subsequence between sequences a and b, and return the least score result of sequences a and b.
+    Find the optimal sequence alignemnt by looking longest common subsequence between
+    sequences a and b, and return the least score result of sequences a and b.
     """
     z = ""
     w = ""
