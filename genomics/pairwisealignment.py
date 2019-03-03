@@ -133,6 +133,9 @@ def hirschberg(a, b):
     
     lscore = needlemanWunsch(a[:n/2+1], b)[-1] # score of the left-hand of a with the entirety of b
     rscore = needlemanWunsch(a[n/2:], b[::-1])[-1] # score of the right-hand of a with the reverse of b
-    mid =
+    scores = lscore + rscore # combine the two so we can comapre them
+    ymid = scores.index(max(scores))+1 # find the index of the largest score between the two
+    
+    (z, w) = hirschberg(a[:n/2+1], b[:ymid+1]) + hirschberg(a[n/2:], b[ymid:])
 
     return (z, w)
