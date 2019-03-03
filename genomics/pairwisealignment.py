@@ -123,6 +123,11 @@ the costs of insertions, replacements, deletions, and null actions needed to
 change one string into the other. Hirschberg's algorithm is simply described as a
 more space efficient version of the Needleman–Wunsch algorithm (which uses divide and conquer).
 """
+def NWScore(x, y):
+    """
+    Return the last line of the Needleman-Wunsch score matrix.
+    """
+    
 
 def hirschberg(a, b):
     """
@@ -131,3 +136,6 @@ def hirschberg(a, b):
     n = np.zeros(len(a)) # alignment arrays with zeros
     m = np.zeros(len(b))
     
+    lscore =
+
+    return (z, w)
