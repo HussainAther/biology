@@ -159,7 +159,7 @@ shorter sequence.
 
 def simple(a, b):
     """
-    
+    simple method of reducing the lengths of a and b
     """
     grid = np.zeros(len(a), len(b))
     for i in range(1, len(b) + 1):
@@ -196,8 +196,28 @@ def simple(a, b):
 
 def countdiff(a, b):
     """
+    reduce the lengths through the counting method. compare two sequences row and rw against one another
+    and return the last row to show the differences between the sequences
     """
-    return
+    row = range(0, len(a)+1)
+    for i in range(1, len(b)+1):
+        rw = [] * (len(a)+1)
+        rw[0] = i
+        for j in range(1, len(a) + 1):
+            rw[j] = min(rw[j-1] + 1, row[j] + 1)
+            if a[j-1] == b[i-1]:
+                rw[j] = min(rw[i], row(j-1]))
+        row, rw = rw, row # switch them till we get the last row
+    return row
 
 def mm(a, b):
+    if b % 2 == 0: # find the midpoint mid
+        mid = len(b)/2
+    else:
+        mid = len(b)/2 + 1
+    row1 = countdiff(a, b[:mid]) # first row
+    st1 = a[::-1] # reverse the first sequence
+    st2 = b[(len(b) - mid+1):][::-1] # reverse the latter half of b
+    row = countdiff(st1, st2) # count the differences between them
+    
     return
