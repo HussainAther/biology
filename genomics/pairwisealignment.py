@@ -126,13 +126,13 @@ more space efficient version of the Needleman–Wunsch algorithm (which uses div
 
 def hirschberg(a, b):
     """
-    
+    Find the longest common subsequence between sequences a and b, and return the least score result of sequences a and b.
     """
     n = np.zeros(len(a)) # alignment arrays with zeros
     m = np.zeros(len(b))
     
     lscore = needlemanWunsch(a[:n/2+1], b)[-1] # score of the left-hand of a with the entirety of b
     rscore = needlemanWunsch(a[n/2:], b[::-1])[-1] # score of the right-hand of a with the reverse of b
-    mid = 
+    mid =
 
     return (z, w)
