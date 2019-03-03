@@ -15,7 +15,9 @@ def classicalScore(events):
     If the substitution cost is given by a function Σ × Σ → R (all real numbers) such that d(σ, σ′) is the
     cost of changing character σ to σ′ and the gap cost is given by a function g: N → R such that g(k) is the cost
     of insertion or deletion of k characters, then we say the score function is a classical score function.
-    The score of the function is the sum of hte costs of each event described by the alignment.
+    The score of the function is the sum of the costs of each event described by the alignment.
+    
+    Here we have an arbitrary method of calculating this score.
     """
     result = 0
     result += 1 * events.count(s) # substition cost
