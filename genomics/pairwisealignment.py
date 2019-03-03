@@ -10,16 +10,18 @@ TTGCTC
 """
 
 
-def classicalScore():
+def classicalScore(events):
     """
     If the substitution cost is given by a function Σ × Σ → R (all real numbers) such that d(σ, σ′) is the
     cost of changing character σ to σ′ and the gap cost is given by a function g: N → R such that g(k) is the cost
     of insertion or deletion of k characters, then we say the score function is a classical score function.
     The score of the function is the sum of hte costs of each event described by the alignment.
     """
-
-
-
+    result = 0
+    result += 1 * events.count(s) # substition cost
+    result += 2 * events.count(d) # deletion cost
+    result += 3 * events.count(i) # insertion cost
+    return result
 
 """
 Needleman-Wunsch algorithm for global alignment. This algorithm was published by Needleman and Wunsch in 1970
@@ -27,12 +29,12 @@ for alignment of two protein sequences and it was the first application of dynam
 sequence analysis. The Needleman-Wunsch algorithm finds the best-scoring global alignment between two sequences.
 """
 
-def diag(n1, n2, pt):
+def diag(n1, n2, pd):
     # Return match or mismatch along diagnol
     if(n1 == n2):
-        return pt["MATCH"]
+        return pd["MATCH"]
     else:
-        return pt["MISMATCH"]
+        return pd["MISMATCH"]
 
 def point(d, h, v):
     # Return pointer matrix
@@ -108,3 +110,16 @@ def smithWaterman(a, b, match_score=3, gap_cost=2):
         M[i, j] = max(c, d, v, 0) # add the maximum of the possible scores
     bb, pos = loopstep(M, b) # loop through the second string locally until the final matrix index is 0
     return (pos, pos + len(bb))
+
+
+
+"""
+Hirschberg algorithm finds the optimal sequence alignment between two strings.
+Optimality is measured with the Levenshtein distance, defined to be the sum of
+the costs of insertions, replacements, deletions, and null actions needed to
+change one string into the other. Hirschberg's algorithm is simply described as a
+more space efficient version of the Needleman–Wunsch algorithm (which uses divide and conquer).
+"""
+
+def Hirschberg():
+
