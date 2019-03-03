@@ -211,6 +211,12 @@ def countdiff(a, b):
     return row
 
 def mm(a, b):
+    """
+    Miller-Myers algorithm is a recursive algorithm based on the Hirschberg method that
+    exploits the lengths of the sequences to perform at a greater speed..
+    """
+    if len(a) < 3 or len(b) < 3:
+        return simple(a, b)
     if b % 2 == 0: # find the midpoint mid
         mid = len(b)/2
     else:
@@ -218,6 +224,9 @@ def mm(a, b):
     row1 = countdiff(a, b[:mid]) # first row
     st1 = a[::-1] # reverse the first sequence
     st2 = b[(len(b) - mid+1):][::-1] # reverse the latter half of b
-    row = countdiff(st1, st2) # count the differences between them
-    
-    return
+    row2 = countdiff(st1, st2)[::-1] # count the differences between them and reverse the output row
+    index = 0 #
+    for i in range(1, len(a)+1):
+        if row1[index] + row2[index] > row1[i] + row2[i]: # find an index at which the diffrences at that index are greatest
+            index = i
+    return mm(a[:index], b[:mid]) + mm(a[index:], b[mid:]) # loop again
