@@ -230,3 +230,11 @@ def mm(a, b):
         if row1[index] + row2[index] > row1[i] + row2[i]: # find an index at which the diffrences at that index are greatest
             index = i
     return mm(a[:index], b[:mid]) + mm(a[index:], b[mid:]) # loop again
+
+"""
+Finally the Method of Four Russians partitions the matrix into small square blocks and uses a lookup
+table to perform the algorithm quickyl within each block. The lookup table encodes an index from the upper
+left quadrant of the block to the boundary cells on the lower right of the block. It improves the overall
+speed from (n/t)^2 blocks instead of n^2 matrix cells in which n is the side length of the matrix.
+"""
+
