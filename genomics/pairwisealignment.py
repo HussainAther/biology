@@ -85,6 +85,8 @@ and optimizes the similarity measure.
 def loopstep(M, b, bb='', old_i=0):
     """
     Flip the matrix M to get the last occurence of the maximum value of M.
+    Start at the highest scoring matrix cell and go until a cell with score zero
+    is encountered, which should be the highest scoring local alignment.
     """
     Mf = np.flip(np.flip(M, 0), 1) # flip it
     ii, jj = np.unravel_index(Mf.argmax(), Mf.shape) # given a linear index, find the corresponding Mf.shape-dimensinoal index
@@ -99,7 +101,8 @@ def loopstep(M, b, bb='', old_i=0):
 
 def smithWaterman(a, b, match_score=3, gap_cost=2):
     """
-    Use itertools instead of two different arrays.
+    Use itertools instead of two different arrays. Optimize similarity measure locally first, then
+    perform the loopstep (traceback) to get the highest scoring local alignment.
     """
     a, b = a.upper(), b.upper() # convert to uppercase
     M = np.zeros((len(a)+1, len(b)+1))
@@ -111,8 +114,6 @@ def smithWaterman(a, b, match_score=3, gap_cost=2):
     bb, pos = loopstep(M, b) # loop through the second string locally until the final matrix index is 0
     return (pos, pos + len(bb))
 
-
-
 """
 Hirschberg algorithm finds the optimal sequence alignment between two strings.
 Optimality is measured with the Levenshtein distance, defined to be the sum of
@@ -121,5 +122,8 @@ change one string into the other. Hirschberg's algorithm is simply described as 
 more space efficient version of the Needleman–Wunsch algorithm (which uses divide and conquer).
 """
 
-def Hirschberg():
+def hirschberg():
+    """
+    
+    """
 
