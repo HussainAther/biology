@@ -10,3 +10,10 @@ def forwardBackward(obs, pStart, pTrans, pEmit):
     I = identity(nStates)
     fwd = empty([n+1, nStates])
     fwd[0] = pStart
+    
+    for i, val in enumerate(obs):
+        fProb = np.dot(pEmit[:, val]*I, np.dot(pTrans, fwd[i]))
+        fwd[i+1] = fProb / fProb.sum()
+
+    nwd = np.ones(nStates)
+    smooth = np.
