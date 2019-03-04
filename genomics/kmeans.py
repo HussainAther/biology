@@ -119,3 +119,6 @@ def jumpMethodCluster(data, kRange=None, cycles=10):
 
         if (maxJump is None) or (jump > maxJump):
             maxJump = jump
+            bestK = k
+
+    return bestK
