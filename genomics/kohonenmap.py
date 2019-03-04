@@ -24,7 +24,7 @@ def selfOrganizingMap(inputs, spread, size, steps = 1000):
             diff2 = diff**2
             dist2 = diff2.sum(axis=2)
             index = dist2.argmin()
-            
+
         row = index // nRows
         col = index % nRows
 
