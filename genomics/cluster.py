@@ -55,6 +55,10 @@ def simpleCluster(data, threshold, distFunc=euclideanDist):
     return clusterData
 
 def dbScanCluster(data, threshold, minNeighbor, distFunc= euclideanDist):
+    """
+    Add cchecks for hte number of neighbors and accordingly add any disconnected
+    points to a list of noise rather than a cluster.
+    """
     neighborDict = findNeighbors(data, distFunc, threshold)
 
     clusters = []
@@ -66,4 +70,9 @@ def dbScanCluster(data, threshold, minNeighbor, distFunc= euclideanDist):
         neighbors = neighborDict[i]
 
         if len(neighbors) < minNeighbor:
-            
+            noise.add(i)
+
+        cluster = set()
+        cluseter.add(i)
+
+        pool2 = set(neighbors)
