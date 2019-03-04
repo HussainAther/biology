@@ -76,3 +76,23 @@ def dbScanCluster(data, threshold, minNeighbor, distFunc= euclideanDist):
         cluseter.add(i)
 
         pool2 = set(neighbors)
+        while pool2:
+            j = pool2.pop()
+            if j in pool:
+                pool.remove(j)
+            neighbors2 = neighborDict.get(j,[])
+            if len(neighbors2) < minNeighbor:
+                noise.add(j)
+            else:
+                pool2.update(neighbors2)
+                cluster.add(j)
+
+            clusters.append(cluster)
+
+        noiseData = [data[i] for i in noise]
+
+        clusterData = []
+        for cluster in clusters:
+            clusterData.append([data[i] for i in cluster])
+
+        return clusterData, noiseData
