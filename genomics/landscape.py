@@ -1,4 +1,4 @@
-import fileinput # (1)
+import fileinput
 import numpy
 from matplotlib import pylab
 
