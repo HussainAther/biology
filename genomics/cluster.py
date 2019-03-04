@@ -36,3 +36,20 @@ def simpleCluster(data, threshold, distFunc=euclideanDist):
         neighbors = neighborDict[i]
         cluster = set()
         cluster.add(i)
+
+        pool2 = set(neighbors)
+        while pool2:
+            j = pool2.pop()
+            if j in pool:
+                pool.remove(j)
+                cluster.add(j)
+                neighbors2 = neighborDict[j]
+                pool2.update(neighbors2)
+
+        clusters.append(cluster)
+
+    clusterData = []
+    for cluster in clusters:
+        clusterData.append([data[i] for i in cluster])
+
+    return clusterData
