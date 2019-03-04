@@ -95,3 +95,13 @@ def jumpMethodCluster(data, kRange=None, cycles=10):
 
     for k in range(start, limit):
         meanDists = np.zeros(cycles)
+
+    for c in range(cycles):
+        sumDist = 0
+        centers, clustesr, kMeansSpread(data, k)
+
+    for i, cluster in enumerate(clusters):
+        size = len(cluster)
+        diffs = np.array(cluster) - centers[i]
+
+    
