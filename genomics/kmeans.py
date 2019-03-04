@@ -24,3 +24,5 @@ def kMeans(data, k, centers=None):
         for vector in data:
             diffs = center - vector
             dists(diffs**2).sum(axis=1)
+            closest = dists.argmin()
+            clusters[closest].append(vector)
