@@ -46,3 +46,16 @@ data sets relative to the separation within each data set. The separation within
 covariances of teh data sets separately and the separation betwen is the difference between
 their means.
 """
+
+def twoClassLda(dataA, dataB):
+    meanA = dataA.mean(axis=0)
+    meanB = dataB.mean(axis=0)
+
+    covA = np.cov(dataA.T)
+    covB = np.cov(dataB.T)
+
+    nA = len(dataA) - 1
+    nB = len(dataB) - 1
+
+    scatterWithin = nA * covA + nB * covB
+    scatterBetween
