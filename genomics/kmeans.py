@@ -59,7 +59,7 @@ def kMeansSpread(data, k):
     influence = np.zeros(n)
     while len(indices) < k:
         """
-        We increase each value in the influence array over sumSq to get an array of reciprocals. 
+        We increase each value in the influence array over sumSq to get an array of reciprocals.
         """
         diff = data - data[index]
         sumSq = (diff**2).sum(axis=1) + 1.0 # sum of the sequences sqared. add 1 to avoid division by 0.
@@ -73,3 +73,20 @@ def kMeansSpread(data, k):
     centers = np.vstack([data[i] for i in indices])
     return  kMeans(data, k, centers)
 
+"""
+The jump method performs k-means clustering with different values of k and assesses which of hte steps
+between increasing values of k represents the best compromise between the number of clusters and complexity
+of the solution. When we try a k value, the result of a trial clustering attempt uses the "distortion"
+(measeure of the average sprea adjsuted for the covariance) from the cluster centers of data points over
+all the clusters. With jumpMethodCluster, we determine how many times to repeat the clustering.
+"""
+
+def jumpMethodCluster(data, kRange=None, cycles=10):
+    n, dims = data.shape
+
+    if kRange is None:
+        start, limit = (2, n+1)
+    else:
+        start, limit = kRange
+
+    
