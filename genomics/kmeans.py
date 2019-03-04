@@ -89,4 +89,9 @@ def jumpMethodCluster(data, kRange=None, cycles=10):
     else:
         start, limit = kRange
 
-    
+    power = dims/2
+    distortion = {}
+    invCovMat = np.linalg.pinv(np.cov(data.T))
+
+    for k in range(start, limit):
+        meanDists = np.zeros(cycles)
