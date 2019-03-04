@@ -107,3 +107,9 @@ def neiGojobori(a, b):
     print("Non-synonomous sbustitutions " + str(ns))
     print("Synonomous sbustitutions " + str(ss))
 
+    print("SS p distance " + str(ss / (ss + ns)) # p distance normalizes them for comparison
+    print("NS p distance " + str(ns / (ss + ns))
+
+    
+
+    return
