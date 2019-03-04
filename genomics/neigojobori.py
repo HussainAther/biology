@@ -78,17 +78,32 @@ def neiGojobori(a, b):
     """
     Count non-synonymous and synonymous substitutions between DNA sequecnes a and b.
     """
+    ns = 0 # non-synonomous substitutions (alters amino acid)
+    ss = 0 # synonomous substitutions (doesn't alter amino acid)
     aalista = [] # list of amino acids from the a sequence
     aalistb = [] # list of amino acids from the b sequence
-    aaa = "" # amino acid for a
-    aab = "" # amino acid for b
+    aaa = "" # current amino acid for a
+    aab = "" # current amino acid for b
     for i in range(len(a)):
         if len(aaa) == 3:
             aalista.append(aadict[aaa]) # append the amino acid to the list of amino acids in a
             aaa = ""
         else:
-            
+            aaa += i # add it to the current amino acid string
+    for i in range(len(b)):
+        if len(aab) == 3:
+            aalistb.append(aadict[aab]) # append the amino acid to the list of amino acids in a
+            aab = ""
+        else:
+            aab += i # add it to the current amino acid string
     for ind in range(len(aalista)): # for each amino acid from sequence a
+        if aalista[ind] == aalistb[ind]: # the two amino acids are the exact same three strings of DNA
+            pass
+        else: # they aren't the exact same three strings of DNA
+            if aadict[aalista[ind]] == aadict[aalistb[ind]]: # they code for the same amino acid
+                ss += 1
+            else: # they don't code for the same amino acid
+                ns += 1
+    print("Non-synonomous sbustitutions " + str(ns))
+    print("Synonomous sbustitutions " + str(ss))
 
-
-    
