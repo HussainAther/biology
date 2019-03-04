@@ -53,3 +53,17 @@ def simpleCluster(data, threshold, distFunc=euclideanDist):
         clusterData.append([data[i] for i in cluster])
 
     return clusterData
+
+def dbScanCluster(data, threshold, minNeighbor, distFunc= euclideanDist):
+    neighborDict = findNeighbors(data, distFunc, threshold)
+
+    clusters = []
+    noise = set()
+    pool = set(range(len(data)))
+
+    while pool:
+        i = pool.pop()
+        neighbors = neighborDict[i]
+
+        if len(neighbors) < minNeighbor:
+            
