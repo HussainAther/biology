@@ -30,3 +30,21 @@ def forwardBackward(obs, pStart, pTrans, pEmit):
 expTypes = ["-", "*"]
 aaTypes = ["A", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y"]
 
+nExp = len(expTypes)
+nAmino = len(aaTypes)
+nStates = nExp * nAmino
+
+# initialize probabilities
+pStart = np.zeros(nStates, float)
+pTrans = np.zeros((nStates, nStates), float)
+pEmit = np.zeros((nSt, nAmino), float)
+
+indexDict = {}
+stateDict= {}
+index = 0
+for exposure in expTypes:
+    for aminoAcid in aaTypes:
+        stateKey = (exposure, aminoAcid)
+        indexDict[stateKey] = index
+        stateDict[index] = stateKey
+        index += 1
