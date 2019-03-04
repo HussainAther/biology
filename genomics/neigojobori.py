@@ -76,10 +76,19 @@ aadict = {
 
 def neiGojobori(a, b):
     """
-    
+    Count non-synonymous and synonymous substitutions between DNA sequecnes a and b.
     """
-    aalist = []
+    aalista = [] # list of amino acids from the a sequence
+    aalistb = [] # list of amino acids from the b sequence
+    aaa = "" # amino acid for a
+    aab = "" # amino acid for b
     for i in range(len(a)):
-    if firstaa in aadict.keys():
+        if len(aaa) == 3:
+            aalista.append(aadict[aaa]) # append the amino acid to the list of amino acids in a
+            aaa = ""
+        else:
+            
+    for ind in range(len(aalista)): # for each amino acid from sequence a
+
 
     
