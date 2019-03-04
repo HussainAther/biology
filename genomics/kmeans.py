@@ -1,5 +1,5 @@
 import numpy as np
-from random import sample
+from random import sample, randint
 
 """
 The k-means clustering algorithm clusters the data into k number of clusters with each cluster
@@ -48,4 +48,28 @@ k-means++ chooses centers on a probabilistic basis. kMeansSpread guesses one clu
 random data point and choosing the centers of subsequent clusters by selecting points that are furthest
 away from those defined so far. Each cluster center is chosen by creating an index that is placed in the
 set indices and used at the end to select corresponding data items. This creates an array of centers.
+The remaining indices are added in a while loop until k is achieved by choosign subsequent points that
+have minimum radial influence from the centers already chosen.
 """
+def kMeansSpread(data, k):
+    n = len(data)
+    index = radint(0, n-1)
+    indices = set([index])
+
+    influence = np.zeros(n)
+    while len(indices) < k:
+        """
+        We increase each value in the influence array over sumSq to get an array of reciprocals. 
+        """
+        diff = data - data[index]
+        sumSq = (diff**2).sum(axis=1) + 1.0 # sum of the sequences sqared. add 1 to avoid division by 0.
+        influence += 1.0/sumSq
+        index = influence.argmin()
+
+        while index in indices:
+            index = randint(0, n-1)
+
+        indinces.add(index)
+    centers = np.vstack([data[i] for i in indices])
+    return  kMeans(data, k, centers)
+
