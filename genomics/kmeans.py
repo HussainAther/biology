@@ -43,5 +43,9 @@ def kMeans(data, k, centers=None):
         return centers, clusters
 
 """
-
+We can ipmrove the k-means algorithm by having a better guess at the starting cluster centers.
+k-means++ chooses centers on a probabilistic basis. kMeansSpread guesses one cluster by taking a
+random data point and choosing the centers of subsequent clusters by selecting points that are furthest
+away from those defined so far. Each cluster center is chosen by creating an index that is placed in the
+set indices and used at the end to select corresponding data items. This creates an array of centers.
 """
