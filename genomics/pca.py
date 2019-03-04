@@ -35,4 +35,14 @@ def extractPrincnipalComponent(data, precision=1e-9):
         for datum in dataC:
             t += np.dot(datum, pc1) * datum
 
-            
+        pc0 = pc1
+        pc1 = t / np.sqrt(np.dot(t,t,))
+
+    return pc1
+
+"""
+Linear discriminant analysis finds the matrix that maximises the separation between
+data sets relative to the separation within each data set. The separation within is the weighted
+covariances of teh data sets separately and the separation betwen is the difference between
+their means.
+"""
