@@ -24,3 +24,15 @@ def findNeighbors(data, distFunc, threshold):
                 neighborDict[j].append(i)
 
     return neighborDict
+
+def simpleCluster(data, threshold, distFunc=euclideanDist):
+    neighborDict = findNeighbors(data, distFunc, threshold)
+    
+    clusters = []
+    pool = set(range(len(data)))
+
+    while pool:
+        i = pool.pop()
+        neighbors = neighborDict[i]
+        cluster = set()
+        cluster.add(i)
