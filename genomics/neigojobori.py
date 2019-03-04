@@ -107,9 +107,17 @@ def neiGojobori(a, b):
     print("Non-synonomous sbustitutions " + str(ns))
     print("Synonomous sbustitutions " + str(ss))
 
-    print("SS p distance " + str(ss / (ss + ns)) # p distance normalizes them for comparison
-    print("NS p distance " + str(ns / (ss + ns))
+    ps = (ss / (ss + ns)) # p distance normalizes them for comparison
+    pn = (ns / (ss + ns))
 
-    
+    print("SS p distance " + str(ps))
+    print("NS p distance " + str(pn))
+
+    ds = -(3/4) * np.log(1- (4/3)*ps) # Jukes-Cantor correction (JC) accounts for multiple substitutions at the same site
+    dn = -(3/4) * np.log(1- (4/3)*pn)
+
+    print("JC for synonymous subs" + str(ds))
+    print("JC for non-synonymous subs" + str(dn))
+
 
     return
