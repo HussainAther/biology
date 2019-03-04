@@ -41,7 +41,7 @@ def extractPrincnipalComponent(data, precision=1e-9):
     return pc1
 
 """
-Linear discriminant analysis finds the matrix that maximises the separation between
+Linear discriminant analysis finds the matrix that maximises the scatter (separation) between
 data sets relative to the separation within each data set. The separation within is the weighted
 covariances of teh data sets separately and the separation betwen is the difference between
 their means.
@@ -59,3 +59,12 @@ def twoClassLda(dataA, dataB):
 
     scatterWithin = nA * covA + nB * covB
     scatterBetween
+
+    discrim = np.dot(np.linalg.inv(scatterWithin), scatterBetween)
+
+    transfA = np.dot(dataA, discrim.T)
+    transfB = np.dot(dataB, discrim.T)
+
+    divide = np.dot(discrim, (meanA + meanB))/2
+
+    return transfA, transfB, divide
