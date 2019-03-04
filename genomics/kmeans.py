@@ -91,7 +91,7 @@ def jumpMethodCluster(data, kRange=None, cycles=10):
 
     power = dims/2
     distortion = {}
-    invCovMat = np.linalg.pinv(np.cov(data.T))
+    invCovMat = np.linalg.pinv(np.cov(data.T)) # inverted covariance matrix
 
     for k in range(start, limit):
         meanDists = np.zeros(cycles)
@@ -104,4 +104,18 @@ def jumpMethodCluster(data, kRange=None, cycles=10):
         size = len(cluster)
         diffs = np.array(cluster) - centers[i]
 
-    
+    for j, diff in enumerate(diffs):
+        dist = np.dot(diff.T, np.dot(diff,i invCovMat))
+
+    meanDists[c] = sumDist / (dims*k)
+
+    distortions[k] = min(meanDists) ** (-power)
+
+    maxJump = None
+    bestK = None
+
+    for k in range(start+1, limit):
+        jump = distortions[k] - distortions[k-1]
+
+        if (maxJump is None) or (jump > maxJump):
+            maxJump = jump
