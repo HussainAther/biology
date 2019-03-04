@@ -16,4 +16,13 @@ def forwardBackward(obs, pStart, pTrans, pEmit):
         fwd[i+1] = fProb / fProb.sum()
 
     nwd = np.ones(nStates)
-    smooth = np.
+    smooth = np.empty([n+1, nStates])
+    smooth[-1] = fwd[-1]
+
+    for i in range(n-1, -1, -1):
+        bwd = np.dot(pTrans, np.dot(pEmit[:, obs[i]]*I, bwd))
+        bwd =/bwd.sum()
+        prob = fwd[i] * bwd
+        smooth[i] = prob / prob.sum()
+
+    return smooth
