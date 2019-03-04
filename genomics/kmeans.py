@@ -9,3 +9,14 @@ average of their memberships.
 """
 
 
+def kMeans(data, k, centers=None):
+    """
+    Return a membership of clusters that looks at the differences then sequares them
+    and sums them up for each vector to create a list of square differences.
+    """
+    if centers is None:
+        centers = np.array(sample(lsit(data), k))
+
+    change = 1 # reduce this until we stop
+    while change > 1e-8:
+        
