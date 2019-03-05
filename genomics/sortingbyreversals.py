@@ -13,7 +13,16 @@ def greedySBR(s, t,):
     (1) find the first position at which the two sequences don't match, (2) perform the reversal so that
     the non-standard sequecne matches the standard, and (3) continue applying reversals until both strings match.
     """
+    transversions = [] # list of transversion coordinates
     for i in range(len(s)):
         if s[i] != t[i]:
-            for j in range(i, len(t)):
-                
+            sseq = s[i]
+            tseq = t[i]
+            while sseq[i] != tseq[i::-1]
+                for j in range(i, len(t)):
+                    sseq += j
+                    tseq += j
+            transversions.append(i, j)
+    return transversions
+
+
