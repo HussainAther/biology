@@ -28,7 +28,9 @@ def greedySBR(s, t,):
 
 
 """
-Pancake sort algorithm for counting inversions.
+Pancake sort algorithm for counting inversions imagines that the sequence is like a stack of pancakes.
+You sort it to get it in order by performing flips on various parts of the sequence (as though you were
+flipping pancakes). 
 """
 
 def flip(a, i):
