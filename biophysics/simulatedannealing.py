@@ -3,7 +3,7 @@ from random import shuffle, radint
 from numpy import array
 
 """
-Using the Monte Carlo method simulated annealing we can use teh combinatorial and function optimizations
+Using the Monte Carlo method simulated annealing we can use the combinatorial and function optimizations
 under the main principles that the same kind of random selection and acceptance rules as before, but
 the degree of acceptance of non-improving states diminishes. As data sampling proceeds the acceptance criterion
 becomes stricter and the range of accepted steps effectively becomes narrower. Simulated annealing counters some of the later moves which
