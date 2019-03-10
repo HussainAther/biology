@@ -1,10 +1,11 @@
 import numyp as np
 
 """
-Sorting by reversals: When studying synteny (the physical colocalization of genetic loci on the same chromosome),
-we can find hte smallest number of inversion events that might have led from one genome to
-the other. These inversion events are the inversion of a string of ORFs or homologous non-coding
-regions. The Greedy sort by reversals is the simplest, most straightforward method of determining them.
+Sorting by reversals: When studying synteny (the physical colocalization of genetic loci 
+on the same chromosome), we can find the smallest number of inversion events that might 
+have led from one genome to the other. These inversion events are the inversion of a 
+string of ORFs or homologous non-coding regions. The Greedy sort by reversals is the simplest, 
+most straightforward method of determining them.
 """
 
 def greedySBR(s, t,):
