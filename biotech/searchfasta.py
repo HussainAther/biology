@@ -1,6 +1,6 @@
 import re
 
-# Search for a pattern within a FASTA file
+# Search for a specific pattern within a FASTA file
 
 pattern = "[LIVM]{2}.RL[DE].{4}RLE"
 fh = open("/home/sb/bioinfo/prot.fas")
