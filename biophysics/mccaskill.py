@@ -16,6 +16,15 @@ Watson-Crick as well as GU base pairs are considered complementary. The overall 
 is given by Z=Q1,n for a sequence of length n.
 """
 
+def e(i,j):
+    """
+    Check if a pair of indices match with one another.
+    """
+    if (Seq[i].upper(),Seq[j].upper()) in (("A", "U"),("U","A"),("C","G"),("G","C"),("G","U")):
+        Qbp[i][j] = Q[i+1][j-1] * float(np.exp(-Eij / RT))
+        return float(Qbp[i][j])
+    return 0.0
+
 def mc():
     """
     Steps of the algorithm.
@@ -26,7 +35,7 @@ def mc():
 
             sum = 0.0
             for h in range(i,j-1):
-                sum += Q[i][h-1] * Eps_ij(h,j)
+                sum += Q[i][h-1] * e(h,j) # extra scoring term
 
 
             Q[i][j] = Q[i][j-1] + sum
