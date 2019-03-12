@@ -232,7 +232,7 @@ def mm(a, b):
     return mm(a[:index], b[:mid]) + mm(a[index:], b[mid:]) # loop again
 
 """
-Finally the Method of Four Russians partitions the matrix into small square blocks and uses a lookup
+The Method of Four Russians partitions the matrix into small square blocks and uses a lookup
 table to perform the algorithm quickly within each block. The lookup table encodes an index from the upper
 left quadrant of the block to the boundary cells on the lower right of the block. It improves the overall
 speed from (n/t)^2 blocks instead of n^2 matrix cells in which n is the side length of the matrix.
@@ -242,3 +242,13 @@ lookup = {}
 
 def fourRussians(a, b):
     return
+
+"""
+The Gotoh algorithm computes the optimal global alignment of two sequences when using an affine gap scoring.
+Here, the scoring of a long consecutive gap (insertion/deletion) is favored over a collection of small gaps
+with the same combined length. This incorporates the assumption that a single large insertion/deletion event
+is biologically more likely to happen compared to many small insertions/deletions. While sophisticated gap
+scoring models can be applied in the generic algorithm by Waterman-Smith-Beyer (1976), affine gap scoring used
+in Gotoh's algorithm enables a reasonable gap model with reduced runtime. 
+"""
+
