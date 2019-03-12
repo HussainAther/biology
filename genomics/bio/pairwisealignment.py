@@ -256,6 +256,8 @@ def affine(i, j):
     """
     Affine scoring for two indices i and j.
     """
+    cons = 5 # some constant
+    return i + j * cons
 
 def gotoh(a, b):
     """
