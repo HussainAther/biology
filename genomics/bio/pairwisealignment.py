@@ -343,6 +343,23 @@ of a set of sequences based on pairwise alignments. This approximative approach 
 
 """
 
+def point(d, h, v):
+    # Return pointer matrix
+    p = max(d, h, v)
+    if(d == p):
+        return "D"
+    elif(h == p):
+        return "H"
+    else:
+        return "V"
+
+penaltydict =
+    {
+    "MATCH": match,
+    "MISMATCH": mismatch,
+    "GAP": gap
+}
+
 def fd(a, b):
     """
     Compute pairwise alignments of all sequences, use similarities instead of distances,
@@ -352,8 +369,8 @@ def fd(a, b):
     M = np.zeros((len(a)+1, len(b)+1))
     for i, j in itertools.product(range(1, M.shape[0]), range(1, M.shape[1])):
         c = M[i - 1, j - 1] + (match_score if a[i - 1] == b[j - 1] else - match_score) # score if there's a match
-        d = M[i - 1, j] - gap_cost # deletion
-        v = M[i, j - 1] - gap_cost # insertion
+        d = M[i - 1, j] + penaltydict["GAP"]# deletion
+        v = M[i, j - 1] + penaltydict["GAP"] # insertion
         M[i, j] = max(c, d, v, 0) # add the maximum of the possible scores
     bb, pos = loopstep(M, b) # loop through the second string locally until the final matrix index is 0
     return (pos, pos + len(bb))
