@@ -51,3 +51,32 @@ def optimal(i, j, seq):
     p = max(p)
 
     return max(u, p)
+
+def trace(i, j, struc, dp, seq):
+    """
+    For two indices i, j
+    """
+    if j <= i:
+        return
+    elif dp[i][j] == dp[i][j-1]:
+        trace(i, j-1, struc, dp, seq)
+    else:
+        for k in [b for b in range(i, j-4) if pair_check((seq[b], seq[j]))]:
+            if k-1 < 0:
+                if dp[i][j] == dp[k+1][j-1] + 1:
+                struc.append((k,j))
+                trace(k+1, j-1, struc, dp, seq)
+                break
+            elif dp[i][j] == dp[i][k-1] + dp[k+1][j-1] + 1:
+                struc.append((k,j))
+                trace(i, k-1, struc, dp, seq)
+                trace(k+1, j-1, struc, dp, seq)
+                break
+
+trace(0,len(seq), struc, dp, seq)
+
+dot_bracket = ["." for _ in range(len(seq))]
+for s in struc:
+    dot_bracket[min(s)] = "("
+    dot_bracket[max(s)] = ")"
+print("".join(dot_bracket))
