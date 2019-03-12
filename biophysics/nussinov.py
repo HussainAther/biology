@@ -21,5 +21,7 @@ def optimal(i, j, seq):
     """
     if i >= j - 4: # no pairs when i and j are fewer than four bases apart
         return 0
-
-    
+    else:
+        u = optimal(i, j-1, sequence) # recursively look for optimal pairing score
+        p = [1 + optimal(i, t-1, seq) + optimal(t+1, j-1, sequence) for t in range(i, j-4) if pair((seq[t], seq[j]))]
+        
