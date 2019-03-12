@@ -14,3 +14,9 @@ def pair(t):
     if t in [("A", "U"), ("U", "A"), ("C", "G"), ("G", "C")]:
         return True
     return False
+
+def optimal(i, j, seq):
+    """
+    Return optimal pairing score between two indices i and j.
+    """
+    
