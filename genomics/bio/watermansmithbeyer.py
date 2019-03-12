@@ -40,10 +40,14 @@ def wsb(a, b, match_score=3, gap_cost=2):
     blockgap_cost = 1 # if there's a block of gaps, then that's worth a leser cost than several individual gaps
     a, b = a.upper(), b.upper() # convert to uppercase
     M = np.zeros((len(a)+1, len(b)+1))
+    prev = "" # previous indel
     for i, j in itertools.product(range(1, M.shape[0]), range(1, M.shape[1])):
         c = M[i - 1, j - 1] + (match_score if a[i - 1] == b[j - 1] else - match_score) # score if there's a match
         d = M[i - 1, j] - gap_cost # deletion
         v = M[i, j - 1] - gap_cost # insertion
         M[i, j] = max(c, d, v, 0) # add the maximum of the possible scores
+        if M[i, j] == prev: # if the indel is the same as the one before
+            M[i, j] == blockgap_cost # use the block gap cost instead
+        prev = max(c, d, v, 0) # get the previous indel
     bb, pos = loopstep(M, b) # loop through the second string locally until the final matrix index is 0
     return (pos, pos + len(bb))
