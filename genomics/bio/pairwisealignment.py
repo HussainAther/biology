@@ -249,6 +249,10 @@ Here, the scoring of a long consecutive gap (insertion/deletion) is favored over
 with the same combined length. This incorporates the assumption that a single large insertion/deletion event
 is biologically more likely to happen compared to many small insertions/deletions. While sophisticated gap
 scoring models can be applied in the generic algorithm by Waterman-Smith-Beyer (1976), affine gap scoring used
-in Gotoh's algorithm enables a reasonable gap model with reduced runtime. 
+in Gotoh's algorithm enables a reasonable gap model with reduced runtime.
 """
+
+def gotoh(a, b):
+    """
+    """
 
