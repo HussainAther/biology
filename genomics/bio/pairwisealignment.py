@@ -334,3 +334,26 @@ def wsb(a, b, match_score=3, gap_cost=2):
         prev = max(c, d, v, 0) # get the previous indel
     bb, pos = loopstep(M, b) # loop through the second string locally until the final matrix index is 0
     return (pos, pos + len(bb))
+
+"""
+Feng-Doolittle algorithm.
+
+The progressive alignment approach by Da-Fei Feng and Russell F. Doolittle (1987) computes a multi-sequence-alignment (MSA)
+of a set of sequences based on pairwise alignments. This approximative approach identifies good MSA solutions in reasonable time.
+
+"""
+
+def fd(a, b):
+    """
+    Compute pairwise alignments of all sequences, use similarities instead of distances,
+    and build a tree with the values. Then use the tree to generate alignments.
+    """
+    a, b = a.upper(), b.upper() # convert to uppercase
+    M = np.zeros((len(a)+1, len(b)+1))
+    for i, j in itertools.product(range(1, M.shape[0]), range(1, M.shape[1])):
+        c = M[i - 1, j - 1] + (match_score if a[i - 1] == b[j - 1] else - match_score) # score if there's a match
+        d = M[i - 1, j] - gap_cost # deletion
+        v = M[i, j - 1] - gap_cost # insertion
+        M[i, j] = max(c, d, v, 0) # add the maximum of the possible scores
+    bb, pos = loopstep(M, b) # loop through the second string locally until the final matrix index is 0
+    return (pos, pos + len(bb))
