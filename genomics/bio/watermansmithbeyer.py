@@ -37,6 +37,7 @@ def wsb(a, b, match_score=3, gap_cost=2):
     Use itertools instead of two different arrays. Optimize similarity measure locally first, then
     perform the loopstep (traceback) to get the highest scoring local alignment.
     """
+    blockgap_cost = 1 # if there's a block of gaps, then that's worth a leser cost than several individual gaps
     a, b = a.upper(), b.upper() # convert to uppercase
     M = np.zeros((len(a)+1, len(b)+1))
     for i, j in itertools.product(range(1, M.shape[0]), range(1, M.shape[1])):
