@@ -19,4 +19,7 @@ def optimal(i, j, seq):
     """
     Return optimal pairing score between two indices i and j.
     """
+    if i >= j - 4: # no pairs when i and j are fewer than four bases apart
+        return 0
+
     
