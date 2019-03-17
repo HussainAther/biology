@@ -60,9 +60,12 @@ def bw(num_states, num_obs, observ):
             for b in xrange(num_states):
                 for t in xrange(observ.size):
                     Amat[a, b] = np.sum(theta[a, b, :]) / np.sum(p[a:]) # update A matrix
-        Amat = Amat / np.sum(Amat, 1)
+        Amat = Amat / np.sum(Amat, 1) # re-normalize
         for a in xrange(num_states):
             for o in xrange(num_obs):
                 roi = np.array(np.where(observ == o)) + 1 # right observation index is the array where we observe correctly
-                Omat
+                Omat[a, o] = np.sum(p[a, roi]) / np.sum(p[a, 1:])
+        Omat = Omat / np.sum(Omat, 1) # re-normalize
+        
+
 
