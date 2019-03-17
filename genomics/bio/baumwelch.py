@@ -17,6 +17,8 @@ def bw(num_states, num_obs, observ):
     4. Repeate (iterate) expectation and maximization steps until the likelihood converges given the parameters
     """
     # Initialize the variabels we'll use
-    A_mat = np.ones((num_states, num_states)) / np.sum(A_mat,1)
-    O_mat = np.ones((num_states, num_obs)) / np.sum(O_mat,1)
-    theta = np.zeros((num_states, num_states, observ.size))
+    Amat = np.ones((num_states, num_states)) / np.sum(np.ones((num_states, num_states)), 1) # transition between states matrix A
+    Omat = np.ones((num_states, num_obs)) / np.sum(np.ones((num_states, num_obs)), 1) # observed elements matrix O
+    theta = np.zeros((num_states, num_states, observ.size)) # likelihood
+    while True: # until we converge, iterate
+        oldA = Amat
