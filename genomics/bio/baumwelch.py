@@ -16,6 +16,10 @@ def fb_alg(Amat, Omat, observ):
     probmat = np.zeros((n,k)) # probability matrix for the transitions using the appropriate shape
     fw = np.zeros((n,k+1)) # forward step
     bw = np.zeros((n,k+1)) # backward step
+    fw[:, 0] = 1.0/n # forward step initialized
+    for obsind in xrange(k): # for the observations
+        frowvec = np.matrix(fw[:,obsind])
+        fw[:, obsind+1] = frowvec * np.matrix(Amat) * np.matrix(np.diag(Omat[:,observ[obsind]]))
 
 def bw(num_states, num_obs, observ):
     """
