@@ -10,7 +10,7 @@ Going to implement this using the feedback algorithm of each individual step fol
 determining the various values in python code.
 """
 
-def fb_alg(Amat, Omat, observ):
+def fb(Amat, Omat, observ):
     """
     Feedback algorithm among our matrices of transition and observation.
     """
@@ -51,3 +51,5 @@ def bw(num_states, num_obs, observ):
         oldO = Omat
         Amat = np.ones((num_states, num_states)) # re-initialize
         Omat = np.ones((num_states, num_obs))
+        p, f, b = fb( oldA, oldO, observ) # expectation
+        
