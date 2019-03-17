@@ -12,8 +12,10 @@ def fb_alg(Amat, Omat, observ):
     Feedback algorithm among our matrices of transition and observation.
     """
     k = observ.size # size of waht we observe
-    (n,m) = Omat.shape
-    probmat = np.zeros((n,k)) # probability matrix for the transitions
+    (n,m) = Omat.shape # shape for future reference
+    probmat = np.zeros((n,k)) # probability matrix for the transitions using the appropriate shape
+    fw = np.zeros((n,k+1)) # forward step
+    bw = np.zeros((n,k+1)) # backward step
 
 def bw(num_states, num_obs, observ):
     """
