@@ -5,6 +5,9 @@ Baum-Welch algorithm is an expectation maximization algorithm used with Hidden M
 It's used in locating genes for identifying coding regions in prokaryotic DNA, analyzing
 eukaroyitc seuqences up to one million base paris long, and finding copy number variations (CNVs)
 among genome structure variation in humans.
+
+Going to implement this using the feedback algorithm of each individual step following equations for
+determining the various values in python code.
 """
 
 def fb_alg(Amat, Omat, observ):
@@ -17,9 +20,18 @@ def fb_alg(Amat, Omat, observ):
     fw = np.zeros((n,k+1)) # forward step
     bw = np.zeros((n,k+1)) # backward step
     fw[:, 0] = 1.0/n # forward step initialized
-    for obsind in xrange(k): # for the observations
-        frowvec = np.matrix(fw[:,obsind])
-        fw[:, obsind+1] = frowvec * np.matrix(Amat) * np.matrix(np.diag(Omat[:,observ[obsind]]))
+    for obsind in xrange(k): # for the observation indices
+        frowvec = np.matrix(fw[:,obsind]) # convert to matrix and save as a vector the current row
+        fw[:, obsind+1] = frowvec * np.matrix(Amat) * np.matrix(np.diag(Omat[:,observ[obsind]])) # find the likelihood
+        fw[:, obsind+1] = fw[:,obsind+1]/np.sum(fw[:,obsind+1]) # normalize with the sum
+    bw[:,-1] = 1.0 # backward step initialized. same as with forward.
+    for obsind in xrange(k, 0, -1): # observation index
+        bcolvec = np.matrix(bw[:,obsind]).transpose()
+        bw[:, obsind-1] = (np.matrix(Amat) * np.matrix(np.diag(Omat[:,observ[obsind-1]])) * bcolvec).transpose()
+        bw[:,obsind-1] = bw[:,obsind-1]/np.sum(bw[:,obsind-1])
+    probmat = np.array(fw)*np.array(bw)
+    probmat = probmat/np.sum(probmat, 0)
+    return probmat, fw, bw
 
 def bw(num_states, num_obs, observ):
     """
