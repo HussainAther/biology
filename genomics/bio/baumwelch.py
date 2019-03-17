@@ -16,8 +16,7 @@ def bw(num_states, num_obs, observ):
     probability distribution for individual states.
     4. Repeate (iterate) expectation and maximization steps until the likelihood converges given the parameters
     """
-    A_mat = np.ones( (num_states, num_states) )
-    A_mat = A_mat / np.sum(A_mat,1)
-    O_mat = np.ones( (num_states, num_obs) )
-    O_mat = O_mat / np.sum(O_mat,1)
-    theta = np.zeros( (num_states, num_states, observ.size) )
+    # Initialize the variabels we'll use
+    A_mat = np.ones((num_states, num_states)) / np.sum(A_mat,1)
+    O_mat = np.ones((num_states, num_obs)) / np.sum(O_mat,1)
+    theta = np.zeros((num_states, num_states, observ.size))
