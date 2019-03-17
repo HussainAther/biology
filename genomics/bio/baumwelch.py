@@ -40,7 +40,7 @@ def bw(num_states, num_obs, observ):
     2. create a two-dimensional array of probabilities p with n rows and k+1 columns
     3. (maximization) find the probabilities of being at a state with a time using the
     probability distribution for individual states.
-    4. Repeate (iterate) expectation and maximization steps until the likelihood converges given the parameters
+    4. Repeat (iterate) expectation and maximization steps until the likelihood converges given the parameters
     """
     # Initialize the variabels we'll use
     Amat = np.ones((num_states, num_states)) / np.sum(np.ones((num_states, num_states)), 1) # transition between states matrix A
@@ -55,9 +55,14 @@ def bw(num_states, num_obs, observ):
         for a in xrange(num_states):
             for b in xrange(num_states):
                 for t in xrange(observ.size):
-                    theta[a, b, t] = fo[a,t] * bw[b, t+1] * oldA[a, b] * oldO[b, observ[t]]
+                    theta[a, b, t] = fo[a,t] * bw[b, t+1] * oldA[a, b] * oldO[b, observ[t]] # get the likelihoods
         for a in xrange(num_states):
             for b in xrange(num_states):
                 for t in xrange(observ.size):
-                    
+                    Amat[a, b] = np.sum(theta[a, b, :]) / np.sum(p[a:]) # update A matrix
+        Amat = Amat / np.sum(Amat, 1)
+        for a in xrange(num_states):
+            for o in xrange(num_obs):
+                roi = np.array(np.where(observ == o)) + 1 # right observation index is the array where we observe correctly
+                Omat
 
