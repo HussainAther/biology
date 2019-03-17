@@ -50,18 +50,18 @@ def viterbi(X):
             Vprev = V[i-1]
 
         for k in xrange(N):
-            V[i][k] = Vprev * em[i][k]
-            TB[i][k] = em[Y][X]
-            # YOUR CODE HERE
-            # Set V[i][k] to the appropriate value for the Viterbi matrix, based
-            #  on Vprev (V[i-1]) and the model parameters.
-            # Set TB[i][k] to the selected previous state (0 or 1 corresponding
-            #  to + or -)
-            # To receive full credit, your code should in theory work on any
-            #  valid emission and transition matrices, not just the ones hard-
-            #  coded into this program.
-            # See note about log probabilities above.
-
+            if V[i][k] == Vprev:
+                V[i][k] = Vprev * .99
+            else:
+                V[i][k] == Vprev * .01
+            GCcount = 0
+            for j in X:
+                if j == "G" or j == "C":
+                    GCount +=1
+            if GCount > len(X)/2:
+                TB[i][k] = 1
+            else:
+                TB[i][k] = 0
 
     # perform traceback and return the predicted hidden state sequence
     Y = [-1 for i in xrange(L)]
