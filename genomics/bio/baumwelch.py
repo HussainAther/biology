@@ -21,4 +21,7 @@ def bw(num_states, num_obs, observ):
     Omat = np.ones((num_states, num_obs)) / np.sum(np.ones((num_states, num_obs)), 1) # observed elements matrix O
     theta = np.zeros((num_states, num_states, observ.size)) # likelihood
     while True: # until we converge, iterate
-        oldA = Amat
+        oldA = Amat # for comparison, start with current matrices
+        oldO = Omat
+        Amat = np.ones((num_states, num_states)) # re-initialize
+        Omat = np.ones((num_states, num_obs))
