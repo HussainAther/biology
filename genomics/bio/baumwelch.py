@@ -22,7 +22,7 @@ def fb(Amat, Omat, observ):
     fw[:, 0] = 1.0/n # forward step initialized
     for obsind in xrange(k): # for the observation indices
         frowvec = np.matrix(fw[:,obsind]) # convert to matrix and save as a vector the current row
-        fw[:, obsind+1] = frowvec * np.matrix(Amat) * np.matrix(np.diag(Omat[:,observ[obsind]])) # find the likelihood
+        fw[:, obsind+1] = frowvec * np.matrix(Amat) * np.matrix(np.diag(Omat[:,observ[obsind]])) # find the probability for each state and time
         fw[:, obsind+1] = fw[:,obsind+1]/np.sum(fw[:,obsind+1]) # normalize with the sum
     bw[:,-1] = 1.0 # backward step initialized. same as with forward.
     for obsind in xrange(k, 0, -1): # observation index
@@ -51,8 +51,13 @@ def bw(num_states, num_obs, observ):
         oldO = Omat
         Amat = np.ones((num_states, num_states)) # re-initialize
         Omat = np.ones((num_states, num_obs))
-        p, f, b = fb( oldA, oldO, observ) # expectation
+        p, fo, bw = fb( oldA, oldO, observ) # expectation
+        for a in xrange(num_states):
+            for b in xrange(num_states):
+                for t in xrange(observ.size):
+                    theta[a, b, t] = fo[a,t] * bw[b, t+1] * oldA[a, b] * oldO[b, observ[t]]
         for a in xrange(num_states):
             for b in xrange(num_states):
                 for t in xrange(observ.size):
                     
+
