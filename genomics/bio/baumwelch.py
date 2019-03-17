@@ -52,4 +52,7 @@ def bw(num_states, num_obs, observ):
         Amat = np.ones((num_states, num_states)) # re-initialize
         Omat = np.ones((num_states, num_obs))
         p, f, b = fb( oldA, oldO, observ) # expectation
-        
+        for a in xrange(num_states):
+            for b in xrange(num_states):
+                for t in xrange(observ.size):
+                    
