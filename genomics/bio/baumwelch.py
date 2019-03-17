@@ -7,6 +7,14 @@ eukaroyitc seuqences up to one million base paris long, and finding copy number 
 among genome structure variation in humans.
 """
 
+def fb_alg(Amat, Omat, observ):
+    """
+    Feedback algorithm among our matrices of transition and observation.
+    """
+    k = observ.size # size of waht we observe
+    (n,m) = Omat.shape
+    probmat = np.zeros((n,k)) # probability matrix for the transitions
+
 def bw(num_states, num_obs, observ):
     """
     Baum-Welch algorithm follows as:
