@@ -66,6 +66,7 @@ def bw(num_states, num_obs, observ):
                 roi = np.array(np.where(observ == o)) + 1 # right observation index is the array where we observe correctly
                 Omat[a, o] = np.sum(p[a, roi]) / np.sum(p[a, 1:])
         Omat = Omat / np.sum(Omat, 1) # re-normalize
-        
+        if np.linalg.norm(oldA - Amat) < .00001 and np.linalg.norm(oldO-Omat) < .00001: # if we converge
+            return Amat, Omat
 
 
