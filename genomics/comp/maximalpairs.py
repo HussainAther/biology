@@ -16,7 +16,7 @@ def report(p, a, b, alpha):
            result.append((a, p, abs(alpha)))
     return result
 
-def pairs():
+def pairs(T):
     """
     1. Build the binary suffix tree T and create at each leaf an AVL tree of size one
        that stores the index at the leaf. An AVL tree is a blaanced search tree that stores
@@ -33,9 +33,6 @@ def pairs():
        (c) Build the leaf-list tree T at node v by merging T1 and T2 applying the following lemma:
           "Two AVL trees of size at most n and m, where n <= m, can be merged together
            in time O(nlog(m/n))"
+    T is the binary suffix tree described in step 1.
     """
-    T = {}
-    for i in s:
-        """
-        Build our binary suffix tree
-        """
+     
