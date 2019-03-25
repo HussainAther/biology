@@ -1,5 +1,3 @@
-
-
 """
 We can generalize a Turing machine to two dimensions for 2-D cellular automata
 and create a Turmite. It's a portmanteau of a termite (because of how the head
