@@ -34,3 +34,8 @@ def pairs():
           "Two AVL trees of size at most n and m, where n <= m, can be merged together
            in time O(nlog(m/n))"
     """
+    T = {}
+    for i in s:
+        """
+        Build our binary suffix tree
+        """
