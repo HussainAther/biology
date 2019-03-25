@@ -19,7 +19,7 @@ def report(p, a, b, alpha):
 def pairs(T):
     """
     1. Build the binary suffix tree T and create at each leaf an AVL tree of size one
-       that stores the index at the leaf. An AVL tree is a blaanced search tree that stores
+       that stores the index at the leaf. An AVL tree is a balanced search tree that stores
        an ordered set of elements. 
     2. When the AVL trees T1 and T2 (in which |T1| <= |T2|) at the two children w1 and w2 of
        a node v with path-label alpha are available we do:
