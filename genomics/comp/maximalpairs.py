@@ -33,6 +33,14 @@ def pairs(T):
        (c) Build the leaf-list tree T at node v by merging T1 and T2 applying the following lemma:
           "Two AVL trees of size at most n and m, where n <= m, can be merged together
            in time O(nlog(m/n))"
-    T is the binary suffix tree described in step 1.
+    T is the array used for building the binary tree in order from highest node to lowest.
+    For example, the input array T for [3,5,2,1,4,6,7,8,9,10,11,12,13,14]
+       would correspond to the following tree:
+                 3
+              /     \
+            5         2
+            /\         /\
+           1  4       6   7
+          /\  /\     /\   /\
+          8 9 10 11 12 13 14 
     """
-     
