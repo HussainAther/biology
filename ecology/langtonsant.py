@@ -4,6 +4,10 @@
 We can generalize a Turing machine to two dimensions for 2-D cellular automata
 and create a Turmite. It's a portmanteau of a termite (because of how the head
 of the automata moves) with Turing.
+
+During each time step, the ant checks the color of the cell is it on. If it is black,
+the ant turns to the right, changes the cell to white, and moves forward one space.
+If the cell is white, the ant turns left, changes the cell to black, and moves forward.
 """
 
 w = 75 # width
