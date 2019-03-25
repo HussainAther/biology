@@ -4,11 +4,17 @@ import numpy as np
 Find all-right maximal pairs in string s with bounded gap.
 """
 
-def report(a, b):
+def report(p, a, b, alpha):
     """
-    Return the  
+    Return based on the order of p, a, and b for alpha (for use in the pairs function). 
     """
     result = []
+    while a <= b:
+       if p < a:
+           result.append((p, a, abs(alpha)))
+       else:
+           result.append((a, p, abs(alpha)))
+    return result
 
 def pairs():
     """
