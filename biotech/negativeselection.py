@@ -1,4 +1,5 @@
 from random import random
+import numpy as np
 
 """
 The Negative Selection algorithm is based off the self-nonself discrimintaino behavior
@@ -18,4 +19,4 @@ def eucdist(a, b):
     """
     Return Euclidean distance between two vectors a and b.
     """
-
+    return np.linalg.norm(a-b) 
