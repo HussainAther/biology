@@ -6,6 +6,11 @@ of swarms and optimize these behaviors iteratively. We search for a best solutio
 particles with a velocity and calculating the solution every iteration until the particle swarm
 converges to the best solution.
 """
+def fit(i):
+    """
+    Return fitness value for some particle index i .
+    """
+    return x[i] ** 2 + 1
 
 def pso(a, dim):
     """
@@ -15,3 +20,5 @@ def pso(a, dim):
     x = np.random.rand(len(a))*100 # x positions of each particle
     v = np.random.rand(len(a))*100 # v velocity of each particle
     k = 1 # iteration
+    for i,j in enumerate(a):
+         fit(i) 
