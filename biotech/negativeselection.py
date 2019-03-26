@@ -67,7 +67,11 @@ def genselfdata(num, selfspace, searchspace):
             selfdata.append(p)
     return selfdata
 
-def applydet():
+def applydet(det, bounds, dataset, mindist, trials=50):
     """
     Apply our detectors to our algorithm.
     """
+    correct = 0
+    for i in range(trials):
+        input = randvec(bounds)
+        
