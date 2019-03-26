@@ -3,7 +3,9 @@ import numpy as np
 
 """
 The Negative Selection algorithm is based off the self-nonself discrimintaino behavior
-in the mammalian acquired immune system.
+in the mammalian acquired immune system. The clonal selection theory of acquired immunity
+accounts for the adaptive behavior of the immune system that includes the ongoing selection
+and proliferation of cells that select for potentially harmful material in the body.
 """
 
 def randvec(minmax):
@@ -84,4 +86,11 @@ def applydet(det, bounds, dataset, mindist, trials=50):
                 correct += 1
     return corret
 
-
+def runit(bounds, selfspace, maxdetect, maxself, mindist):
+    """
+    Execute the algorithm.
+    """
+    selfdataset = genselfdata(maxself, selfspace, bounds)
+    detect = gendet(maxdetect, bounds, selfdataset, mindist)
+    applydet(detect, bounds, selfdataset, mindist)
+    return detect
