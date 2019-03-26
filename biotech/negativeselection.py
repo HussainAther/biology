@@ -74,4 +74,14 @@ def applydet(det, bounds, dataset, mindist, trials=50):
     correct = 0
     for i in range(trials):
         input = randvec(bounds)
-        
+        actual = []
+        expected = []
+        correct = 0
+        for j in input:
+            actual.append(matches(input, det, mindist)
+            expected.append(matches(input, dataset, mindist)
+            if actual[-1] == expected[-1]: # if actual and expected values are the same
+                correct += 1
+    return corret
+
+
