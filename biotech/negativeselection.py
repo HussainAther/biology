@@ -20,3 +20,13 @@ def eucdist(a, b):
     Return Euclidean distance between two vectors a and b.
     """
     return np.linalg.norm(a-b) 
+ 
+def contains(vec, space):
+    """
+    Return True if the vector is in space. False otherwise.
+    """
+    for i in vector:
+         for j in i:
+               if i< space[j][0] or i > space[j][1]:
+                   return False
+    return True
