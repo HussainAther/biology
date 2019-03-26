@@ -31,10 +31,8 @@ def pso(a, dim):
     p_best = np.zeros(a) # best fitness values of each particle
     k = 1 # iteration
     for i in range(a):
-        for j in range(dim):
-
-         if fit(i) > p_best[i]:
-             p_best[i] = fit(i) # calculate the current fitness values
+        if fit(i, dim) > p_best[i]:
+            p_best[i] = fit(i, dim) # calculate the current fitness values
     g_best = p_best.index(max(p_best)) # the particle that is the most fit
     for i in range(a):
-    
+          
