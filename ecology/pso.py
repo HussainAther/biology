@@ -25,9 +25,9 @@ def pso(a, dim):
     the fitness value for each particle.
     """
     for i in range(dim):
-        p.append(np.random.rand(a)*100) # positions of each particle
+        p.append(np.random.rand(a)*100) # positions of each particle for each dimension
     for i in range(dim):
-        v.append(np.random.rand(x)*100) # each velocity component for each particle
+        v.append(np.random.rand(x)*100) # each velocity component for each particle 
     p_best = np.zeros(a) # best fitness values of each particle
     for i in range(a):
         if fit(i, dim) > p_best[i]:
@@ -35,7 +35,7 @@ def pso(a, dim):
     g_best = p_best.index(max(p_best)) # the particle that is the most fit
     for i in range(a):
         for j in range(dim):
-            v[i] += np.random.rand(p[i][j]-p[1][j]) + np.random.rand(p[g_best][j] - p[1][j]) # update velocity
-            p[i][j] += v[i] # update position
+            v[i][j] += np.random.rand(p[i][j]-p[1][j]) + np.random.rand(p[g_best][j] - p[1][j]) # update velocity
+            p[i][j] += v[i][j] # update position
     return p, v
 
