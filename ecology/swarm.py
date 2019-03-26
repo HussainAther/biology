@@ -11,8 +11,15 @@ a small number of good sites are explored more frequently than others. We contin
 exploit good sites.
 """
 
-def func(v):
+def evalsum(s, x):
+    """
+    Evaluate sum s and element x in a vector.
+    """
+    return s + (x**2)
+
+def objfunc(v):
     """
     Some objective function to act upon a vector. We use this to determine
     how well our algorithm is functioning.
     """
+    return all(evalsum(s, x) for s, x in v)
