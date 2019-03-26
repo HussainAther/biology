@@ -5,7 +5,9 @@ import numpy as np
 The Negative Selection algorithm is based off the self-nonself discrimintaino behavior
 in the mammalian acquired immune system. The clonal selection theory of acquired immunity
 accounts for the adaptive behavior of the immune system that includes the ongoing selection
-and proliferation of cells that select for potentially harmful material in the body.
+and proliferation of cells that select for potentially harmful material in the body. We use 
+negative selection to select for self-reactive cells during cell creation and cell proliferation.
+We observe this in the creatino of T-lymphocytes in the thymus.
 """
 
 def randvec(minmax):
