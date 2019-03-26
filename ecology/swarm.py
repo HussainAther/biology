@@ -7,5 +7,12 @@ to inform other bees to the direction, distance, and quality rating of food sour
 
 We use information processing to locate and explore good sites in a problem search space.
 We randomly sample the problem space to locate good sites via a local search in which
-a small number of good sites are explored more frequently than others.
+a small number of good sites are explored more frequently than others. We continue to 
+exploit good sites.
 """
+
+def func(v):
+    """
+    Some objective function to act upon a vector. We use this to determine
+    how well our algorithm is functioning.
+    """
