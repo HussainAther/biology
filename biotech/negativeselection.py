@@ -54,3 +54,14 @@ def gendet(maxdet, searchspace, selfdataset, mindist):
             if not matches(det[:vec], det, 0):
                 det.append(det) 
     return det
+
+
+def genselfdata(num, selfspace, searchspace):
+    """
+    """
+    selfdata = []
+    while len(selfdata) < num:
+        p = randvec(searchspace)
+        if matches(p, selfdata, 0) and contains(p, selfspace):
+            selfdata.append(p)
+    return selfdata
