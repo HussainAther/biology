@@ -29,10 +29,13 @@ def pso(a, dim):
     for i in range(dim):
         v.append(np.random.rand(x)*100) # each velocity component for each particle
     p_best = np.zeros(a) # best fitness values of each particle
-    k = 1 # iteration
     for i in range(a):
         if fit(i, dim) > p_best[i]:
             p_best[i] = fit(i, dim) # calculate the current fitness values
     g_best = p_best.index(max(p_best)) # the particle that is the most fit
     for i in range(a):
-          
+        for j in range(dim):
+            v[i] += np.random.rand(p[i][j]-p[1][j]) + np.random.rand(p[g_best][j] - p[1][j]) # update velocity
+            p[i][j] += v[i] # update position
+    return p, v
+
