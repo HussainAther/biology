@@ -23,10 +23,21 @@ def eucdist(a, b):
  
 def contains(vec, space):
     """
-    Return True if the vector is in space. False otherwise.
+    Return True if the vector vec is in space. False otherwise.
     """
-    for i in vector:
+    for i in vec:
          for j in i:
                if i< space[j][0] or i > space[j][1]:
                    return False
     return True
+
+def matches(vec, dataset, min_dist):
+    """
+    If there are any matches between the data set and the vector
+    based off some minimum distance.
+    """
+    for p in dataset:
+        dist = eucdist(vec, p[:vec])
+            if dist <= min_dist:
+                 return True
+    return False
