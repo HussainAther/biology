@@ -41,3 +41,16 @@ def matches(vec, dataset, min_dist):
             if dist <= min_dist:
                  return True
     return False
+
+def gendet(maxdet, searchspace, selfdataset, mindist):
+    """
+    Return the detectors for the search space, dataset, and minimum distance between.
+    """
+    det = []
+    while len(det) < maxdet:
+        vec = randvec(searchspace) 
+        det = det[:vec]
+        if not matches[det[:vec], selfdataset, mindist):
+            if not matches(det[:vec], det, 0):
+                det.append(det) 
+    return det
