@@ -58,6 +58,7 @@ def gendet(maxdet, searchspace, selfdataset, mindist):
 
 def genselfdata(num, selfspace, searchspace):
     """
+    Generate the dataset selfdata for our algorithm.
     """
     selfdata = []
     while len(selfdata) < num:
@@ -65,3 +66,8 @@ def genselfdata(num, selfspace, searchspace):
         if matches(p, selfdata, 0) and contains(p, selfspace):
             selfdata.append(p)
     return selfdata
+
+def applydet():
+    """
+    Apply our detectors to our algorithm.
+    """
