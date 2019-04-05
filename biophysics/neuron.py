@@ -8,7 +8,8 @@ of NMDA channels and voltage-dependence of post-synaptic currents. We incorporat
 into the delta-functions that describe the post-synaptic currents without duration or temporal kinetics. We use solutions
 to the Fokker-Planck (Fokker fokker Planck planck) equation, the partial differential equation to describe how a
 probability density function of the velocity of a particle under the influence of drag forces and random Brownian forces
-evolves over time.
+evolves over time. It's also referred ot as the Kolmogorov forward equation or the Smoluchowski equation when applied
+to particle position distributions.
 
 Firing rate of a neuron:
 
@@ -18,5 +19,6 @@ b = vth_eff - v_ss / sigma_eff i # in which Vth_eff is the effective threshold p
 
 v_post  = [tau_ref + tau_m_eff * sqrt(pi) * integral from 
 
-erf(x) is 2/sqrt(pi) * integral from 0 to x of exp(u^2)du
+erf(x) is 2/sqrt(pi) * integral from 0 to x of exp(u^2)du, also known as the error function that we use in integrating
+the normal distribution.
 """
