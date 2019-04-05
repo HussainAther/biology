@@ -13,7 +13,7 @@ to particle position distributions.
 
 Firing rate of a neuron:
 
-a = vr_eff - v_ss / sigma_eff # in which Vr is the effective threshold for and v_ss is the steady-state voltage that results 
+a = vr_eff - v_ss / sigma_eff # in which Vr is the effective threshold for resting potential and v_ss is the steady-state voltage that results 
 
 b = vth_eff - v_ss / sigma_eff i # in which Vth_eff is the effective threshold potential
 
@@ -22,3 +22,5 @@ v_post  = [tau_ref + tau_m_eff * sqrt(pi) * integral from
 erf(x) is 2/sqrt(pi) * integral from 0 to x of exp(u^2)du, also known as the error function that we use in integrating
 the normal distribution.
 """
+
+
