@@ -2,10 +2,13 @@ from tkplot import *
 from Numeric import *
 
 """
-Plot bar charts of codons frequencies
+Plot bar charts of codon frequencies
 """
 
 def codon_sort(a,b):
+    """
+    Used for sorting the codons.
+    """
     if a < b:
         return -1
     elif a > b:
