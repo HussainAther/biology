@@ -1,22 +1,31 @@
-# genome.py - a custom genome class which wraps
-# biopython parsing code
+import genbank 
 
-import genbank # (1)
 from Bio import Seq
 from Bio.Alphabet import IUPAC
 
+"""
+Genome class wraps biopython parsing code for more effective utility.
+"""
+
 class Genome(object):
-    """Genome - representing a genomic DNA sequence with genes
-    Genome.genes[i] returns the CDS sequences for each gene i."""
+    """
+    Genome - representing a genomic DNA sequence with genes
+    Genome.genes[i] returns the CDS sequences for each gene i.
+    """
     def __init__(self, accession_number):
-        genbank.download([accession_number]) # (2)
+        """
+        Initialize by downloading from GenBank.
+        """
+        genbank.download([accession_number]) 
         self.parsed_genbank = genbank.parse([
                               accession_number])[0]
         self.genes = []
         self._parse_genes()
     def _parse_genes(self):
-        """Parse out the CDS sequence for each gene."""
-        for feature in self.parsed_genbank.features: # (3)
+        """
+        Parse out the CDS sequence for each gene.
+        """
+        for feature in self.parsed_genbank.features: 
             if feature.type == ’CDS’:
                 #Build up a list of (start,end) tuples that will
                 #be used to slice the sequence in
