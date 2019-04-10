@@ -3,7 +3,6 @@ Use information secondary and tertiary structure of of protein or RNA molecules 
 align the sequences.
 """
 
-
 """
 DALI: Distance matrix alignment uses fragments for constructing structural
 alignemnts based on contact similarity patterns between successive hexapeptides in the
