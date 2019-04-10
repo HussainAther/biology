@@ -1,12 +1,14 @@
-# genbank.py - utilities for downloading
-# and parsing GenBank files
-
-from Bio import GenBank #(1)
+from Bio import GenBank 
 from Bio import SeqIO
 
+"""
+Utilities for parsing GenBank files.
+"""
+
 def download(accession_list):
-    """Download and save all GenBank records in
-       accession_list.
+    """
+    Download and save all GenBank records in
+    accession_list.
     """
     try:
         handle = GenBank.download_many(accession_list) #(2)
@@ -23,7 +25,9 @@ def download(accession_list):
         f.close()
 
 def parse(accession_list):
-    """ Parse all records in accession_list. """
+    """ 
+    Parse all records in accession_list. 
+    """
     parsed = []
     for accession_number in accession_list:
         gb_file_name = accession_number+’.gb’
