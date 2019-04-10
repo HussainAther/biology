@@ -1,4 +1,4 @@
-import numyp as np
+import numpy as np
 
 """
 Sorting by reversals: When studying synteny (the physical colocalization of genetic loci 
