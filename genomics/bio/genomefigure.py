@@ -8,6 +8,7 @@ record = SEqIO.read("https://raw.githubusercontent.com/biopython/biopython/maste
 """
 Create different objects directly to produce figures of a genome in linear and circular diagram
 """
+
 # Feature set and objects
 gd_feature_set = GenomeDiagram.FeatureSet()
 for feature in record.features:
@@ -24,5 +25,3 @@ gd_track_for_features = GenomeDiagram.Track(name="Annotated Features")
 gd_diagram = GenomeDiagram.Diagram("Yersinina pestis biovar Microtus plasmid pPCP1")
 gd_track_for_features.add_set(gd_feature_set)
 gd_diagram.add_track(gd_track_for_features, 1)
-
-
