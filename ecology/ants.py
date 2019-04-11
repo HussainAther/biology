@@ -10,6 +10,9 @@ live ants as red circles. We create a 2-D grid with wrap-around borders like
 cellular automata and compute f, the fraction of dead ants perceived by a living
 ant in its neighborhood. 
 
+This problem has applications in simulated annealing, scheduling problems,
+vehicle routing, set problems, and nanoelectronics.
+
 Requires wxPython. 
 """
 
@@ -56,4 +59,4 @@ def update(event):
                 col = "red" 
                 panel.dc.SetBrush(wc.Brush(col, wx.SOLID))
                 panel.dc.DrawCircle(xcen, ycen, circradius)
-    f = 
+    f =  
