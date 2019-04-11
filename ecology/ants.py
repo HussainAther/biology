@@ -59,4 +59,56 @@ def update(event):
                 col = "red" 
                 panel.dc.SetBrush(wc.Brush(col, wx.SOLID))
                 panel.dc.DrawCircle(xcen, ycen, circradius)
-    f =  
+            neighx = [x-1, x, x+1] # neighborhood for the ant  
+            neighy = [y-1, y, y+1]
+            dead = 0 # number of dead ants
+            live = 0 # number of alive ants
+            for xi in neighx:
+                for yi in neighy:
+                    if frame.world[xi, yi] == 1  
+
+def randomize_worlds():
+    """
+    First create an empty world, initialized with 0's
+    """
+    frame.world = np.zeros([vcells, hcells], dtype=int)
+
+    """
+    Randomly place "dead ants" with id = 1
+    """
+    cell_indices = random.sample(range(hcells * vcells), deadants)
+    row_indices = [idx % vcells for idx in cell_indices]
+    column_indices = [idx / vcells for idx in cell_indices]
+    frame.world[row_indices, column_indices] = 1
+
+    # NOTE: Create a separate 'tracker matrix' for live ants. The reason for doing this is that if live ants step onto cells
+    # containing dead ants (which they are allowed to), we want to be able to track that, as the 'world' contains information
+    # only about dead ants.
+    # As an alternative to maintaining a separate tracker, you can simply associate a position vector (x-y coordinates) 
+    # with each ant as a property of it (in object-oriented language), and just a maintain a list of live ants.
+
+    frame.live_ant_tracker = np.zeros([vcells, hcells], dtype=int)
+
+    # Randomly place 'live ants' with id = 2
+    cell_indices = random.sample(range(hcells * vcells), liveants)
+    row_indices = [idx % vcells for idx in cell_indices]
+    column_indices = [idx / vcells for idx in cell_indices]
+    frame.live_ant_tracker[row_indices, column_indices] = 2
+
+app = wx.App()
+frame = wx.Frame(None, title="Act Clustering", size = (640, 500))
+panel = wx.Panel(frame)
+panel.SetBackgroundColour("black")
+
+panel.Bind(wx.EVT_PAINT, paint)
+timer = wx.Timer(panel)
+panel.Bind(wx.EVT_TIMER, update, timer)
+
+randomize_worlds()
+        
+#frame.Center()
+frame.Show(True)
+
+# A mainloop is an endless cycle that catches up all events coming up to your application.
+# It is an integral part of any windows GUI application.
+app.MainLoop()
