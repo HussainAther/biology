@@ -27,3 +27,10 @@ circradius = min(cellwidth, cellheight)/2 # circle radius
 # ant specs
 deadants = 20
 liveants = 5
+
+def paint(event):
+    """
+    When painting is done, set a new timer that we stop later.
+    """
+    panel.dc = wcPaintDC(panel)
+    timer.Start(1000)
