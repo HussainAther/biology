@@ -12,3 +12,9 @@ ant in its neighborhood.
 
 Requires wxPython. 
 """
+
+# grid specs
+gridb = 640
+gridh = 480 
+
+
