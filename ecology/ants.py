@@ -51,3 +51,7 @@ def update(event):
             panel.dc.DrawRectangle(x, y, cellwidth, cellheight)
             xcen = x + (cellwidth/2) # x center for live ant (red circle)
             ycen = y + (cellheight/2) # y center 
+            if frame.live_ant_tracker[i, j] == 2:
+                col = "red" 
+                panel.dc.SetBrush(wc.Brush(col, wx.SOLID))
+                panel.dc.DrawCircle(xcen, ycen, circradius)
