@@ -41,3 +41,13 @@ def update(event):
     """
     for i in range(0, vcells):
         for j in range(0, hcells):
+            x = j * cellwidth
+            y = i * cellheight
+            if frame.world[i, j] == 1:
+                col = "blue" # create blue squares
+            else:
+                col = "white" 
+            panel.dc.setBrush(wx.Brush(col, wx.SOLID)) # solid color
+            panel.dc.DrawRectangle(x, y, cellwidth, cellheight)
+            xcen = x + (cellwidth/2) # x center for live ant (red circle)
+            ycen = y + (cellheight/2) # y center 
