@@ -17,4 +17,13 @@ Requires wxPython.
 gridb = 640
 gridh = 480 
 
+# cell specs
+hcells = 10 # horizontal cells
+vcells = 10 # vertical cells
+cellwidth = float(gridb)/hcells
+cellheight = float(gridh/vcells
+circradius = min(cellwidth, cellheight)/2 # circle radius
 
+# ant specs
+deadants = 20
+liveants = 5
