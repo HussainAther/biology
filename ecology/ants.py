@@ -37,7 +37,8 @@ def paint(event):
 
 def update(event):
     """
-    Bound event.
+    Bound event. The ants should cluster dead ants toegether with the ant clustering algorithm.
+    If a dead ant is found, pick it up and wander. If dead ants are found, drop the ant and wander.
     """
     for i in range(0, vcells):
         for j in range(0, hcells):
@@ -55,3 +56,4 @@ def update(event):
                 col = "red" 
                 panel.dc.SetBrush(wc.Brush(col, wx.SOLID))
                 panel.dc.DrawCircle(xcen, ycen, circradius)
+    f = 
