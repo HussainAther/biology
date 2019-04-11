@@ -31,6 +31,10 @@ circradius = min(cellwidth, cellheight)/2 # circle radius
 deadants = 20
 liveants = 5
 
+# threshold values
+k1 = 10
+k2 = 5
+
 def paint(event):
     """
     When painting is done, set a new timer that we stop later.
@@ -59,13 +63,9 @@ def update(event):
                 col = "red" 
                 panel.dc.SetBrush(wc.Brush(col, wx.SOLID))
                 panel.dc.DrawCircle(xcen, ycen, circradius)
-            neighx = [x-1, x, x+1] # neighborhood for the ant  
-            neighy = [y-1, y, y+1]
-            dead = 0 # number of dead ants
-            live = 0 # number of alive ants
-            for xi in neighx:
-                for yi in neighy:
-                    if frame.world[xi, yi] == 1  
+                         
+    timer.Stop()
+    wc.PostEvent(panel, wx.PaintEvent()) 
 
 def randomize_worlds():
     """
