@@ -34,3 +34,10 @@ def paint(event):
     """
     panel.dc = wcPaintDC(panel)
     timer.Start(1000)
+
+def update(event):
+    """
+    Bound event.
+    """
+    for i in range(0, vcells):
+        for j in range(0, hcells):
