@@ -129,7 +129,7 @@ def main():
     fig, ax = plt.subplots() 
     img = ax.imshow(grid, interpolation="nearest") 
     ani = animation.FuncAnimation(fig, update, fargs=(img, grid, N, ), 
-                                  frames = 10, 
+                                  frames = 20, 
                                   interval=updateInterval, 
                                   save_count=50) 
     ani.save("GoL.gif", dpi=80, writer="imagemagick") 
