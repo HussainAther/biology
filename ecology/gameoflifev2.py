@@ -1,4 +1,4 @@
-# Python code to implement Conway's Game Of Life 
+# Python code to implement Conway"s Game Of Life
 import argparse 
 import numpy as np 
 import matplotlib.pyplot as plt  
@@ -68,7 +68,7 @@ def update(frameNum, img, grid, N):
                          grid[(i-1)%N, (j-1)%N] + grid[(i-1)%N, (j+1)%N] + 
                          grid[(i+1)%N, (j-1)%N] + grid[(i+1)%N, (j+1)%N])/255) 
   
-            # apply Conway's rules 
+            # apply Conway"s rules
             if grid[i, j]  == ON: 
                 if (total < 2) or (total > 3): 
                     newGrid[i, j] = OFF 
@@ -87,14 +87,14 @@ def main():
     # Command line args are in sys.argv[1], sys.argv[2] .. 
     # sys.argv[0] is the script name itself and can be ignored 
     # parse arguments 
-    parser = argparse.ArgumentParser(description="Runs Conway's Game of Life simulation.") 
+    parser = argparse.ArgumentParser(description="Runs Conway"s Game of Life simulation.")
   
     # add arguments 
-    parser.add_argument('--grid-size', dest='N', required=False) 
-    parser.add_argument('--mov-file', dest='movfile', required=False) 
-    parser.add_argument('--interval', dest='interval', required=False) 
-    parser.add_argument('--glider', action='store_true', required=False) 
-    parser.add_argument('--gosper', action='store_true', required=False) 
+    parser.add_argument("--grid-size", dest="N", required=False)
+    parser.add_argument("--mov-file", dest="movfile", required=False)
+    parser.add_argument("--interval", dest="interval", required=False)
+    parser.add_argument("--glider", action="store_true", required=False)
+    parser.add_argument("--gosper", action="store_true", required=False)
     args = parser.parse_args() 
       
     # set grid size 
