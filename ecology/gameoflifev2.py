@@ -87,7 +87,7 @@ def main():
     # Command line args are in sys.argv[1], sys.argv[2] .. 
     # sys.argv[0] is the script name itself and can be ignored 
     # parse arguments 
-    parser = argparse.ArgumentParser(description="Runs Conway"s Game of Life simulation.")
+    parser = argparse.ArgumentParser(description="Runs Conway's Game of Life simulation.")
   
     # add arguments 
     parser.add_argument("--grid-size", dest="N", required=False)
@@ -98,7 +98,7 @@ def main():
     args = parser.parse_args() 
       
     # set grid size 
-    N = 100
+    N = 10000
     if args.N and int(args.N) > 8: 
         N = int(args.N) 
           
