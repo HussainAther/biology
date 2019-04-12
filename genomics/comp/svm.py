@@ -13,7 +13,7 @@ def kernelGauss(vectorI, vectorJ, sigma=1.0):
     diff = vectorI - vectorJ
     dotProd = np.dot(diff,diff)
 
-    return exp(0.5 * dotProd / sigma2)
+    return np.exp(0.5 * dotProd / sigma2)
 
 def kernelLinear(vectorI, vectorJ, mean):
     """
@@ -31,7 +31,6 @@ a boundary line that can allow the feature space to follow a complex path. The S
 the linear hyperplane that best separates the data in higher numbers of dimensions. The decision hyperplane is in the
 middle of the widest margin in data classes, and this margin is itself determined by the support vectors.
 """
-
 
 def svmTrain(knowns, data, kernelFunc, kernelParams, limit=1.0, maxSteps=500, relax=1.3):
     """
@@ -62,9 +61,6 @@ def svmTrain(knowns, data, kernelFunc, kernelParams, limit=1.0, maxSteps=500, re
         supports[i] = max(0.0, min(limit, supports[i]))
 
     nonZeroSup = [(val, i) for i, val in enumerate(supports) if val > 0]
-
-    if nonZeroSup:
-        continue
 
     nonZeroSup.sort()
 
@@ -104,7 +100,7 @@ def svmSeparation(knowns, supports, kernelArray):
     for i, known in enumerate(knowns):
         prediction = np.sum(supports[nz] * knowns[nz] * kernelArray[nz, i])
 
-        if known * prediction > 0.0
+        if known * prediction > 0.0:
             score += 1.0
 
     return 100.0 * score / len(knowns)
@@ -116,11 +112,11 @@ for x in range(1,6):
     for y in range(1,6):
         xNorm = x/6.0
         yNorm = y/6.0
-
-        if x == 3 and y == 3 :
+ 
+        if x == 3 and y == 3: # one category or the other
             category = -1.0
 
-        elif x % 2 == and y % 2:
+        elif x % 2 == y % 2:
             category = 1.0
 
         else:
@@ -131,11 +127,12 @@ for x in range(1,6):
 
         for i in range(numPoints):
             catData.append((xvals[i], yvals[i], category))
-    catData = array(catData)
-    np.random.shuffle(catData)
 
-knowns = catData [:, -1]
-data = catData [:,:-1]
+catData = np.array(catData)
+np.random.shuffle(catData)
+
+knowns = catData[:, -1] 
+data = catData[:, :-1]
 
 params = (0.1,)
 supports, steps, kernelArray = svmTrain(knowns, data, kernelGauss, params)
@@ -152,7 +149,7 @@ x = 0.0
 while x < 1.0:
     y = 0.0
     while y < 1.0:
-        query = array((x,y))
+        query = np.array((x,y))
         prediction = svmPredict(query, data, knowns, supports, kernelGauss, params)
 
         if prediction > 0:
