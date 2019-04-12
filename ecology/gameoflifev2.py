@@ -101,7 +101,7 @@ def main():
     args = parser.parse_args() 
       
     # set grid size 
-    N = 200
+    N = 600
     if args.N and int(args.N) > 8: 
         N = int(args.N) 
           
