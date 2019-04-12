@@ -9,23 +9,26 @@ ON = 255
 OFF = 0
 vals = [ON, OFF] 
   
-def randomGrid(N): 
-  
-    """returns a grid of NxN random values"""
+def randomGrid(N):
+    """
+    Returns a grid of NxN random values.
+    """
     return np.random.choice(vals, N*N, p=[0.2, 0.8]).reshape(N, N) 
   
-def addGlider(i, j, grid): 
-  
-    """adds a glider with top left cell at (i, j)"""
+def addGlider(i, j, grid):
+    """
+    Adds a glider with top left cell at (i, j).
+    """
     glider = np.array([[0,    0, 255],  
                        [255,  0, 255],  
                        [0,  255, 255]]) 
     grid[i:i+3, j:j+3] = glider 
   
-def addGosperGliderGun(i, j, grid): 
-  
-    """adds a Gosper Glider Gun with top left 
-       cell at (i, j)"""
+def addGosperGliderGun(i, j, grid):
+    """
+    Adds a Gosper Glider Gun with top left
+    cell at (i, j).
+    """
     gun = np.zeros(11*38).reshape(11, 38) 
   
     gun[5][1] = gun[5][2] = 255
@@ -98,7 +101,7 @@ def main():
     args = parser.parse_args() 
       
     # set grid size 
-    N = 10000
+    N = 1000
     if args.N and int(args.N) > 8: 
         N = int(args.N) 
           
