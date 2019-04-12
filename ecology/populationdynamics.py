@@ -1,7 +1,8 @@
 import numpy as num
 import numpy.matlib as M
-from numpy.matlib import rand, zeros, ones, empty, eye
 import interval
+
+from numpy.matlib import rand, zeros, ones, empty, eye
 
 """
 With python, we can create a model of population dynamics using a few different approaches.
