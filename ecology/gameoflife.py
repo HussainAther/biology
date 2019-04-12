@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
+
 from vpython.graph import *
 import random
 import numpy as np
@@ -22,7 +25,7 @@ def drawcells(ce):
     boxes.pos = []
     for j in range(0, 50):
         for i in range(0, 50):
-            if ce[i, j] == 1:
+            if cell[i][j] == 1:
                 xx = 2*i-50
                 yy = 2*j-50
                 boxes.append(pos=(xx, yy))
@@ -37,19 +40,19 @@ def initial():
 def gameoflife(cell):
     for i in range(1, 49):
         for j in range(1, 49):
-            sum1 = cell[i−1,j−1]+cell[i,j−1]+cell[i+1,j−1] # sum 8 neighbors
-            sum2 = cell[i−1,j]+cell[i+1,j]+cell[i−1,j+1]+cell[i,j+1]+cell[i+1,j+1]
-            alive = sum1+sum2
-            if cell[i,j] == 1:
+            sum1 = cell[i−1][j−1] + cell[i][j−1] + cell[i+1][j−1] # sum 8 neighbors
+            sum2 = cell[i−1][j] + cell[i+1][j] + cell[i−1][j+1] + cell[i][j+1] + cell[i+1][j+1]
+            alive = sum1 + sum2
+            if cell[i][j] == 1:
                 if alive == 2 or alive == 3: # remain alive
-                    cellu[i,j] = 1 # alive
+                    cellu[i][j] = 1 # alive
                 if alive > 3 or alive < 2: # overcrowded or loneliness
-                    cellu[i,j] = 0 # rip in peace
-            if cell[i,j] == 0:
+                    cellu[i][j] = 0 # rip in peace
+            if cell[i][j] == 0:
                 if alive == 3: # revive
-                    cellu[i,j] = 1
+                    cellu[i][j] = 1
                 else:
-                    cellu[i,j]] = 0
+                    cellu[i][j] = 0
     alive = 0
     return cells
 
