@@ -124,19 +124,19 @@ def main():
   
     # set up animation 
     fig, ax = plt.subplots() 
-    img = ax.imshow(grid, interpolation='nearest') 
+    img = ax.imshow(grid, interpolation="nearest") 
     ani = animation.FuncAnimation(fig, update, fargs=(img, grid, N, ), 
                                   frames = 10, 
                                   interval=updateInterval, 
                                   save_count=50) 
-  
+    ani.save("GoL.gif", dpi=80, writer="imagemagick") 
     # # of frames?  
     # set output file 
     if args.movfile: 
-        ani.save(args.movfile, fps=30, extra_args=['-vcodec', 'libx264']) 
+        ani.save(args.movfile, fps=30, extra_args=["-vcodec", "libx264"]) 
   
     plt.show() 
   
 # call main 
-if __name__ == '__main__': 
+if __name__ == "__main__": 
     main() 
