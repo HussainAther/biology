@@ -1,6 +1,7 @@
-from vpython.graph import *
 import random
 import numpy as np
+
+from vpython.graph import *
 
 """
 Perform a one-dimensional molecular dynamics simulation with too small a number of large steps
