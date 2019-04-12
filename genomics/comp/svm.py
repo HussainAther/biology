@@ -1,6 +1,8 @@
 import numpy as np
+
 from time import time
 from matplotlib import pyplot as plt
+
 np.random.seed(int(time()))
 
 def kernelGauss(vectorI, vectorJ, sigma=1.0):
