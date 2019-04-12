@@ -4,6 +4,7 @@ import random, sys, math
 # "Sequence" class that represents sequences, with some fields and methods helpful
 # for using this class in a Gibbs sampler.
 # -------------------------
+
 class Sequence:	
 	# fields in this class
 	# -------------------------
