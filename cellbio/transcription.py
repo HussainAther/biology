@@ -1,3 +1,7 @@
+"""
+Utilities for transcription of DNA.
+"""
+
 class Sequence:
     """
     Storing general information about sequences
