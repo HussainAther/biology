@@ -7,6 +7,7 @@ from sys import *
 """
 Position-specific scoring matrix
 """
+
 if len(argv) == 2:
     threshold=40.0
 else:
