@@ -2,7 +2,7 @@ import numpy as np
 
 """
 By characterizing photon arrival frequency as a harmonic oscillator in terms
-of raising and lowering (creatino and annihilation operators), we may use the 
+of raising and lowering (creation and annihilation operators), we may use the 
 electomagnetic field to write a Hamiltonian of a harmonic oscillator with
 frequency oemga.
 
@@ -22,7 +22,7 @@ def canda(n):
     return creation, annihilation 
 
 """
-We can use the Poisson distributino to determine the probability of counting
+We can use the Poisson distribution to determine the probability of counting
 n quanta in a certain state.
 """
 
@@ -32,3 +32,4 @@ def quanta(n):
     distribution. We write the coherent state as a superposition of states 
     with different numbers of quanta. 
     """
+     
