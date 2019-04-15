@@ -1,5 +1,6 @@
 import re
-try:
+
+try: # for a different Python version
     import tkinter
     from tkinter import filedialog, messagebox
 except:
