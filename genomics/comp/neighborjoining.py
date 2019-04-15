@@ -1,5 +1,4 @@
 from Alignments import sequenceAlign, calcSeqSimilarity
-from math import exp
 
 """
 Neighbor-joining method for building phylogenetic trees. It repeatedly finds the closest pair from
