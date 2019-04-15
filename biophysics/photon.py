@@ -1,6 +1,7 @@
 import numpy as np
 
 from math import factorial
+from scipy.constants import hbar
 
 """
 Photon statistics can be used in analyzinig how photoreceptor cells respond
@@ -49,3 +50,11 @@ def ham(omega, m, p, q):
     frequency omega.
     """
     return (1/2m)*p**2 + (q**2)*(m*omega**2)/2
+
+"""
+Then we can describe the ground state as a Gaussian wavefunction.
+"""
+
+omega2 = hbar/(4*m*omega) # omega squared: zero point motion variance
+
+q0 = (1/(2*np.pi*omega2)**(1/4)) * np.exp(-q**2/(4*omega2))  
