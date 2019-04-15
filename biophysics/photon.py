@@ -1,5 +1,7 @@
 import numpy as np
 
+from math import factorial
+
 """
 By characterizing photon arrival frequency as a harmonic oscillator in terms
 of raising and lowering (creation and annihilation operators), we may use the 
@@ -32,4 +34,6 @@ def quanta(n):
     distribution. We write the coherent state as a superposition of states 
     with different numbers of quanta. 
     """
-     
+    c, a = canda(n) # get the creation and annihilation eigenstates
+    m = np.abs(a)**2 # m is mean number of quanta
+    return np.exp(-m) * m**(n) / factorial(n) 
