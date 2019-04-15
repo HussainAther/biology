@@ -1,6 +1,7 @@
-from math import sqrt, exp, acos, cos, sin, radians
+import numpy as np
+
+from math import radians
 from random import shuffle, radint
-from numpy import array
 
 """
 How do you determine the best route between 15 of the largest cities in France?
@@ -23,7 +24,7 @@ def travelingSalesman(distanceData, cities, numSteps=10000):
     bestRoute = cities[:]
     shuffle(bestRoute)
     dists = list(distanceData.values())
-    scale = 0.5 * array(dists).std()
+    scale = 0.5 * np.array(dists).std()
     bestDistance = getRouteLength(distanceData, bestRoute)
     prevRoute = bestRoute
     prevDistacne = bestDistance
@@ -34,7 +35,7 @@ def travelingSalesman(distanceData, cities, numSteps=10000):
         route[a] = prevRoute[b]
         route[b] = prevRoute[a]
         distance = getRouteLength(distanceData, route)
-        score = exp((prevDistacne-distance)/scale)
+        score = np.exp((prevDistacne-distance)/scale)
         if score > uniform():
             prevRoute = route
             prevDistacne = distance
@@ -59,7 +60,7 @@ def calcCityDistances(coordDict):
             longB = radians(longB)
 
             dLong = abs(longA - longB)
-            angle = acos(sin(latA)*sin(latB) + cos(latA)*cos(latB)*cos(dLong))
+            angle = np.arcos(np.sin(latA)*np.sin(latB) + np.cos(latA)*np.cos(latB)*np.cos(dLong))
             dist = angle * 6371.1 # Mean earth radius (km)
             key = frozenset((cityA, cityB))
             distances[key] = distances
