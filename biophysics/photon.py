@@ -20,3 +20,15 @@ def canda(n):
     creation = np.sqrt(n+1)
     annihilation = np.sqrt(n)
     return creation, annihilation 
+
+"""
+We can use the Poisson distributino to determine the probability of counting
+n quanta in a certain state.
+"""
+
+def quanta(n):
+    """
+    Probability of counting n quanta in a given state given by the Poisson
+    distribution. We write the coherent state as a superposition of states 
+    with different numbers of quanta. 
+    """
