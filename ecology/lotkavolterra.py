@@ -1,5 +1,6 @@
+import numpy as np
+
 from vpython.graph import *
-from numpy import zeros
 
 """
 Compute the population dynamics for a group of predators and prey following
@@ -8,7 +9,7 @@ the Lotka-Volterra model.
 
 Tmin = 0
 Tmax = 500
-y = zeros( (2), float)
+y = np.zeros( (2), float)
 Ntimes = 1000
 y[0] = 2.0
 y[1] = 1.3
@@ -20,12 +21,12 @@ def f(t, y, F): # some function
     F[1] = − 0.1∗y[1] + 0.1∗y[0]∗y[1]; # RHS 2nd eq
 
 def rk4(t, y, h, Neqs): # rk4 method
-    F = zeros((Neqs), float)
-    ydumb = zeros((Neqs), float)
-    k1 = zeros((Neqs), float)
-    k2 = zeros((Neqs), float)
-    k3 = zeros((Neqs), float)
-    k4 = zeros((Neqs), float)
+    F = np.zeros((Neqs), float)
+    ydumb = np.zeros((Neqs), float)
+    k1 = np.zeros((Neqs), float)
+    k2 = np.zeros((Neqs), float)
+    k3 = np.zeros((Neqs), float)
+    k4 = np.zeros((Neqs), float)
     f(t, y, F)
     for i in range(0, Neqs):
         k1[i] = h*F[i]
