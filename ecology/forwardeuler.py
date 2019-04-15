@@ -1,5 +1,5 @@
-from numpy import linspace, zeros
 import matplotlib.pyplot as plt
+import numpy as np
 
 """
 Forward Euler scheme (Euler's method) is a population growth model that posits an animal species poulation (N)
@@ -21,16 +21,17 @@ r   = .1 # growth rate
 dt  = .5 # step size
 N_t = 20 # number of steps
 
-t = linspace(0, (N_t+1)*dt, N_t+2)
-N = zeros(N_t+2)
+t = np.linspace(0, (N_t+1)*dt, N_t+2)
+N = np.zeros(N_t+2)
 
 N[0] = N0
 for n in range(N_t+1):
     N[n+1] = N[n] + r*dt*N[n]
 
-numerical_sol = 'bo' if N_t < 70 else 'b-'
-plt.plot(t, N, numerical_sol, t, N0*exp(r*t), 'r-')
-plt.legend(['numerical', 'exact'], loc='upper left')
-plt.xlabel('t'); plt.ylabel('N(t)')
-filestem = 'growth1_%dsteps' % N_t
-plt.savefig('%s.png' % filestem); plt.savefig('%s.pdf' % filestem)
+numerical_sol = "bo if N_t < 70 else "b-"
+plt.plot(t, N, numerical_sol, t, N0*exp(r*t), "r-")
+plt.legend(["numerical", "exact"], loc="upper left")
+plt.xlabel("t"); plt.ylabel("N(t)")
+filestem = "growth1_%dsteps" % N_t
+plt.savefig("%s.png" % filestem)
+plt.savefig("%s.pdf" % filestem)
