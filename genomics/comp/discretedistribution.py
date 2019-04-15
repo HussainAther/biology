@@ -1,6 +1,8 @@
 import discrete_distribution
 
-# draw numbers from discrete probability distribution
+"""
+Draw numbers from discrete probability distribution
+"""
 
 discrete_distribution.seed()
 
