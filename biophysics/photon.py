@@ -3,6 +3,10 @@ import numpy as np
 from math import factorial
 
 """
+Photon statistics can be used in analyzinig how photoreceptor cells respond
+to stimuli. We use the physics of random photo arrivals and the probabilistic
+nature of perceptions to reflect it.
+
 By characterizing photon arrival frequency as a harmonic oscillator in terms
 of raising and lowering (creation and annihilation operators), we may use the 
 electomagnetic field to write a Hamiltonian of a harmonic oscillator with
