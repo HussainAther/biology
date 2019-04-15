@@ -1,6 +1,7 @@
-from math import sqrt, exp, acos, cos, sin, radians
+import numpy as np
+
+from math import radians
 from random import shuffle, radint
-from numpy import array
 
 """
 Using the Monte Carlo method simulated annealing we can use the combinatorial and function optimizations
@@ -27,7 +28,7 @@ def travelingSalesman(distanceData, cities, numSteps=10000):
     bestRoute = cities[:]
     shuffle(bestRoute)
     dists = list(distanceData.values())
-    scale = 0.5 * array(dists).std()
+    scale = 0.5 * np.array(dists).std()
     bestDistance = getRouteLength(distanceData, bestRoute)
     prevRoute = bestRoute
     prevDistacne = bestDistance
@@ -38,7 +39,7 @@ def travelingSalesman(distanceData, cities, numSteps=10000):
         route[a] = prevRoute[b]
         route[b] = prevRoute[a]
         distance = getRouteLength(distanceData, route)
-        score = exp((prevDistacne-distance)/scale)
+        score = np.exp((prevDistacne-distance)/scale)
         if score > uniform():
             prevRoute = route
             prevDistacne = distance
@@ -63,7 +64,7 @@ def calcCityDistances(coordDict):
             longB = radians(longB)
 
             dLong = abs(longA - longB)
-            angle = acos(sin(latA)*sin(latB) + cos(latA)*cos(latB)*cos(dLong))
+            angle = np.arcos(np.sin(latA)*np.sin(latB) + np.cos(latA)*np.cos(latB)*np.cos(dLong))
             dist = angle * 6371.1 # Mean earth radius (km)
             key = frozenset((cityA, cityB))
             distances[key] = distances
@@ -99,14 +100,14 @@ def travelingSalesmanSimAnneal(distanceData, cities, numIter=100000):
     prevDistance = bestDistance
     m = float(numIter)
     for i in range(numIter):
-        cool = exp(-i/m)
+        cool = np.exp(-i/m)
         a = radint(0, n-1)
         b = radint(0, n-1)
         route = prevRoute[:]
         route[a] = prevRoute[b]
         route[b] = prevRoute[a]
         distance = getRouteLength(distanceData, route)
-        score = exp((prevDistance-distance) / (scale*cool)))
+        score = np.exp((prevDistance-distance) / (scale*cool)))
         if score > uniform():
             prevRoute = route
             prevDistance = distanceData
@@ -127,10 +128,10 @@ def simAnneal(numIter, testFunc, spread=0.1, nDims=2):
     prevPoint = bestPoint
     prevValue = bestValue
     for i in range(numIter):
-        cool = exp(-i/n)
+        cool = np.exp(-i/n)
         testPoint = normal(prevPoint, spread, nDims)
         value = testFunc(testPoint)
-        prob = exp((prevValue - value)/ cool)
+        prob = np.exp((prevValue - value)/ cool)
         if prob > uniform():
             prevPoint = testPoint
             prevValue = value
