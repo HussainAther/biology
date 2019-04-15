@@ -11,3 +11,12 @@ H = hbar * omega (a†a + 1/2)
 in which a† and a are creation and annihilation operators to connect states
 with different numbers of quanta.
 """
+
+def canda(n):
+    """
+    Simple calcuation of eigenstates of creation and for given numbers of 
+    quanta. 
+    """
+    creation = np.sqrt(n+1)
+    annihilation = np.sqrt(n)
+    return creation, annihilation 
