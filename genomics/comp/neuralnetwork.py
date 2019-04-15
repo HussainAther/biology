@@ -1,5 +1,9 @@
 from numpy import array, tanh, zeros, ones, random, sum, append
 
+"""
+Neural network functions in Python.
+"""
+
 def neuralNetPredict(inputVec, weightsIn, weightsOut):
 
     signalIn = append(inputVec, 1.0) ) # input layer
