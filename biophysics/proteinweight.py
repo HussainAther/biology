@@ -1,7 +1,9 @@
-1 from Bio.Data.IUPACData
+from Bio.Data.IUPACData
 import protein_weights as protweight
 
-# BioPython protein weight calculator
+"""
+BioPython protein weight calculator
+"""
 
 protseq = raw_input("Enter your protein sequence: ")
 totalW = 0
