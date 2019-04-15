@@ -42,8 +42,10 @@ def quanta(n):
     m = np.abs(a)**2 # m is mean number of quanta
     return np.exp(-m) * m**(n) / factorial(n) 
 
-def ham(p, q):
+def ham(omega, m, p, q):
     """
     Mechanistic realization of the harmonic oscillator as a mass m hangign
-    from a spring with p and q momentum and position of the mass.
+    from a spring with p and q momentum and position of the mass and angular
+    frequency omega.
     """
+    return (1/2m)*p**2 + (q**2)*(m*omega**2)/2
