@@ -41,3 +41,9 @@ def quanta(n):
     c, a = canda(n) # get the creation and annihilation eigenstates
     m = np.abs(a)**2 # m is mean number of quanta
     return np.exp(-m) * m**(n) / factorial(n) 
+
+def ham(p, q):
+    """
+    Mechanistic realization of the harmonic oscillator as a mass m hangign
+    from a spring with p and q momentum and position of the mass.
+    """
