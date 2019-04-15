@@ -22,7 +22,7 @@ To do this, we set some rules on the structure of an RNA sequence:
 
 If i and j form a pair:
 
-1. The pair i and j must form a valid watson-crick pair.
+1. The pair i and j must form a valid Watson-Crick pair.
 2. i<j−4. This ensures that bonding is not happening between positions that are too close to each other, which would produce steric clashes.
 3. If pair (i,j) and (k,l) are in the structure, then i<k<j<l. This ensures that there is no crossing over of pairs which would result in pseudoknots.
 4. No base appears in more than one pair.
