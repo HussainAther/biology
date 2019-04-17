@@ -1,6 +1,6 @@
 import re
 
-# Delete GC repeats
+# Delete GC repeats using re
 
 regex = re.compile("(?:GC){3,}")
 seq="ATGATCGTACTGCGCGCTTCATGTGATGCGCGCGCGCAGACTATAAG"
