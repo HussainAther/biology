@@ -32,12 +32,9 @@ def mc():
     for k in range(1, L+1):
         for i in range(L-k+1):
             j = i + k -1
-
             sum = 0.0
             for h in range(i,j-1):
                 sum += Q[i][h-1] * e(h,j) # extra scoring term
-
-
             Q[i][j] = Q[i][j-1] + sum
 
 def init(N, q = 0.):
