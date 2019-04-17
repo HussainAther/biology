@@ -1,4 +1,5 @@
 import unittest
+
 from dnaseqlib import *
 
 """
@@ -95,8 +96,8 @@ def intervalSubsequenceHashes(seq, k, m):
     except StopIteration:
         return
 
-#compareSequences(getExactSubmatches, 'mouse-paternal_8_100.png', (500,500), 'fmouse.fa', 'fpaternal.fa', 8, 100)
-
+# Run thsi to retun the exact matches between the sequences.
+#compareSequences(getExactSubmatches, "mouse-paternal_8_100.png", (500,500), "fmouse.fa", "fpaternal.fa", 8, 100)
 
 class TestRollingHash(unittest.TestCase):
     def test_rolling(self):
@@ -118,6 +119,5 @@ class TestMultidict(unittest.TestCase):
         self.assertTrue(foo.get(2) == ["b"])
         self.assertTrue(foo.get(3) == [])
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
