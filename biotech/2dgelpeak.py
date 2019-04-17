@@ -1,12 +1,14 @@
-from PIL import Image
-from Images import imageToPixmapRGB, pixmapToImage
 import numpy as np
 import scipy as sp
 import matplotlib.pyplot as plt
 
+from PIL import Image
+from Images import imageToPixmapRGB, pixmapToImage
+
 """
 Biological application of Python Imaging Library (PIL) to represent spots on polyacrylamide protein gel.
 """
+
 class Peak:
     def __init__(self, position, data, dataHeight=None,linewidth=None):
         self.position = tuple(position)
