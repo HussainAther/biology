@@ -32,14 +32,18 @@ sequence analysis. The Needleman-Wunsch algorithm finds the best-scoring global 
 """
 
 def diag(x, y, pd):
-    # Return match or mismatch along diagnol
+    """
+    Return match or mismatch along diagnol.
+    """
     if(x == y):
         return pd["MATCH"]
     else:
         return pd["MISMATCH"]
 
 def point(d, h, v):
-    # Return pointer matrix
+    """
+    Return pointer matrix.
+    """
     p = max(d, h, v)
     if(d == p):
         return "D"
@@ -295,9 +299,8 @@ O(n^2) to O(n^3) when compared to the approach by Needleman and Wunsch (1970) th
 a and b stem from the same origin, a global alignment tries to identify matching parts and the changes needed to transfer one sequence into the other.
 The changes are scored and an optimal set of changes is identified, which defines an alignment. The dynamic programming approach
 tabularizes optimal subsolutions in matrix D. An entry D_ij represents the best score for the alignment of the prefixes a_1i with b_ij. We use adding recursion.
-
-
 """
+
 def loopstep(M, b, bb='', old_i=0):
     """
     Flip the matrix M to get the last occurence of the maximum value of M.
