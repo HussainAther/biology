@@ -1,5 +1,6 @@
-from Bio import SeqIO
 import pylab
+
+from Bio import SeqIO
 
 """
 Use dot plot to visually compare nucleotide sequences for similarity to each other.
