@@ -1,6 +1,9 @@
 import os
 import sys
-# convert command line arguments to variables
+
+"""
+Convert command line arguments to variables so that we can count kmers in them.
+"""
 
 kmer_size = int(sys.argv[1])
 count_cutoff = int(sys.argv[2])
