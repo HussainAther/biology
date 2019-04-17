@@ -1,5 +1,6 @@
-from random import random
 import numpy as np
+
+from random import random
 
 """
 The Negative Selection algorithm is based off the self-nonself discrimintaino behavior
