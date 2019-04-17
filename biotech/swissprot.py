@@ -1,7 +1,9 @@
 from Bio import SwissProt
 from Bio.SwissProt import SProt
 
-# SwissProt implementation to retrieve SwissProt information
+"""
+SwissProt implementation to retrieve SwissProt information.
+"""
 
 fh = open("/home/sb/bioinfo/spfile.txt")
 record = SwissProt.parse(fh).next()
@@ -33,9 +35,9 @@ seq = iterator.next().seq
 sp.close()
 
 for id in prosite_refs:
-    print id
+    print(id)
     pattern=get_prosite_pattern(id)
-    print pattern
+    print(pattern)
     p = Pattern.compile(pattern)
     m = p.search(seq)
-    print "[", m.start(), ":", m.end(), "]", seq[m.start():m.end()]
+    print("[", m.start(), ":", m.end(), "]", seq[m.start():m.end()])
