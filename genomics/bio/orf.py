@@ -1,7 +1,7 @@
 from Bio import SeqIO
 
 """
-Identify possible genes by looking for open reading frames (ORF). We need all sixx frames for long regions
+Identify possible genes by looking for open reading frames (ORF). We need all six frames for long regions
 without stop codons. An ORF is a region of nucleotides with no in frame stop codons.
 """
 
@@ -22,6 +22,9 @@ for strand, nuc in [(_1, record.seq), -1, record.seq.reverse_complement())]:
 record = SeqIO.read("https://raw.githubusercontent.com/biopython/biopython/master/Tests/GenBank/NC_005816.gb", "genbank")
 
 def find_orfs_with_trans(seq, trans_table, min_protein_length):
+    """
+    Find the ORFs with the corresponding translation table.
+    """
     answer = []
     seq_len = len(seq)
     for strand, nuc in [(+1, seq), (-1, seq.reverse_complement())]:
