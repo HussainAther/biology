@@ -3,11 +3,13 @@ from Bio import SeqIO
 """
 Simple quality control for fastq files. Works on URLs and present directories.
 """
+
 count = 0
 ftp = "ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR020/SRR020192/SRR020192.fastq"
 
 for rec in SeqIO.parse(ftp, "fastq"):
     count += 1
+
 print("%i reads" % count)
 
 """
@@ -32,6 +34,7 @@ print("Saved %i reads" % count)
 """
 Trim adaptors
 """
+
 def trim_adaptors(records, adaptor):
     """Trims perfect adaptor sequences.
 
