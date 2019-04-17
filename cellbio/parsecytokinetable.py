@@ -4,6 +4,10 @@ import pandas as pd
 import os
 import pylab
 
+"""
+Parse cytokine table for functions and proteins secreted by immune system cells.
+"""
+
 def read_table(filename, delimiter="\t"):
     """
     Read a tab-delimited table
@@ -58,7 +62,9 @@ def parse_data(table):
     return data
 
 def parse_cytokine_table(filename):
-    # extract data and sample and cytokine mapping dictinaries from table
+    """
+    Extract data and sample and cytokine mapping dictinaries from table
+    """
     table = read_table(filename)
     warning_dict = parse_warnings(table)
     sample_mapper = parse_samples(table)
