@@ -1,4 +1,5 @@
 import sys
+
 from math import log
 from util import plothist
 
@@ -7,8 +8,8 @@ Viterbi algorithm is one solution to the problem of decoding (inferring hidden s
 observed sequences) sometimes used in finding an organism's genomic sequence.
 """
 
-base_idx = { 'A' : 0, 'G' : 1, 'C' : 2, 'T' : 3 }
-state_idx = { '+' : 0, '-' : 1 }
+base_idx = { "A" : 0, "G" : 1, "C" : 2, "T" : 3 }
+state_idx = { "+" : 0, "-" : 1 }
 
 # initial distribution over states, i.e. probability of starting in state k
 init_dist = [0.5,0.5]
