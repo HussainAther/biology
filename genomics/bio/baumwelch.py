@@ -42,7 +42,7 @@ def bw(num_states, num_obs, observ):
     probability distribution for individual states.
     4. Repeat (iterate) expectation and maximization steps until the likelihood converges given the parameters
     """
-    # Initialize the variabels we'll use
+    # Initialize the variables we'll use
     Amat = np.ones((num_states, num_states)) / np.sum(np.ones((num_states, num_states)), 1) # transition between states matrix A
     Omat = np.ones((num_states, num_obs)) / np.sum(np.ones((num_states, num_obs)), 1) # observed elements matrix O
     theta = np.zeros((num_states, num_states, observ.size)) # likelihood
