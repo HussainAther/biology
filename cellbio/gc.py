@@ -1,6 +1,7 @@
+import pylab
+
 from Bio import SeqIO
 from Bio.SeqUtils import GC
-import pylab
 
 """
 Calculate GC content of ls orchid fasta.
