@@ -1,6 +1,8 @@
 from mod_python import apache
 
-# Executable modpython server
+"""
+Executable modpython server.
+"""
 
 def handler(req):
     req.content_type = "text/plain"
