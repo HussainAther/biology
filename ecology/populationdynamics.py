@@ -1,4 +1,4 @@
-import numpy as num
+import numpy as np
 import numpy.matlib as M
 import interval
 
@@ -89,12 +89,12 @@ class LMatrix():
         """
         Obtain the new population vector
         """
-        nextpopvec = num.mat(self.m) * num.mat(self.popvec).T # Convert the population array to a numpy matrix
+        nextpopvec = np.mat(self.m) * np.mat(self.popvec).T # Convert the population array to a numpy matrix
                                                               # and transpose it to get the column vector we need.
                                                               # Multiply the L*matrix by the column vector with the population
                                                               # at the next step.
         self.lastpopvec = self.popvec
-        self.popvec = num.array(nextpopvec.T)
+        self.popvec = np.array(nextpopvec.T)
         self.step += 1
 
     def LM_TotalPopulation(self):
@@ -102,13 +102,13 @@ class LMatrix():
         Return total population size
         """
         if (None != self.popvec):
-            t= num.mat(self.popvec)*(ones(Self.stAges).T
+            t= np.mat(self.popvec)*(ones(Self.stAges).T
             return t[0,0]
         else:
             return 0
 
 if __name__=="__main__":
     def hermitian(A, **kwargs): # Hermitian function
-        return num.transpose(A, **kwargs).conj()
-    T = num.transpose # shortcuts for tranpose
+        return np.transpose(A, **kwargs).conj()
+    T = np.transpose # shortcuts for tranpose
     H = hermitian
