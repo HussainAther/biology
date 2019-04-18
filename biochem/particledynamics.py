@@ -1,4 +1,4 @@
-from numpy import zeros, sqrt
+import numpy as np
 
 """
 In integrating the various ways particles interact with one another, we can determine solutions that
@@ -26,7 +26,7 @@ def chemParticleDynamics(bondDict, numSteps=5000, bondLen=1.0, timeStep=0.01):
     for i in indices[1:]:
         atom = atoms[i]
         coords = atomCoords[i]
-        velocity = zeros(3, float)
+        velocity = np.zeros(3, float)
         for j in indices:
             if i == j:
                 continue
@@ -35,7 +35,7 @@ def chemParticleDynamics(bondDict, numSteps=5000, bondLen=1.0, timeStep=0.01):
             dist2 = delta2.sum()
             bound = bondDict[atoms[j]]
             if atom in bound:
-                force = bondLen - sqrt(dist2)
+                force = bondLen - np.sqrt(dist2)
             else:
                 force = 1.0 / (dist2**2)
             force = min(max(-200.0, force), 200.0)
