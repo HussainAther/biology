@@ -6,6 +6,10 @@ import subprocess
 import numpy as np
 import pprint
 import pickle
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
+
 from math import log
 
 amino_acids_list = ["A", "C", "D", "E", "F", "G", "H", "I", "K", "L",\
@@ -13,13 +17,10 @@ amino_acids_list = ["A", "C", "D", "E", "F", "G", "H", "I", "K", "L",\
 
 def parse_alignment_file(aligned_fasta_file):
 	"""
-	- Goes through an aligned FASTA file, extracts all the sequences,
-	determines which of the sequence positions have residues (i.e.,
-	not gaps) in 50% or more of the sequences, henceforth referred to
-	as "wel-represented positions"
-	
-	INPUT: a FASTA file of a multiple sequence alignment (MSA)
-	RETURNS: a tuple (seqs_byposition_dict, human_sequence), where
+	Go through an aligned FASTA file, extract all the sequences,
+	determine which of the sequence positions have residues (i.e.,
+	not gaps) in 50% or more of the sequences ("well-represented positions")
+	Return a tuple (seqs_byposition_dict, human_sequence), where
 	(1) seqs_byposition_dict is a dictionary
 	that contains each of the well-represented positions and the
 	residue at that position in each of the sequences:
@@ -82,26 +83,15 @@ def parse_alignment_file(aligned_fasta_file):
 	
 	return (seqs_byposition_dict, human_sequence)
 
-
-
-
-
-
 def get_mono_freqs_and_di_counts(seqs_byposition_dict):
 	"""
-	- INPUT: seqs_byposition_dict, a dictionary returned by 
-		the parse_alignment_file() function above
-	- RETURNS: a tuple of (mono_freqs_dict, di_counts_dict),
-		two dictionaries that have
-		(1) the (mono-)amino acid frequencies at each of the well-
-			represented positions
-		(2) the di-amino acid counts at each pair of well-represented
-			positions
-			- format is di_counts_dict[pos][sec_pos][aa_1 + aa_2],
-				where pos is the left column, sec_pos is the
-				right column, aa_1+aa_2 is a string of the di-a.a.
+	With an input seqs_byposition_dict, a dictionary returned by the parse_alignment_file() function.
+	Return a tuple of (mono_freqs_dict, di_counts_dict), two dictionaries that have
+        (1) the (mono-)amino acid frequencies at each of the well-
+	represented positions (2) the di-amino acid counts at each pair 
+        of well-represented positions. The format is di_counts_dict[pos][sec_pos][aa_1 + aa_2],
+        where pos is the left column, sec_pos is the right column, aa_1+aa_2 is a string of the di-a.a.
 	"""
-	
 	# a list of the "well-represented positions"
 	positions_list = seqs_byposition_dict.keys()
 	positions_list.sort()
@@ -114,9 +104,9 @@ def get_mono_freqs_and_di_counts(seqs_byposition_dict):
 	mono_freqs_dict = {}
 	di_counts_dict = {}
 	for pos_num, pos in enumerate(positions_list):
-		print "Calculating amino acid frequencies for original MSA position ",\
+		print("Calculating amino acid frequencies for original MSA position ",\
 		    pos," of", positions_list[-1],\
-		    " (well-represented position #", pos_num, ")"
+		    " (well-represented position #", pos_num, ")")
 		mono_counts_dict = {}
 		mono_freqs_dict[pos] = {}
 		di_counts_dict[pos] = {}
@@ -161,7 +151,7 @@ def get_mono_freqs_and_di_counts(seqs_byposition_dict):
 
 def get_information_content(mono_freqs_dict):
 	"""
-	- Calculates the information content at each position and returns
+	Calculate the information content at each position and return
 	a list, info_content_list, that contains tuples
 	[(orig_pos_in_seq, info), (orig_pos_in_seq, info), ...],
 	where orig_pos_in_seq is the index in the original MSA
@@ -169,7 +159,6 @@ def get_information_content(mono_freqs_dict):
 	information content at that position
 	"""
 	info_content_list = []
-
 
 	# get a sorted list of all of the "well-represented positions"
 	positions_list = mono_freqs_dict.keys()
@@ -187,35 +176,27 @@ def get_information_content(mono_freqs_dict):
 		if (info_at_position > largest_info):
 			largest_info = info_at_position
 	# go through and get all indices that have largest_info
-	print "Highest information content at position is: ", largest_info
+	print("Highest information content at position is: ", largest_info)
 	for well_represented_pos, tupl in enumerate(info_content_list):
 		orig_pos = tupl[0]
 		info = tupl[1]
 		if (info == largest_info):
-			print "\nHighest information at original MSA position ",\
+			print("\nHighest information at original MSA position ",\
 			    orig_pos, " (well-represented position # ",\
-			    well_represented_pos, ")\n"
-	########## END YOUR CODE HERE ############
+			    well_represented_pos, ")\n")
 
 	return info_content_list
 				
-
-
 def plot_info_content_list(info_content_list):
 	"""
-	- This will create 2 plots of the information content at each position,
-		one indexed by the original MSA position and one indexed by the
-		well-represented position #
-		- matplotlib must be installed; otherwise, use the output
-			from the above function (info_content_list) to plot
-			the information at each position in Excel or another
-			package of your choice
+	Create 2 plots of the information content at each position, one indexed by the 
+        original MSA position and one indexed by the well-represented position 
+	matplotlib must be installed; otherwise, use the output from info_content_list to plot
+        the information at each position in Excel or another
+        package of your choice
 	"""
-	import matplotlib
-	matplotlib.use('agg')
-	import matplotlib.pyplot as plt
 
-	print "Making 2 plots of the information content at each position..."
+	print("Making 2 plots of the information content at each position...")
 
 	max_info = -1
 	min_info = 1000
@@ -261,7 +242,7 @@ def plot_info_content_list(info_content_list):
 	# this will save the figure in the directory from which this script
 	# is run
 	fig.savefig("information_plot_well_represented_positions.pdf")
-	print "\n\tPlot saved as information_plot_well_represented_positions.pdf"
+	print("\n\tPlot saved as information_plot_well_represented_positions.pdf")
 
 	# makes a figure, axis, and plots the points on it relative to the
 	# original MSA positions
@@ -299,28 +280,27 @@ def plot_info_content_list(info_content_list):
 	# this will save the figure in the directory from which this script
 	# is run
 	fig.savefig("information_plot_original_MSA_positions.pdf")
-	print "\n\tPlot saved as information_plot_original_MSA_positions.pdf"
+	print("\n\tPlot saved as information_plot_original_MSA_positions.pdf")
 	plt.clf()
-
 
 def get_MI_at_pairs_of_positions(di_counts_dict):
 	"""
-	- Calculates the MI at each pair of positions (i, j) in the multiple
+	Calculate the MI at each pair of positions (i, j) in the multiple
 	sequence alignment, where i < j are indexes corresponding to positions
 	in the original MSA (i.e., are keys of mono_freqs_dict)
-	- Returns a dictionary, mutual_information_dict, where
+	Return a dictionary, mutual_information_dict, where
 	mutual_information_dict[i][j] = MI_at_ij_positions
-	- Note: when calculating the mutual information for a pair of positions,
-		you can scale the di-a.a. counts directly into frequencies to
-		get the joint distribution f^(i,j)_x,y, and you should sum over
-		this joint distribution to get the marginal distributions
-		f^(i)_x and f^(j)_y
+	When calculating the mutual information for a pair of positions,
+	you can scale the di-a.a. counts directly into frequencies to
+	get the joint distribution f^(i,j)_x,y, and you should sum over
+	this joint distribution to get the marginal distributions
+	f^(i)_x and f^(j)_y
 	"""
 
 	mutual_information_dict = {}
 	
 	
-	print "\nMaking mutual_information_dict..."
+	print("\nMaking mutual_information_dict...")
 	max_MI = -1
 	positions_list = di_counts_dict.keys()
 	positions_list.sort()
@@ -392,16 +372,11 @@ def get_MI_at_pairs_of_positions(di_counts_dict):
 		for sec_pos in positions_list[(pos_num+1):]:
 			if (mutual_information_dict[pos][sec_pos] == max_MI):
 				list_of_indices_max_MI.append( (pos, sec_pos) )
-	print "Maximum MI is ", max_MI
-	print "\t-The maximum MI occurs at positions:",
-	pprint.pprint(list_of_indices_max_MI)
-	########## END YOUR CODE HERE ############
+	print("Maximum MI is ", max_MI)
+	print("\t-The maximum MI occurs at positions:",
+	pprint.pprint(list_of_indices_max_MI))
 	
 	return mutual_information_dict
-
-
-
-
 
 def get_highest_MI_block_of_10(mutual_information_dict):
 	"""
@@ -441,21 +416,13 @@ def get_highest_MI_block_of_10(mutual_information_dict):
 			for i in range(10):
 				highest_average_positions_list.append(\
 					positions_list[pos_in_list+i])
-	########## END YOUR CODE HERE ############
 	
 	return highest_average_positions_list
 
-
-
-
 def plot_mutual_information(mutual_information_dict):
 	"""
-	- This will create a plot of the mutual information
-		at each pair of positions
-		- matplotlib must be installed; otherwise, use the output
-			from the above function (mutual_information_dict)
-			to plot the information at each position pair in
-			Excel or another package of your choice
+	Create a plot of the mutual information
+	at each pair of positions.
 	"""
 	import matplotlib
 	matplotlib.use('agg')
@@ -578,7 +545,7 @@ def plot_mutual_information(mutual_information_dict):
 	# this will save the figure in the directory from which this script
 	# is run
 	fig.savefig("mutual_information_plot_original_MSA_positions.pdf")
-	print "\n\tPlot saved as mutual_information_plot_original_MSA_positions.pdf"
+	print("\n\tPlot saved as mutual_information_plot_original_MSA_positions.pdf")
 
 if __name__ == "__main__":
 	### the FASTA MSA file should be the command line argument
@@ -644,13 +611,13 @@ if __name__ == "__main__":
 	if (len(highest_MI_block_of_10) == 10):
 		start_of_MI_block = highest_MI_block_of_10[0]
 		end_of_MI_block = highest_MI_block_of_10[-1]
-		print "\nResidues ",start_of_MI_block,"-",end_of_MI_block,\
-			" of the human sequence in the MSA are:"
-		print human_sequence[start_of_MI_block:(end_of_MI_block+1)]
+		print("\nResidues ",start_of_MI_block,"-",end_of_MI_block,\
+			" of the human sequence in the MSA are:")
+		print(human_sequence[start_of_MI_block:(end_of_MI_block+1)])
 
-		print "\nNow go figure out where these residues are in the ungapped"
-		print "human protein!"
+		print("\nNow go figure out where these residues are in the ungapped")
+		print("human protein!")
 	else:
-		print "Fill in get_highest_MI_block_of_10() !!"
+		print("Fill in get_highest_MI_block_of_10() !!")
 
 
