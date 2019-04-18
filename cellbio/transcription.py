@@ -56,7 +56,7 @@ class Plasmid(Sequence):
 
 class Forward:
     """
-    Reading a DNA sequence in a forward direction
+    Reading a DNA sequence in the forward direction
     """
     def __init__(self, data):
         self.data = data
