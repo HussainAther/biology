@@ -1,7 +1,7 @@
 import numpy as np
 
 """
-Motoo Kimura's model of population genetics uses more than just the alpha parameter (which indicates the
+Motoo Kimura's (kimura Kimura) model of population genetics uses more than just the alpha parameter (which indicates the
 general probability of transversion). It uses beta as the probability of inversions. This means the
 substitution probability is beta + beta + alpha (two possible transversions and one possible substitution).
 """
