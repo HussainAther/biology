@@ -42,6 +42,8 @@ pEmit = np.zeros((nSt, nAmino), float)
 indexDict = {}
 stateDict= {}
 index = 0
+
+# calculate and store probabilities
 for exposure in expTypes:
     for aminoAcid in aaTypes:
         stateKey = (exposure, aminoAcid)
