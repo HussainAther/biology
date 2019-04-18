@@ -1,4 +1,5 @@
 import numpy as np
+
 from random import sample, randint
 
 """
@@ -7,7 +8,6 @@ as the central average position. We cycle through the data while making an initi
 is improved through re-appraising the data and moving the centers of the clusters to the
 average of their memberships.
 """
-
 
 def kMeans(data, k, centers=None):
     """
@@ -51,6 +51,7 @@ set indices and used at the end to select corresponding data items. This creates
 The remaining indices are added in a while loop until k is achieved by choosign subsequent points that
 have minimum radial influence from the centers already chosen.
 """
+
 def kMeansSpread(data, k):
     n = len(data)
     index = radint(0, n-1)
