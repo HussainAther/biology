@@ -4,7 +4,7 @@ from Bio import Seq
 from Bio.Alphabet import IUPAC
 
 """
-Genome class wraps biopython parsing code for more effective utility.
+Genome class wraps Biopython parsing code for more effective utility.
 """
 
 class Genome(object):
