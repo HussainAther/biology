@@ -13,8 +13,10 @@ class BurrowsWheeler():
     # EOS = "#" # a visible end marker
     
     def transform(self, s):
-        """ Simplest Burrows-Wheeler transform implementation, O(n^2) respective
-            to the length of the text. """
+        """ 
+        Simplest Burrows-Wheeler transform implementation, O(n^2) respective
+        to the length of the text. 
+        """
         assert self.EOS not in s, "Input string cannot contain null character (%s)" % self.EOS
         
         # add end of text marker
@@ -60,10 +62,9 @@ class BurrowsWheeler():
         s = s.rstrip(self.EOS)
         
         return s
-# ---------------------------------------------------------------------------- #
-# Different Inverse implementations
-# ---------------------------------------------------------------------------- #
-
+"""
+Different Inverse implementations worth trying out. 
+"""
 
 def calc_first_occ(s):
     #returns C[c], a dictionary for each letter c, of the number of lexically smaller letters in the string -BZ
@@ -109,14 +110,11 @@ def calc_checkpoints(s, step):
     return C
 
 def count_letter_with_checkpoints(C, step, s, idx, letter):
-    """ Count the number of a letter upto idx in s using checkpoints.
-    
-    Arguments:
-    C      -- is the list of checkpoints
-    step   -- is the step of the checkpoints
-    s      -- the transformed string
-    idx    -- count upto this position
-    letter -- count for this letter
+    """
+    Count the number of a letter upto idx in s using checkpoints.
+    C is the list of checkpoints, step is the step of the checkpoints,
+    s is the transformed string, idx is count up to this position,
+    letter is the count for this letter.
     """
     
     # find the nearest checkpoint for idx
@@ -155,8 +153,8 @@ def main():
     bw=BurrowsWheeler()
     bwt=bw.transform(data)
     inverseBwt=bw.inverse(bwt)
-    print 'BWT:%s' % (bwt.replace("\0",'$'))
-    print 'inverse:%s' % (inverseBwt)  
+    print('BWT:%s' % (bwt.replace("\0",'$')))
+    print('inverse:%s' % (inverseBwt)) 
 
 if __name__ == '__main__':
     main()
