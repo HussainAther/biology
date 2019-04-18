@@ -380,16 +380,11 @@ def get_MI_at_pairs_of_positions(di_counts_dict):
 
 def get_highest_MI_block_of_10(mutual_information_dict):
 	"""
-	- Finds the block of 10 consecutive position pairs (i.e., keys of
-		mutual_information_dict) with the highest average MI:
-		between (pos_1, pos_2)
-			   (pos_2, pos_3)
-			   ...
-			   ...
-			   (pos_9, pos_10)		
-	- Your code should return the list
-		[pos_1, pos_2, ..., pos_10], where each of the pos_i
-		are consecutive keys of mutual_information_dict
+	Find the block of 10 consecutive position pairs (i.e., keys of
+	mutual_information_dict) with the highest average MI:
+	between (pos_1, pos_2)  (pos_2, pos_3) ... ... (pos_9, pos_10)		
+	Return the list [pos_1, pos_2, ..., pos_10], where each of the pos_i
+        are consecutive keys of mutual_information_dict
 	"""
 
 	highest_average_positions_list = []
@@ -459,7 +454,7 @@ def plot_mutual_information(mutual_information_dict):
 	# residues i and j as a box at (i, j) with the color of the box
 	# indicating the Mutual Information; here (i, j) are the #s
 	# corresponding to what well-represented positions it is
-	print "\nPlotting indexed relative to well-represented positions..."
+	print("\nPlotting indexed relative to well-represented positions...")
 	fig = plt.figure();
 	ax = fig.add_subplot(111);
 	#plt.rc('text', usetex=True)
@@ -486,7 +481,7 @@ def plot_mutual_information(mutual_information_dict):
 	ax.set_ylabel("Well-represented Position 2",fontsize=14)
 	# this will save the figure in the directory from which this script is run
 	fig.savefig("mutual_information_plot_well_represented_positions.pdf")
-	print "\n\tPlot saved as mutual_information_plot_well_represented_positions.pdf"
+	print("\n\tPlot saved as mutual_information_plot_well_represented_positions.pdf")
 	plt.clf()
 
 	## does the same thing, but plots according to the original position in
@@ -517,7 +512,7 @@ def plot_mutual_information(mutual_information_dict):
 	# residues i and j as a box at (i, j) with the color of the box
 	# indicating the Mutual Information; here (i, j) are the #s
 	# corresponding to what well-represented positions it is
-	print "\nPlotting indexed relative to original MSA positions..."
+	print("\nPlotting indexed relative to original MSA positions...")
 	fig = plt.figure();
 	ax = fig.add_subplot(111);
 	#plt.rc('text', usetex=True)
