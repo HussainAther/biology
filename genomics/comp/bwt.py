@@ -153,8 +153,8 @@ def main():
     bw=BurrowsWheeler()
     bwt=bw.transform(data)
     inverseBwt=bw.inverse(bwt)
-    print('BWT:%s' % (bwt.replace("\0",'$')))
-    print('inverse:%s' % (inverseBwt)) 
+    print("BWT:%s" % (bwt.replace("\0","$")))
+    print("inverse:%s" % (inverseBwt)) 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
