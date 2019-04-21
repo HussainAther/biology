@@ -26,7 +26,7 @@ class Genome(object):
         Parse out the CDS sequence for each gene.
         """
         for feature in self.parsed_genbank.features: 
-            if feature.type == ’CDS’:
+            if feature.type == "CDS":
                 #Build up a list of (start,end) tuples that will
                 #be used to slice the sequence in
                 #self.parsed_genbank.seq
@@ -34,7 +34,7 @@ class Genome(object):
                 #Biopython locations are zero-based so can be
                 #directly used in sequence splicing
                 locations = []
-                if len(feature.sub_features): # (4)
+                if len(feature.sub_features): 
                     # If there are sub_features, then this gene
                     # is made up of multiple parts.  Store the
                     # start and end positins for each part.
@@ -49,13 +49,13 @@ class Genome(object):
 
                 # Store the joined sequence and nucleotide
                 # indices forming the CDS.
-                seq = ’’ # (5)
+                seq = ""
                 for begin,end in locations:
                     seq += self.parsed_genbank.seq[begin:end].tostring()
                 # Reverse complement the sequence if the CDS is on
                 # the minus strand
-                if feature.strand == -1:  # (6)
+                if feature.strand == -1:  
                     seq_obj = Seq.Seq(seq,IUPAC.ambiguous_dna)
                     seq = seq_obj.reverse_complement().tostring()
                 # append the gene sequence
-                self.genes.append(seq) # (7)
+                self.genes.append(seq) 
