@@ -6,10 +6,17 @@ to the arrangement of data points.
 """
 
 def euclideanDist(vectorA, vectorB):
+    """
+    Return the Euclidean distance between two vectors.
+    """
     diff = vectorA - vectorB
     return np.sqrt(np.dot(diff,diff))
 
 def findNeighbors(data, distFunc, threshold):
+    """
+    Find the neighbors within a threshold of data using 
+    the distFunc of the distances.
+    """
     neighborDict = {}
     n = len(data)
     for i in range(n):
@@ -26,6 +33,9 @@ def findNeighbors(data, distFunc, threshold):
     return neighborDict
 
 def simpleCluster(data, threshold, distFunc=euclideanDist):
+    """
+    Cluster according to Euclidean distance.
+    """
     neighborDict = findNeighbors(data, distFunc, threshold)
     
     clusters = []
@@ -56,7 +66,7 @@ def simpleCluster(data, threshold, distFunc=euclideanDist):
 
 def dbScanCluster(data, threshold, minNeighbor, distFunc= euclideanDist):
     """
-    Add cchecks for the number of neighbors and accordingly add any disconnected
+    Add checks for the number of neighbors and accordingly add any disconnected
     points to a list of noise rather than a cluster.
     """
     neighborDict = findNeighbors(data, distFunc, threshold)
