@@ -5,6 +5,10 @@ from matplotlib import pyplot as plt
 
 np.random.seed(int(time()))
 
+"""
+Support vector machine (SVM svm)
+"""
+
 def kernelGauss(vectorI, vectorJ, sigma=1.0):
     """
     Measure of coincidence between input vectors.
