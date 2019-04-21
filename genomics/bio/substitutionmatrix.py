@@ -14,7 +14,6 @@ alpha = Alphabet.Gapped(IUPAC.protein)
 c_align = alignIO.read(filename, "clustal", alphabet = alpha) # from the output of a Clustalw alignment
 summary_align = AlignInfo.SummaryInfo(c_align) # create the summary object from which we can determine substitutions
 
-
 # Look at only amino acids with polar charged side chains by ignoring non-polar amino acids
 # This outputs the accepted number of replacements or how often we expect things
 # to substitude for each other.
