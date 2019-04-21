@@ -139,4 +139,3 @@ def dblookup(atgids):
         else:
             print("Marker &s is not in the DB" %x)
     return markers
-    """
