@@ -11,6 +11,9 @@ to assign signals that occur in a spectrum to the amino acid residues of a prote
 """
 
 def getRouteLength(distanceData, route):
+    """
+    Return the length/distance for a given route based on our distance data.
+    """
     distance = 0.0
     for i, pointA in enumerate(route[:-1]):
         pointB = route[i+1]
@@ -20,6 +23,9 @@ def getRouteLength(distanceData, route):
     return distance
 
 def travelingSalesman(distanceData, cities, numSteps=10000):
+    """
+    Run the Traveling Salesman problem.
+    """
     n = len(cities)
     bestRoute = cities[:]
     shuffle(bestRoute)
@@ -45,6 +51,9 @@ def travelingSalesman(distanceData, cities, numSteps=10000):
             print("%5d %.5f" % (i,distance))
 
 def calcCityDistances(coordDict):
+    """
+    Calculate the distance between cities.
+    """
     cities = list(coordDict.keys())
     n = len(cities)
     distances = {}
