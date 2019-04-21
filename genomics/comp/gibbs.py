@@ -1,33 +1,32 @@
 import random, sys, math
 
-# -------------------------
-# "Sequence" class that represents sequences, with some fields and methods helpful
-# for using this class in a Gibbs sampler.
-# -------------------------
+"""
+"Sequence" class that represents sequences, with some fields and methods helpful
+for using this class in a Gibbs sampler.
+"""
 
 class Sequence:	
-	# fields in this class
-	# -------------------------
-	seqName = ""	# name of this sequence (e.g. gene name)
-	sequence = ""	# nucleotide sequence
+	seqName = "" # name of this sequence (e.g. gene name)
+	sequence = "" # nucleotide sequence
 	siteScores = []	# site odds ratios = P(motif under model)/P(motif under background)
-	motif = -1		# current position of motif according to Gibbs sampler
-	
-	# methods in this class
-	# -------------------------
+	motif = -1 # current position of motif according to Gibbs sampler
 	def __init__(self, name, seq):
-		# initializes a new instance of a Sequence object, and initializes our belief of
-		# where the motif is to be uniform across all possible motif positions
+  		"""
+		Initialize a new instance of a Sequence object, and initializes our belief of
+		where the motif is to be uniform across all possible motif positions
+ 		"""
 		self.seqName = name
 		self.sequence = seq
 		self.siteScores = [1 for i in range(len(seq)-motifWidth+1)]+[0 for i in range(motifWidth-1)]
 		self.drawNewMotifSite()
 		
 	def getMotif(self, *pos):
-		# returns the motif of length motifWidth
-		# can either specify a position (e.g. getMotif(4) returns the motif at position 4)
-		# or if no position in specified it will return the motif at self.motif (e.g. getMotif()
-		# returns self.sequence[self.motif : self.motif + motifWidth]
+		"""
+		Return the motif of length motifWidth
+		can either specify a position (e.g. getMotif(4) returns the motif at position 4)
+		or if no position in specified it will return the motif at self.motif (e.g. getMotif()
+		returns self.sequence[self.motif : self.motif + motifWidth]
+		"""
 		if pos == ():
 			idx = self.motif
 		else:
@@ -39,8 +38,10 @@ class Sequence:
 			return self.sequence[idx : idx + motifWidth]
 			
 	def drawNewMotifSite(self):
-		# randomly draws a new site for this Sequence's motif based on the current
-		# distribution self.siteProbs
+		"""
+		Randomly draws a new site for this Sequence's motif based on the current
+		distribution self.siteProbs
+   		"""
 		tot = float(sum(self.siteScores))
 		siteProbs = [x/tot for x in self.siteScores]	# normalize the siteScores
 		assert abs(1.0-sum(siteProbs)) < 0.00001		# check probs sum to 1 (within margin of error)
@@ -54,8 +55,10 @@ class Sequence:
 		self.motif = site		
 		
 	def updateSiteScores(self, wmat, background):
-		# updates the odds ratios for motifs beginning at each site, where odds ratio
-		# = P(motif | wmat) / P(motif | background) = Pm / Pb, according to current wmat
+		"""
+		Updates the odds ratios for motifs beginning at each site, where odds ratio
+		= P(motif | wmat) / P(motif | background) = Pm / Pb, according to current wmat
+		"""
 		self.siteScores = []
 		for i in range(0,len(self.sequence)):
 			if i > len(self.sequence)-motifWidth:
@@ -67,16 +70,17 @@ class Sequence:
 					Pb = Pb * background[self.getMotif(i)[j]]
 					Pm = Pm * wmat[j][self.getMotif(i)[j]]
 				self.siteScores.append(Pm/Pb)
-					
 
-# -------------------------
-# Other helper functions
-# -------------------------
+
+"""
+Helper functions
+"""					
 
 def readFastaFile(filename):
-	# INPUT: the name of a fasta file to read in
-	# OUTPUT: a list of Sequence objects each corresponding to a sequence in the .fa file,
-	# initialized according to the __init__() function under class Sequence
+   	"""
+	Return a list of a Sequence objects each corresponding to 
+ 	a sequence in the input fasta file (filename)
+	"""
 	try:
 		fastaLines=open(filename).readlines()
 	except IOError:
@@ -102,13 +106,11 @@ def readFastaFile(filename):
 	
 
 def findSimpleBackgroundModel(sequences):
-	# Finds background model assuming simple 0-order model
-	# INPUTS:
-	#	sequences - a list of Sequence objects
-	# OUTPUTS:
-	#	background - a dictionary mapping the four nucleotides to their frequencies across
-	#	all sequences
-
+	"""
+	Find a background model assuming simple 0-order model.
+	Return background, a dictionary mapping the four nucleotides
+	to their frequencids across all sequences.
+	"""
 	background = {'A': 0, 'C': 0, 'G': 0, 'T':0}
 	for s in sequences:
 		for nt in background:
@@ -122,16 +124,13 @@ def findSimpleBackgroundModel(sequences):
 	
 	
 def buildWeightMatrix(seqsToScore):
-	# Builds weight matrix from motifs in all sequences except the leaveOut sequence
-	# You should include pseudocounts at each position.
-	# INPUTS:
-	#	sequences - a list of Sequence objects
-	#	leaveOut - index of Sequence to be left out when building weight matrix
-	# OUTPUT:
-	# 	wmat - a list of dictionaries, where each position of motif is a dictionary with keys = nt
-	# 	describing the nt distribution at that position (so wmat[3]['A'] corresponds to fraction As at
-	# 	position 3 in motif)
-	
+	"""
+	Build a weight matrix from motifs in all sequences except the 
+	leaveOut sequence. It includes pseudocounts at each position.
+	Retuen wmat, a list of dictionary in which each position of a 
+	motif is a dictionary with keys as nucleotides desrcibing the nt
+	nucleotide distribution at that position.
+	"""
 	# initialize with pseudocounts at each position
 	wmat = []
 	for i in range(0, motifWidth):
@@ -150,16 +149,21 @@ def buildWeightMatrix(seqsToScore):
 	
 
 def printWeightMatrix(wmat):
-	# given a weight matrix in format given by buildWeightMatrix(), prints out human-friendly
-	# version
-	print "Pos\tA\tC\tG\tT"
+	"""
+	For an input wmat weight matrix in teh format specified 
+	by buildWeightMatrix(), return a human-friendly version.
+	"""
+	print ("Pos\tA\tC\tG\tT")
 	for i in range(0,motifWidth):
 		print str(i)+'\t'+str(wmat[i]['A'])+'\t'+str(wmat[i]['C'])+'\t'+str(wmat[i]['G'])+'\t'+str(wmat[i]['T'])
 	
 	
 def calcRelEnt(wmat, background):
-	# calculates the relative entropy of the weight matrix model wmat to the background
-	# (assume every position is independent), use math.log(x,2) to take the log2 of x
+	"""
+	Calculate the relative entropy of the weight matrix model
+	wmat to the backgronud while assuming every position is 
+	independent.
+	"""
 	relEnt = 0.0
 	for pos in wmat:
 		for base in pos:
