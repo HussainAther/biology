@@ -26,7 +26,7 @@ for codon in count_random.keys():
 
 labels=count.keys()
 labels.sort(codon_sort)
-w1=window(plot_title=’Count codons’,width=1000)
+w1=window(plot_title="Count codons",width=1000)
 
 y=array(count.values())[:len(count)/2]
 x=arange(len(y)+1)
