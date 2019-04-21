@@ -9,7 +9,6 @@ T---TG
 TTGCTC
 """
 
-
 def classicalScore(events):
     """
     If the substitution cost is given by a function Σ × Σ → R (all real numbers) such that d(σ, σ′) is the
@@ -52,7 +51,6 @@ def point(d, h, v):
     else:
         return "V"
 
-
 penaltydict =
     {
     "MATCH": match,
@@ -62,7 +60,7 @@ penaltydict =
 
 def needlemanWunsch(a, b, match = 1,mismatch = -1, gap = -2):
     """
-    matrix is numpy array of len for rows and columns of the sizes of the two sequences.
+    Matrix is numpy array of len for rows and columns of the sizes of the two sequences.
     """
     a, b = a.upper(), b.upper() # convert to uppercase
     n = np.zeros(len(a)) # alignment arrays with zeros
@@ -163,7 +161,7 @@ shorter sequence.
 
 def simple(a, b):
     """
-    simple method of reducing the lengths of a and b
+    Simple method of reducing the lengths of a and b
     """
     grid = np.zeros(len(a), len(b))
     for i in range(1, len(b) + 1):
@@ -200,7 +198,7 @@ def simple(a, b):
 
 def countdiff(a, b):
     """
-    reduce the lengths through the counting method. compare two sequences row and rw against one another
+    Reduce the lengths through the counting method. compare two sequences row and rw against one another
     and return the last row to show the differences between the sequences
     """
     row = range(0, len(a)+1)
@@ -284,7 +282,6 @@ def gotoh(a, b):
     bb, pos = loopstep(M, b) # loop through the second string locally until the final matrix index is 0
     return (pos, pos + len(bb))
 
-
 """
 Waterman-Smith-Beyer algorithm.
 
@@ -343,11 +340,13 @@ Feng-Doolittle algorithm.
 
 The progressive alignment approach by Da-Fei Feng and Russell F. Doolittle (1987) computes a multi-sequence-alignment (MSA)
 of a set of sequences based on pairwise alignments. This approximative approach identifies good MSA solutions in reasonable time.
-
 """
 
 def point(d, h, v):
-    # Return pointer matrix
+    """
+    Return a pointer matrix to determine the maximum
+    of three variabels d, h, and v.
+    """
     p = max(d, h, v)
     if(d == p):
         return "D"
