@@ -53,6 +53,10 @@ have minimum radial influence from the centers already chosen.
 """
 
 def kMeansSpread(data, k):
+    """
+    As described above, we choose cluster centers and create indices
+    within them to choose the corresponding data items.
+    """
     n = len(data)
     index = radint(0, n-1)
     indices = set([index])
