@@ -5,7 +5,9 @@ Neural network functions in Python.
 """
 
 def neuralNetPredict(inputVec, weightsIn, weightsOut):
-
+    """
+    Predict based on input vectors, input weights, and output weights. 
+    """
     signalIn = append(inputVec, 1.0) ) # input layer
 
     prod = signalIn * weightsIn.T
@@ -19,7 +21,10 @@ def neuralNetPredict(inputVec, weightsIn, weightsOut):
     return signalIn, signalHid, signalOut
 
 def neuralNetTrain(trainData, numHid, steps=100, rate=0.5, momentum=0.2):
-
+    """
+    Train the neural network with training data, number of hidden layers,
+    steps, rate, and momentum.
+    """
     numInp = len(trainingData[0][0])
     numOut = len(trainingData[0][1])
     numInp += 1
@@ -94,7 +99,9 @@ for i, code in enumearte(ssCodes):
     ssIndexDict[code] = i
 
 def convertSeqToVector(seq, indexDict):
-
+    """
+    Convert a sequnce to a vector based on the corresponding indices.
+    """
     numLetters = len(indexDict)
     vector = [0.0] * len(seq) * numLetters
 
@@ -107,10 +114,8 @@ def convertSeqToVector(seq, indexDict):
 # train the model
 trainingData = []
 for seq, ss in seqSecStrucData:
-
     inputVec = convertSeqToVector(seq, aaIndexDict)
     outputVec = convertSeqToVector(ss, ssIndexDict)
-
     trainingData.append((inputVec, outputVec))
 
 wMatrixIn, wMatrixOut = neuralNetTrain(trainindData, 3, 1000)
