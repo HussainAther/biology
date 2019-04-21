@@ -7,6 +7,10 @@ sequences have been considered and only one fully joined tree remains.
 """
 
 def getDistanceMatrix(seqs, simMatrix):
+    """
+    Create the distance matrix for sequences and a 
+    similarity matrix.
+    """
     n = len(seqs)
     matrix = [[0.0] *n for x in range(n)]
     maxScores = [calcSeqSimilarity(x,x,simMatrix) for x in seqs]
@@ -22,6 +26,9 @@ def getDistanceMatrix(seqs, simMatrix):
     return matrix
 
 def getJoinPair(distMatrix):
+    """
+    Return pairs to join based on the distance matrix.
+    """
     n = len(distMatrix)
     minQ = None
     joinPair = None
@@ -37,6 +44,10 @@ def getJoinPair(distMatrix):
     return joinPair
 
 def getDistToJunction(distMatrix, i, j):
+    """
+    Get the disatnce between i and j junction from the 
+    distance matrix.
+    """
     n = len(distMatrix)
     row = distMatrix[i]
     column = distMatrix[j]
@@ -45,6 +56,9 @@ def getDistToJunction(distMatrix, i, j):
     return dist
 
 def neighborJoinTree(distMatrix):
+    """
+    Create the neighbor-joining tree.
+    """
     joinOrder = []
     n = len(distMatrix)
     tree = list(range(n))
