@@ -24,6 +24,7 @@ v_post  = [tau_ref + tau_m_eff * sqrt(pi) * integral from
 erf(x) is 2/sqrt(pi) * integral from 0 to x of exp(u^2)du, also known as the error function that we use in integrating
 the normal distribution.
 """
+
 a = (vr_eff - v_ss) / sigma_eff
 b = (vth_eff - v_ss) / sigma_eff
 
