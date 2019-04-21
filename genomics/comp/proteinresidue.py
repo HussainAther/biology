@@ -7,7 +7,7 @@ import numpy as np
 import pprint
 import pickle
 import matplotlib
-matplotlib.use('agg')
+matplotlib.use("agg")
 import matplotlib.pyplot as plt
 
 from math import log
