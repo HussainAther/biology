@@ -11,17 +11,17 @@ def download(accession_list):
     accession_list.
     """
     try:
-        handle = GenBank.download_many(accession_list) #(2)
+        handle = GenBank.download_many(accession_list)
     except:
-        print "Are you connected to the internet?"
+        print("Are you connected to the internet?")
         raise
-    genbank_strings = handle.read().split(’//\n’) #(3)
+    genbank_strings = handle.read().split("//\n") 
     for i in range(len(accession_list)):
         #Save raw file as .gb
-        gb_file_name = accession_list[i]+’.gb’
-        f = open(gb_file_name,’w’)
-        f.write(genbank_strings[i]) #(4)
-        f.write(’//\n’)
+        gb_file_name = accession_list[i] + ".gb"
+        f = open(gb_file_name, "w")
+        f.write(genbank_strings[i]) 
+        f.write("//\n")
         f.close()
 
 def parse(accession_list):
@@ -30,17 +30,17 @@ def parse(accession_list):
     """
     parsed = []
     for accession_number in accession_list:
-        gb_file_name = accession_number+’.gb’
-        print ’Parsing ... ’,accession_number
+        gb_file_name = accession_number + ".gb"
+        print("Parsing ... ", accession_number)
         try:
-            gb_file = file(gb_file_name,’r’)
+            gb_file = file(gb_file_name, "r")
         except IOError:
-            print ’Is the file %s downloaded?’ % gb_file_name
+            print("Is the file %s downloaded?" % gb_file_name)
             raise
         gb_parsed_record = SeqIO.parse(gb_file,
-                                       "genbank").next() #(5)
+                                       "genbank").next()
         gb_file.close()
-        print gb_parsed_record.id #(6)
+        print gb_parsed_record.id 
         print gb_parsed_record.seq
-        parsed.append(gb_parsed_record) #(7)
+        parsed.append(gb_parsed_record) 
     return parsed
