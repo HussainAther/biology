@@ -13,13 +13,13 @@ def plot(filename):
     cumulative sum.
     """
     numbers = []
-    for line in fileinput.input(filename): # (2)
-        numbers.append(float(line.split(’\n’)[0]))
-    mean = numpy.mean(numbers) # (3)
+    for line in fileinput.input(filename):
+        numbers.append(float(line.split("\n")[0]))
+    mean = numpy.mean(numbers) 
     cumulative_sum = numpy.cumsum([number -
                                    mean for number in numbers])
-    pylab.plot(cumulative_sum[0::10],’k-’) # (4)
-    pylab.xlabel(’i’)
-    pylab.title(’Zero Mean Cumulative Sum’)
-    pylab.savefig(filename+’.png’) # (5)
+    pylab.plot(cumulative_sum[0::10],"k-") 
+    pylab.xlabel("i"
+    pylab.title("Zero Mean Cumulative Sum")
+    pylab.savefig(filename + ".png")
     pylab.show()
