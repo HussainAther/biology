@@ -32,14 +32,14 @@ class Sequence:
 		else:
 			idx = pos[0]
 		if idx < 0 or idx > len(self.sequence)-motifWidth:
-			print "Error - tried to access motif beginning at",idx,", index out of bounds."
+			print("Error - tried to access motif beginning at",idx,", index out of bounds.")
 			sys.exit(1)
 		else:
 			return self.sequence[idx : idx + motifWidth]
 			
 	def drawNewMotifSite(self):
 		"""
-		Randomly draws a new site for this Sequence's motif based on the current
+		Randomly draws a new site for this Sequence"s motif based on the current
 		distribution self.siteProbs
    		"""
 		tot = float(sum(self.siteScores))
@@ -71,7 +71,6 @@ class Sequence:
 					Pm = Pm * wmat[j][self.getMotif(i)[j]]
 				self.siteScores.append(Pm/Pb)
 
-
 """
 Helper functions
 """					
@@ -85,25 +84,24 @@ def readFastaFile(filename):
 		fastaLines=open(filename).readlines()
 	except IOError:
 		# file "filename" cannot be opened, print an error message and exit
-		print "Error - could not open",filename,",please check that you entered the correct file."
+		print("Error - could not open",filename,",please check that you entered the correct file.")
 		sys.exit(1)
 	seqList = []
-	curSeq=''
+	curSeq=""
 	curName=None
 	for line in fastaLines:
-		if '>' in line:
+		if ">" in line:
 			if  curName !=None:
 				seqList.append(Sequence(curName, curSeq))
 				curName=None
-				curSeq=''
-			curName=line.strip()[1:]	# remove first char '>' and leading/trailing whitespace
+				curSeq=""
+			curName=line.strip()[1:]	# remove first char ">" and leading/trailing whitespace
 		else:
 			curSeq=curSeq+line.strip().upper()
 	if curName !=None:
 		seqList.append(Sequence(curName, curSeq))
 	
 	return seqList
-	
 
 def findSimpleBackgroundModel(sequences):
 	"""
@@ -111,7 +109,7 @@ def findSimpleBackgroundModel(sequences):
 	Return background, a dictionary mapping the four nucleotides
 	to their frequencids across all sequences.
 	"""
-	background = {'A': 0, 'C': 0, 'G': 0, 'T':0}
+	background = {"A": 0, "C": 0, "G": 0, "T":0}
 	for s in sequences:
 		for nt in background:
 			background[nt] = background[nt] + s.sequence.count(nt)
@@ -121,8 +119,7 @@ def findSimpleBackgroundModel(sequences):
 	for nt in background:
 		background[nt] = background[nt]/totCounts
 	return background
-	
-	
+
 def buildWeightMatrix(seqsToScore):
 	"""
 	Build a weight matrix from motifs in all sequences except the 
@@ -134,7 +131,7 @@ def buildWeightMatrix(seqsToScore):
 	# initialize with pseudocounts at each position
 	wmat = []
 	for i in range(0, motifWidth):
-		wmat.append({'A': 1, 'C': 1, 'G': 1, 'T': 1})
+		wmat.append({"A": 1, "C": 1, "G": 1, "T": 1})
 	# loop through all motifs, add 1 to appropriate position and nt in wmat
 	for s in seqsToScore:
 		for j in range(0, motifWidth):
@@ -153,11 +150,10 @@ def printWeightMatrix(wmat):
 	For an input wmat weight matrix in teh format specified 
 	by buildWeightMatrix(), return a human-friendly version.
 	"""
-	print ("Pos\tA\tC\tG\tT")
+	print("Pos\tA\tC\tG\tT")
 	for i in range(0,motifWidth):
-		print str(i)+'\t'+str(wmat[i]['A'])+'\t'+str(wmat[i]['C'])+'\t'+str(wmat[i]['G'])+'\t'+str(wmat[i]['T'])
-	
-	
+		print(str(i)+"\t"+str(wmat[i]["A"])+"\t"+str(wmat[i]["C"])+"\t"+str(wmat[i]["G"])+"\t"+str(wmat[i]["T"]))
+
 def calcRelEnt(wmat, background):
 	"""
 	Calculate the relative entropy of the weight matrix model
@@ -169,29 +165,33 @@ def calcRelEnt(wmat, background):
 		for base in pos:
 			relEnt = relEnt + pos[base]*math.log(pos[base]/background[base],2)
 	return relEnt
-	
-	
+
 def getMotifScore(sequences, wmat, background):
-	# the total score of a motif = sum of log2 (odds ratios for each sequence)
+    """
+    Return the total score of a motif, the sum of the log2 odds
+    ratios for each sequence
+    """
 	score = 0
 	for s in sequences:
 		s.updateSiteScores(wmat, background)			# update with final weight matrix
 		score += math.log(s.siteScores[s.motif],2)		# get score at motif
 	return score
-	
 
 def printToLogo(sequences):
-	# prints to the command line the motifs from each sequence in the correct format
-	# for WebLogo
+    """
+    Print the motifs from each sequence to the command line
+    in the format for WebLogo
+    """
 	for s in sequences:
-		print s.getMotif()
+		print(s.getMotif())
 
-
-def run(numIter):		# this is the main function
-
+def run(numIter):
+    """
+    Main function
+    """
 	# Get file name and motifWidth from command line
 	if len(sys.argv)<=2:
-		print "Error - please specify both a fasta file and motif width as inputs"
+		print("Error - please specify both a fasta file and motif width as inputs")
 		sys.exit(1)
 	else:
 		fastaName=sys.argv[1]
@@ -204,36 +204,33 @@ def run(numIter):		# this is the main function
 	# Find the background nucleotide distributions
 	background = findSimpleBackgroundModel(sequences)
 		
-	# (STEP 1) pick starting sites at random
+	# Pick starting sites at random
 	# done when initializing each Sequence object in the readFastaFile() function
 	
 	# Repeat the following steps 2000 times
 	
 	for iter in range(numIter):
 	
-		# (STEP 2) choose sequence to leave out
+		# Choose sequence to leave out
 		leaveOut = random.randint(0,len(sequences)-1)		# index of sequence to be left out
 		seqsToScore = sequences[:]							# make list of sequences with that element
 		del seqsToScore[leaveOut]							# left out
 		
-		# (STEP 3) make weight matrix using remaining sequences
+		# Make weight matrix using remaining sequences
 		wmat = buildWeightMatrix(seqsToScore)
 		
-		# (STEP 4) update scores across all possible motif sites for left out sequence according to wmat
+		# Update scores across all possible motif sites for left out sequence according to wmat
 		sequences[leaveOut].updateSiteScores(wmat, background)
 		
-		# (STEP 5) draw a new site for motif in left out sequence at random according to new distribution
+		# Draw a new site for motif in left out sequence at random according to new distribution
 		sequences[leaveOut].drawNewMotifSite()
-#		print calcRelEnt(wmat, background)
+#		print(calcRelEnt(wmat, background))
 	
 	# Print final motif matrix, its total score and its relative entropy compared to background:
 #	printToLogo(sequences)
 	printWeightMatrix(wmat)
-	print "Motif score =",getMotifScore(sequences, wmat, background)
-	print "Relative entropy =",calcRelEnt(wmat, background)
-	print "Background =",background
-	
-	
-	
-run(1000)	# run main function, argument = # of iterations to run Gibbs sampler
+	print("Motif score =",getMotifScore(sequences, wmat, background))
+	print("Relative entropy =",calcRelEnt(wmat, background))
+	print("Background =",background)
 
+run(1000)	# run main function, argument = # of iterations to run Gibbs sampler
