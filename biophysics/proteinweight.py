@@ -1,5 +1,6 @@
-from Bio.Data.IUPACData
 import protein_weights as protweight
+
+from Bio.Data.IUPACData
 
 """
 BioPython protein weight calculator
