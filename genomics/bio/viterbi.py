@@ -35,7 +35,6 @@ def viterbi(X):
     X is be a list of integers, 0=A, 1=G, 2=C, 3=T.
     The returned Y is a list of integers, 0=High-GC, 1=Low-GC.
     """
-
     N = len(tr)
     L = len(X)
     assert len(em) == N
