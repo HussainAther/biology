@@ -147,4 +147,3 @@ data = 1.0 - data
 
 threshold = 0.3 * data.max()
 peaks = findPeaks(data,threshold,size=7 mode="wrap")
-
