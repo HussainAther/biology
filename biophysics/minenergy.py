@@ -1,3 +1,5 @@
+import numpy as np
+
 """
 RNA has some of the properties of both DNA and proteins. It has the same 
 information storage capability as DNA due to its sequence of nucleotides. 
@@ -91,3 +93,4 @@ def VBI(a, b, c, d):
     in which (a, b) closesa bulge or an internal loop. 
     """  
     return eL(a,b,c,d) + V(c, d) 
+
