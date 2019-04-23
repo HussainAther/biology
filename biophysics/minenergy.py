@@ -54,11 +54,24 @@ def eM(args):
     for k in range((len(args)//2) - 1):
         summa += (args[k+1][0] - args[k][1] -1)
     return i1-i0-1+j0-jl+summa      
+
+def eH(x, y):
+    """
+    Energy for hairpin strucutre with (x, y) base pair.
+    """
+
+def eS(x, y):
+    """
+    Stacked pair energy for (x, y) base pair.
+    """
+    return stacked(x, y)
  
 def V(x, y):
     """
-    Energy of optimal struc
+    Energy of optimal structure of the subsequence from x through y
+    closed by (x, y).
     """   
+    return min(eH
 
 def VBI(a, b, c, d): 
     """
