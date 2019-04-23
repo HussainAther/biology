@@ -21,19 +21,40 @@ We can find the strucure with minmal free energy. We can look at hairpin, bulge,
 interior, stacking, and multi loops (multi-loop).
 """
 
+def stack(x, y):
+    """
+    Return stacking energy between two base pairs x and y.
+    """
+    return abs(x-y)
+
+def asymmetry(x, y):
+    """
+    Asymmetry function gives a penalty for asymmetric loops.
+    """
+    return -abs(x-y)
+
 def eL(a, b, c, d):
     """
     Energy of bulge or internal loop with exterior base pair
     (a, b) and interior base pair (c, d).
     """
+    return len(c-a+d-b-2) + stack(a, b) + stack(c, d) + asymmetry(c-a-1, b-d-1) 
     
-def eM(*args):
+def eM(args):
     """
-    For a list of arguments args, determine the energy of an 
+    For a list of tuples args, determine the energy of an 
     optimal structure of the subsequence from i through j 
     in which (i, j) closes a multibranched loop.
     """ 
-
+    i0 = args[0][0]
+    i1 = args[1][0]
+    j0 = args[0][1]
+    jl = args[-1][1]
+    summa = 0
+    for k in range((len(args)//2) - 1):
+        summa += (args[k+1][0] - args[k][1] -1)
+    return i1-i0-1+j0-jl+summa      
+ 
 def VBI(i, j, l): 
     """
     
