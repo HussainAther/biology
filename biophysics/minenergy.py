@@ -21,12 +21,18 @@ We can find the strucure with minmal free energy. We can look at hairpin, bulge,
 interior, stacking, and multi loops (multi-loop).
 """
 
-def e(a, b, c, d):
+def eL(a, b, c, d):
     """
     Energy of bulge or internal loop with exterior base pair
     (a, b) and interior base pair (c, d).
     """
-     
+    
+def eM(*args):
+    """
+    For a list of arguments args, determine the energy of an 
+    optimal structure of the subsequence from i through j 
+    in which (i, j) closes a multibranched loop.
+    """ 
 
 def VBI(i, j, l): 
     """
