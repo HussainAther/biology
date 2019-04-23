@@ -71,7 +71,17 @@ def V(x, y):
     Energy of optimal structure of the subsequence from x through y
     closed by (x, y).
     """   
-    return min(eH
+    return min([eH(x, y), eS(x, y), V(x+1, y+1), VBI(x, y, x-1, y-1), VM(x, y)]
+
+def VM(args):
+    """
+    Energy of optimal strucutre of subsequence from x through y where (x, y)
+ closes a multibranched loop. The input is a list of tuple args that describe each (x, y) pair.
+    """
+    summa = 0
+    for k in range((len(args)//2)):
+        summa += V(args[k][0], args[k][1])
+    return eM(args) + summa 
 
 def VBI(a, b, c, d): 
     """
@@ -79,4 +89,4 @@ def VBI(a, b, c, d):
     the energy of an optimal strucutre of the subsequenc from a through b
     in which (a, b) closesa bulge or an internal loop. 
     """  
-    return min(eL(a,b,c,d) + 
+    return eL(a,b,c,d) + V(c, d) 
