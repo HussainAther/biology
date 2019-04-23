@@ -59,6 +59,7 @@ def eH(x, y):
     """
     Energy for hairpin strucutre with (x, y) base pair.
     """
+    return abs(x, y)
 
 def eS(x, y):
     """
