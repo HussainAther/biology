@@ -16,4 +16,20 @@ base pairs, C-G and A-U, form stable base pairs with each other through
 the creation of hydrogen bonds between donor and acceptor sites on the bases. 
 In addition, the G-U wobble pair is weaker but still stable. Other bases also 
 pair sometimes, especially if chemically modified.
+
+We can find the strucure with minmal free energy. We can look at hairpin, bulge,
+interior, stacking, and multi loops (multi-loop).
 """
+
+def e(a, b, c, d):
+    """
+    Energy of bulge or internal loop with exterior base pair
+    (a, b) and interior base pair (c, d).
+    """
+     
+
+def VBI(i, j, l): 
+    """
+    
+    """  
+    return min(e
