@@ -55,8 +55,15 @@ def eM(args):
         summa += (args[k+1][0] - args[k][1] -1)
     return i1-i0-1+j0-jl+summa      
  
-def VBI(i, j, l): 
+def V(x, y):
     """
-    
+    Energy of optimal struc
+    """   
+
+def VBI(a, b, c, d): 
+    """
+    For exterior base pair (a, b) and interior base pair (c, d), find
+    the energy of an optimal strucutre of the subsequenc from a through b
+    in which (a, b) closesa bulge or an internal loop. 
     """  
-    return min(e
+    return min(eL(a,b,c,d) + 
