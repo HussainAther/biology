@@ -1,3 +1,5 @@
+import numpy as np
+
 """
 In the simplest model for a conjugated molecule, the electrons which form the pi orbitals
 can sit on each carbon atom with some energy we set to zero. They hop from one atom to its
@@ -6,3 +8,7 @@ electrons as a matrix, then for a ring of six carbons (benzene) we have a "hoppi
 element" -t. It's negative as electrons lower their energy by being shared among neighboring
 atoms through chemical bonds.  
 """
+
+# Hamiltonian for benzene
+# We get this by solving Schrödinger's equation Hψ = Eψ
+H = np.matrix("0 -t  
