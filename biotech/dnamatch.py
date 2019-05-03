@@ -6,9 +6,10 @@ from dnaseqlib import *
 DNA Matching utility functions.
 """
 
-### Utility classes ###
-
 class RollingHash:
+    """
+    Utility class
+    """
     def __init__(self, s):
         self.HASH_BASE = 7
         self.seqlen = len(s)
