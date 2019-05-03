@@ -10,7 +10,14 @@ Biological application of Python Imaging Library (PIL) to represent spots on pol
 """
 
 class Peak:
+    """
+    For drawing the peaks.
+    """
+
     def __init__(self, position, data, dataHeight=None,linewidth=None):
+        """
+        Initialize the image and graphing properties.
+        """
         self.position = tuple(position)
         self.data = data
         self.point = tuple([int(round(x)) for x in position])
