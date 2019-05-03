@@ -41,5 +41,3 @@ while i < nsteps and 0 <= x < w and 0 <= y < h:
     i += 1
 
 print ("\n".join("".join(row) for row in M))
-
-
