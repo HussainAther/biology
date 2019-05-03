@@ -26,5 +26,5 @@ def N(t):
     """
     b = 5
     d =  4 
-    N0 = N(0)
-    return N0 * np.exp((b-d)t)
+    N0 = np.exp((b-d)*t)
+    return N0 * np.exp((b-d)*t)
