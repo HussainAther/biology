@@ -7,8 +7,10 @@ Convert command line arguments to variables so that we can count kmers in them.
 
 kmer_size = int(sys.argv[1])
 count_cutoff = int(sys.argv[2])
-# define the function to split dna
 def split_dna(dna, kmer_size):
+    """
+    Return a string of dna split into kmer size kmer_size.
+    """
     kmers = []
     for start in range(0,len(dna)-(kmer_size-1),1):
         kmer = dna[start:start+kmer_size]
