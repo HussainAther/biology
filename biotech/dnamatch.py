@@ -11,6 +11,9 @@ class RollingHash:
     Utility class
     """
     def __init__(self, s):
+        """
+        Initialize self with a given sequence s.
+        """
         self.HASH_BASE = 7
         self.seqlen = len(s)
         n = self.seqlen - 1
@@ -20,39 +23,63 @@ class RollingHash:
             n -= 1
         self.curhash = h
 
-    # Returns the current hash value.
     def hash(self):
+        """
+        Return the current hash value.
+        """
         return self.curhash
 
-    # Updates the hash by removing previtm and adding nextitm.  Returns the updated
-    # hash value.
     def slide(self, previtm, nextitm):
+        """
+        Update the hash by removing the previous item previtm and adding the next item nextitm.
+        Return the updateed hash value.
+        """
         self.curhash = (self.curhash * self.HASH_BASE) + ord(nextitm)
         self.curhash -= ord(previtm) * (self.HASH_BASE ** self.seqlen)
         return self.curhash
 
 class Multidict:
+    """
+    Create a multidict from several seuqences.
+    """
     def __init__(self, pairs=[]):
+        """
+        Initialize the self with a list of pairs.
+        """
         self.table = dict()
         for pair in pairs:
             self.put(pair[0], pair[1])
+
     def put(self, k, v):
+        """
+        Put key k and value v in the table or append it to an existing entry.
+        """
         if k in self.table:
             self.table[k].append(v)
         else:
             self.table[k] = [v]
+
     def get(self, k):
+        """
+        Retrieve a key k from the table.
+        """
         try:
             return self.table[k]
         except KeyError:
             return []
 
-### Implementation ###
+"""
+Searches for commonalities between sequences a and b by comparing subsequences
+of length k.  The sequences a and b should be iterators that return nucleotides.
+The table is built by computing one hash every m nucleotides (for m >= k).
+"""
 
-# Searches for commonalities between sequences a and b by comparing subsequences
-# of length k.  The sequences a and b should be iterators that return nucleotides.
-# The table is built by computing one hash every m nucleotides (for m >= k).
 def getExactSubmatches(a, b, k, m):
+    """
+    Get the submatches from the multidict adding the key k with a value m
+    for the multidict a. Create hashes of the sequence b for a key k
+    such that we can compare. 
+    """
     print("Building table from sequence A...")
     seqtable = Multidict(intervalSubsequenceHashes(a, k, m))
     print("...done building table.")
@@ -64,6 +91,10 @@ def getExactSubmatches(a, b, k, m):
     return
 
 def subsequenceHashes(seq, k):
+    """
+    Generate subsequence hashes for comparing subsequences for 
+    a key k and sequence seq.
+    """
     try:
         assert k > 0
         subseq = ""
@@ -81,6 +112,9 @@ def subsequenceHashes(seq, k):
         return
 
 def intervalSubsequenceHashes(seq, k, m):
+    """
+    Use the interval-method to manage subsequence hashes.
+    """
     assert m >= k
     try:
         pos = 0
@@ -97,10 +131,13 @@ def intervalSubsequenceHashes(seq, k, m):
     except StopIteration:
         return
 
-# Run thsi to retun the exact matches between the sequences.
+# Run this to return the exact matches between the sequences.
 #compareSequences(getExactSubmatches, "mouse-paternal_8_100.png", (500,500), "fmouse.fa", "fpaternal.fa", 8, 100)
 
 class TestRollingHash(unittest.TestCase):
+    """
+    Create a rolling hash to test the exact matches between the sequences.
+    """
     def test_rolling(self):
         rh1 = RollingHash("abcde")
         rh2 = RollingHash("bcdef")
