@@ -142,9 +142,9 @@ class TestRollingHash(unittest.TestCase):
         rh1 = RollingHash("abcde")
         rh2 = RollingHash("bcdef")
         rh3 = RollingHash("cdefZ")
-        rh1.slide("a","f")
+        rh1.slide("a", "f")
         self.assertTrue(rh1.hash() == rh2.hash())
-        rh1.slide("b","Z")
+        rh1.slide("b", "Z")
         self.assertTrue(rh1.hash() == rh3.hash())
 
 class TestMultidict(unittest.TestCase):
