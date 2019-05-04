@@ -8,6 +8,7 @@ Perform a one-dimensional molecular dynamics simulation with too small a number 
 for just a few particles. To be realistic, we need to change the parameters and the number of random
 numbers added to form the Gaussian distribution. Uses the velocity-Verlet algorithm.
 """
+
 scene = display(x=0,y=0,width=350,height=350, title="Molecular Dynamics", range=10)
 sceneK = gidsplay(x=0, y=350, width=600, height=150, title="Average KE", ymin=0, ymax=5,
                     xmin=0, xmax=500, xtitle="time", ytitle"KE avg")
@@ -30,13 +31,19 @@ fy = np.zeros((Nmax, 2), float) # y force
 L = int(1*Natom**.5) # side of square with atoms
 atoms = []
 
-def twelveran(): # average of twelve arndom numbers
+def twelveran(): 
+    """
+    Average of twelve random numbers.
+    """
     s = 0
     for i in range(1, 13):
         s += random.random()
     return x/12 - .5
 
-def initialposvel(): # initial positions and velocities
+def initialposvel(): 
+    """
+    Set initial positions and velocities
+    """
     i = -1
     for ix in range(0, L):
         for iy in range(0, L):
@@ -53,12 +60,18 @@ def initialposvel(): # initial positions and velocities
         atoms.append(sphere(pos=(xc, yc), radius=.5, color=color.red))
 
 def sign(a, b):
+    """
+    Return a value a with sign b.
+    """
     if b >= 0:
         return abs(a)
     else:
         return -abs(a)
 
-def Forces(t, w, PE, PEorW): # set the forces on each of the 25 particles
+def Forces(t, w, PE, PEorW): 
+    """
+    Set the forces on each of the 25 particles.
+    """
     r2cut = 0
     PE = 0
     for i in range(0, Natom):
@@ -91,6 +104,9 @@ def Forces(t, w, PE, PEorW): # set the forces on each of the 25 particles
         return w
 
 def timevolution():
+    """
+    Run it. Find the variables throughout time.
+    """
     avT = 0 # initial all the variables. Temperature
     avP = 0 # average pressure
     Pavg = 0 # pressure averaged across time
