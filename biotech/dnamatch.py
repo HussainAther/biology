@@ -148,6 +148,9 @@ class TestRollingHash(unittest.TestCase):
         self.assertTrue(rh1.hash() == rh3.hash())
 
 class TestMultidict(unittest.TestCase):
+    """
+    Test our test case of the multidict.
+    """
     def test_multi(self):
         foo = Multidict()
         foo.put(1, "a")
