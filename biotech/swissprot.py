@@ -11,14 +11,15 @@ for att in dir(record):
     if not att.startswith(’__’):
     print(att,getattr(record,att))
 
-# Display Prosite patterns
-
 def get_prosite_refs(handle):
+    """
+    Display prosite patterns for a specific handle.
+    """
     sp = SProt.Iterator(handle, SProt.RecordParser())
     refs=[]
     record = sp.next()
     for ref in record.cross_references:
-        if ref[0] == ’PROSITE’:
+        if ref[0] == "PROSITE":
             refs.append(ref[1])
     return refs
 
