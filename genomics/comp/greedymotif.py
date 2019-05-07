@@ -31,7 +31,10 @@ def regms(s):
         return regms(s[j:], prevind) # run it again
     return result
 
-def probgms(s):
+def probgms(a):
     """
-    Motif search using probability matrices.
+    Motif search using probability matrices. For array of strings a,
+    use a profile matrix from the first k-mer. The probability matrices
+    let us use the best probabilities from the profile matrices of the best
+    k-mer groups in each case.  
     """
