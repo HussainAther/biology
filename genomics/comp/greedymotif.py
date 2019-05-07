@@ -78,6 +78,30 @@ def highprob(s, k, m):
     Return the highest probability for a sequence string s, k-mer length k,
     and matrix m.
     """
-    score = 1 # Initialize score value
-    tmp = "" # temporary string 
+    score = 1 # Initialize probability score value
+    ts = "" # temporary string 
     best = "" # best string
+    c = 0
+    tc = 0 # temporary score
+    while c+k < len(s):
+        for i in range(c, c+k):
+            if s[i] == "A":
+                score *= m[i-c]["A"]
+                ts += "A"
+            elif s[i] == "C":
+                score += m[i-c]["C"]
+                ts += "C"
+            elif s[i] == "G":
+                score += m[i-c]["G"]
+                ts += "G"
+            else s[i] == "T":
+                score += m[i-c]["T"]
+                ts += "T"
+            if i == (c+k+1): # if we've reached the end 
+                if score >= ts: # if the score is greater than the temporary score 
+                    ts = score
+                    best = ts # choose temporary string as best string
+        ts = "" # reset the values and continue looping till we get the highest probability
+        score = 1
+        c += 1
+    return best
