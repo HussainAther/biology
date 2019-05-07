@@ -41,7 +41,8 @@ def probgms(a, k):
     best_motifs = [i[0:k] for i in a] # Initialize list of best motifs
     score = 0 
     c = 0
-   
+    while c + k < len(a[0]):
+        k_mer = a[0][c:c+k] 
 
 
 def matrixgen(s, matrix):
