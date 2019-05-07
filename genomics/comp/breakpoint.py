@@ -24,9 +24,19 @@ def reversal(l):
     """
     Apply the reversal step throughout l to remove most breakpoints.
     """
+    bpi = "" # breakpoint initial index
+    bpf = "" # breakpoint final index
+    bpif = [] # list of tuples of initial and final indices of breakpoints for reversals 
     for i, j in enumerate(l):
-        
-    
+        if l[i+1] != l[i] + 1 and bpi == "":
+            bpi = i
+        elif l[i+1] != l[i] + 1 and bpf != "":
+            bpf = i
+        elif bpi != "" and bpf != "":
+            bpif.append((bpi, bpf))
+    for i, f in bpif:
+        l[i:f] = l[i:f][::-1] # reverse the strip 
+             
 def reverseLongestIncrease(l):
     """
     Reverse the longest increasing strip in l.
