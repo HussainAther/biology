@@ -31,10 +31,35 @@ def regms(s):
         return regms(s[j:], prevind) # run it again
     return result
 
-def probgms(a):
+def probgms(a, k):
     """
     Motif search using probability matrices. For array of strings a,
     use a profile matrix from the first k-mer. The probability matrices
     let us use the best probabilities from the profile matrices of the best
     k-mer groups in each case.  
     """
+   
+
+
+def matrixgen(s, matrix):
+    """
+    Generate a DNA matrix for a string s if there isn't one already for the input 
+    matrix. If there is one, sum up the probability values and average them
+    to make sure they're appropriate. 
+    """
+    if len(matrix)==0:
+        for ch in s: # for each character in the string
+            new_dict = {"A":0, "C":0, "G":0, "T":0}
+            new_dict[ch] = 1
+            matrix += [new_dict]
+        print(matrix)
+        return matrix
+    elif len(matrix) == 3:
+        for j in range(len(s)):
+            matrix[j][s[j]] += 1
+        Sum = [sum(matrix[0].values()), sum(matrix[1].values()), sum(matrix[2].values())]
+        for columns in range(len(matrix)):
+            for keys in matrix[columns]:
+                matrix[columns][keys] /= Sum[columns]
+        print(matrix)
+        return matrix  
