@@ -38,6 +38,9 @@ def probgms(a, k):
     let us use the best probabilities from the profile matrices of the best
     k-mer groups in each case.  
     """
+    best_motifs = [i[0:k] for i in a] # Initialize list of best motifs
+    score = 0 
+    c = 0
    
 
 
