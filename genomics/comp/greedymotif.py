@@ -77,4 +77,7 @@ def highprob(s, k, m):
     """
     Return the highest probability for a sequence string s, k-mer length k,
     and matrix m.
-    """ 
+    """
+    score = 1 # Initialize score value
+    tmp = "" # temporary string 
+    best = "" # best string
