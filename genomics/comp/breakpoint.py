@@ -22,8 +22,10 @@ def hasDecrease(l):
 
 def reversal(l):
     """
-    Apply the reversal step throughout l.
+    Apply the reversal step throughout l to remove most breakpoints.
     """
+    for i, j in enumerate(l):
+        
     
 def reverseLongestIncrease(l):
     """
