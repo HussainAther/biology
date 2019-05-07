@@ -11,7 +11,7 @@ very based on different ways of searching and identifying for a given sequence
 string.
 """
 
-def gms(s):
+def regms(s):
     """
     Something similar to what is described above using regex.
     Other potential answers can be explored.
@@ -28,5 +28,10 @@ def gms(s):
         if len(sub) > 1:
             result.append([sub, (1 + prevind + 1, j + prevind + 1)])
         prevind += j # move the previous index up one
-        return gms(s[j:], prevind) # run it again
+        return regms(s[j:], prevind) # run it again
     return result
+
+def probgms(s):
+    """
+    Motif search using probability matrices.
+    """
