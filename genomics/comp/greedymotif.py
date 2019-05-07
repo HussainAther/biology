@@ -42,28 +42,39 @@ def probgms(a, k):
     score = 0 
     c = 0
     while c + k < len(a[0]):
-        k_mer = a[0][c:c+k] 
+        k_mer = a[0][c:c+k]
+        motif = [k_mer]
+        matrix = matrixgen(k_mer, []) # Generate matrix
+        for i in range(1, t):
+            compstring = a[i] # first string
+            good = highprob(compstring, k, matrix) # Get a good motif from the string and matrix
 
 
-def matrixgen(s, matrix):
+def matrixgen(s, m):
     """
     Generate a DNA matrix for a string s if there isn't one already for the input 
-    matrix. If there is one, sum up the probability values and average them
+    matrix m. If there is one, sum up the probability values and average them
     to make sure they're appropriate. 
     """
-    if len(matrix)==0:
-        for ch in s: # for each character in the string
+    if len(m)==0:
+        for ch in s: # For each character in the string
             new_dict = {"A":0, "C":0, "G":0, "T":0}
             new_dict[ch] = 1
-            matrix += [new_dict]
-        print(matrix)
-        return matrix
-    elif len(matrix) == 3:
+            m += [new_dict]
+        print(m)
+        return m
+    elif len(m) == 3:
         for j in range(len(s)):
-            matrix[j][s[j]] += 1
-        Sum = [sum(matrix[0].values()), sum(matrix[1].values()), sum(matrix[2].values())]
-        for columns in range(len(matrix)):
-            for keys in matrix[columns]:
-                matrix[columns][keys] /= Sum[columns]
-        print(matrix)
-        return matrix  
+            m[j][s[j]] += 1
+        Sum = [sum(m[0].values()), sum(m[1].values()), sum(m[2].values())]
+        for columns in range(len(m)):
+            for keys in m[columns]:
+                m[columns][keys] /= Sum[columns]
+        print(m)
+        return m
+
+def highprob(s, k, m):
+    """
+    Return the highest probability for a sequence string s, k-mer length k,
+    and matrix m.
+    """ 
