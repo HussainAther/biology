@@ -29,15 +29,15 @@ def reverseLongestIncrease(l):
     """
     Reverse the longest increasing strip in l.
     """
-    strip = []
-    tempstrip = []
+    strip = [] # indices of the strip
+    tempstrip = [] # indices of the temporary strip used for comparison
     for i in range(len(l) - 1):
         if l[i+1] > l[i]:
-            while l[i+i] > l[i]:
-                tempstrip.append(l[i])
+            tempstrip.append(i)
+        elif tempstrip != []:
             if len(tempstrip) > len(strip):
                 strip = tempstrip
-            
+    l[strip[0]:strip[-1]] = l[strip[0]:strip[-1]][::-1] # reverse the strip 
 
 def brs(a):
     """
