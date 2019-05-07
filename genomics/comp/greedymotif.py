@@ -38,7 +38,7 @@ def probgms(a, k):
     let us use the best probabilities from the profile matrices of the best
     k-mer groups in each case.  
     """
-    best_motifs = [i[0:k] for i in a] # Initialize list of best motifs
+    bm = [i[0:k] for i in a] # Initialize list of best motifs
     score = 0 
     c = 0
     while c + k < len(a[0]):
@@ -48,8 +48,16 @@ def probgms(a, k):
         for i in range(1, t):
             compstring = a[i] # first string
             good = highprob(compstring, k, matrix) # Get a good motif from the string and matrix
-
-
+            motif.append(good) # add to motif list 
+        ts = 1 # temporary score
+        for d in m: # for each dictionary in the matrix
+            ts *= max(d.values()) # update temporary score with the max dictionary value
+        if ts > score:
+             score = ts # Update the score with the temporary score
+             bm = motif # This list of motifs is our best motif
+        c += 1
+    return bm 
+   
 def matrixgen(s, m):
     """
     Generate a DNA matrix for a string s if there isn't one already for the input 
