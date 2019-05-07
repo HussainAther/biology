@@ -13,16 +13,16 @@ def gms(s):
     Other potential answers can be explored.
     Return repreated motifs in s.
     """
-    m = re.search(r'(.+)\1+', s)
+    m = re.search(r'(.+)\1+', s) 
     result = [] # output result
     prevind = 0 # previous index
-    if m:
+    if m: # as long as there are repeats
         i, j = m.span() # m.start(group) and m.end(group)
-        sub = s[i:j]
-        ind = (sub + sub).find(sub, 1)
-        sub = sub[:ind]
+        sub = s[i:j] # find the first subsequence
+        ind = (sub + sub).find(sub, 1) # set the index
+        sub = sub[:ind] # get the next one
         if len(sub) > 1:
             result.append([sub, (1 + prevind + 1, j + prevind + 1)])
-        prevind += j
-        return gms(s[j:], prevind) 
+        prevind += j # move the previous index up one
+        return gms(s[j:], prevind) # run it again
     return result
