@@ -61,3 +61,5 @@ for (i in 1:14) {
 "Retrieve the max score."
 sum(apply(mm, 2, max))
 
+"Use seqLogo."
+df <- data.frame(a, c, g, t)
