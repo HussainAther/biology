@@ -27,8 +27,8 @@ pwm <- function(freq, total, bg=0.25){
 }
 
 "Calculate out all possible PWM values."
-for (i in 0:8){
-  print(pwm(i,8))
+for (i in 0:8) {
+  print(pwm(i, 8))
 }
 
 "Define the frequencies of nucleotides."
@@ -44,3 +44,11 @@ mm <- pwm(m, 8)
 "For some sample sequence."
 seq <- "ttacataagtagtc"
 x <- strsplit(x=seq, split="")
+
+"Initialize a vector."
+seq_score <- vector()
+
+"Get the corresponding values."
+for (i in 1:14) {
+  seq_score[i] <- mm[x[[1]][i],i]
+}
