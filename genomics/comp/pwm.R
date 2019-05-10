@@ -25,3 +25,8 @@ pwm <- function(freq, total, bg=0.25){
   p <- (freq + (sqrt(total) * 1/4)) / (total + (4 * (sqrt(total) * 1/4)))
   log2(p/bg)
 }
+
+# Calculate out all possible PWM values
+for (i in 0:8){
+  print(pwm(i,8))
+}
