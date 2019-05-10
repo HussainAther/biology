@@ -1,3 +1,8 @@
+source("http://bioconductor.org/biocLite.R")
+biocLite("seqLogo")
+ 
+library(seqLogo)
+
 "We use a probability weight matrix (PWM also called profile matrix) to describe 
 the frequency of each nucleotide at each location in a motif. For the initialiation
 step, we compute the frequency of each base in each position of the suspected motif. 
@@ -55,3 +60,4 @@ for (i in 1:14) {
 
 "Retrieve the max score."
 sum(apply(mm, 2, max))
+
