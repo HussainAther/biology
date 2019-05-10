@@ -36,7 +36,7 @@ a <- c(0, 4, 4, 0, 3, 7, 4, 3, 5, 4, 2, 0, 0, 4)
 c <- c(3, 0, 4, 8, 0, 0, 0, 3, 0, 0, 0, 0, 2, 4)
 g <- c(2, 3, 0, 0, 0, 0, 0, 0, 1, 0, 6, 8, 5, 0)
 t <- c(3, 1, 0, 0, 5, 1, 4, 2, 2, 4, 0, 0, 1, 0)
-m <- matrix(data=c(a,c,g,t), nrow=4, byrow=T,dimnames=list(c("a", "c", "g", "t")))
+m <- matrix(data=c(a,c,g,t), nrow=4, byrow=T, dimnames=list(c("a", "c", "g", "t")))
 
 "Add the matrix to our pwm."
 mm <- pwm(m, 8)
@@ -52,3 +52,6 @@ seq_score <- vector()
 for (i in 1:14) {
   seq_score[i] <- mm[x[[1]][i],i]
 }
+
+"Retrieve the max score."
+sum(apply(mm, 2, max))
