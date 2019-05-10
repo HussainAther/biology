@@ -1,5 +1,4 @@
-"""
-We use a probability weight matrix (PWM also called profile matrix) to describe 
+"We use a probability weight matrix (PWM also called profile matrix) to describe 
 the frequency of each nucleotide at each location in a motif. For the initialiation
 step, we compute the frequency of each base in each position of the suspected motif. 
 In the expectation step, we generatea a vector Zij that has the probability of the
@@ -18,5 +17,11 @@ p_c,k = (n_c,k + d_c,k) / summation (n_b,k + d_b,k)
 with n_c,k = summation of i and summation of j (Zij) for k > 0 
              n_c - summation of j for n_c, j for k = 0
 
-We repeat the expectation and maximization steps until the probability weight matrix converges. 
-"""
+We repeat the expectation and maximization steps until the probability weight matrix converges. "
+
+"Sample function for the position weight matrix."
+pwm <- function(freq, total, bg=0.25){
+  #using the formulae above
+  p <- (freq + (sqrt(total) * 1/4)) / (total + (4 * (sqrt(total) * 1/4)))
+  log2(p/bg)
+}
