@@ -63,3 +63,14 @@ sum(apply(mm, 2, max))
 
 "Use seqLogo."
 df <- data.frame(a, c, g, t)
+
+"Define function that divides the frequency by the row sum i.e. proportions."
+proportion <- function(x) {
+   rs <- sum(x);
+   return(x / rs);
+}
+ 
+"Create position weight matrix."
+mef2 <- apply(df, 1, proportion)
+mef2 <- makePWM(mef2)
+seqLogo(mef2)
