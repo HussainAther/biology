@@ -10,5 +10,13 @@ they're part of the motif. Using Bayes' rule, Zij is
 Zij = Pr(Xi|Zij)Pr(Zij=1) / summation from k to L-W+1(Pr(Xi|Zij=1)Pr(Zik=1))
 
 in which Pr(Xi|Zij=1)=Pr(Xi|Zij=1,p) is the probability of a sequence i given that
-the motif starts at position j. 
+the motif starts at position j. In the maximization step, we use the Z vector to update
+the PWM and the background probability distribution using 
+
+p_c,k = (n_c,k + d_c,k) / summation (n_b,k + d_b,k)
+
+with n_c,k = summation of i and summation of j (Zij) for k > 0 
+             n_c - summation of j for n_c, j for k = 0
+
+We repeat the expectation and maximization steps until the probability weight matrix converges. 
 """
