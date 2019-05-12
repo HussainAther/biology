@@ -6,6 +6,9 @@ when forming macromolecules. We can show how the rod elasticity models of polyme
 can use phenomenological parameters of the stretch (fractional change in length
 of a segment), bend (how the rod becomes deformed), and twist density (torsional deformation).
 We may describe worm-like chains (WLC wlc worm) for these semi-flexible polymers.
+When a substrate binds to one enzymatic subunit, the rest of the subunits are 
+stimulated and become active. Ligands can either have positive cooperativity, 
+negative cooperativity, or non-cooperativity.
 """
 
 def ee(T, L):
