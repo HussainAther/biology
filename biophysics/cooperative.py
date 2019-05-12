@@ -21,3 +21,10 @@ def ee(T, L):
     d2r2ds = lambda P*x: x**2 # d2rds2 is the end-to-end distance with some position vector r
                             # across a path s  
     return .5*k*integrate.quad(d2r2ds, 0, L)
+
+def hill(ec10, ec90):
+    """
+    For a response curve coefficient, we may have input values ec10 and ec90 that produce 10% and 90% of
+    the maximal response, respectively. We may then compute the Hill coefficient as a measure of ultra-
+    sensitivity (how steep the response curve is).
+    """
