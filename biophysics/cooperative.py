@@ -1,4 +1,5 @@
 from scipy import integrate
+import numpy as np
 
 """
 We can look at how molecules work toegether with one another to cooperate 
@@ -28,3 +29,4 @@ def hill(ec10, ec90):
     the maximal response, respectively. We may then compute the Hill coefficient as a measure of ultra-
     sensitivity (how steep the response curve is).
     """
+    return np.log(81) / np.log(ec90/ec10)
