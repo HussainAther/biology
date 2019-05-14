@@ -9,7 +9,10 @@ For example given the pattern P = GGT and the text T = ACCGGTGCTGTAA the best
 tandem repeat is given by k = 3 and the following alignment:
 
 ACCGGTGCTG-TAA
-    GGTGGTGGT
+   GGTGGTGGT
 """
 
- 
+def tandem(p, t):
+    """
+    Fill an array D with normal recursion for the tandem repeat alignment problem.
+    """ 
