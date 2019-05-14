@@ -15,10 +15,8 @@ def local_align(x, y, score=ScoreParam(-7, 10, -5)):
     A = np.zeros((len(x) + 1, len(y) + 1)) # create a zero-filled matrix
     best = 0
     optloc = (0,0)
-    # fill in A in
     for i in xrange(1, len(y)):
         for j in xrange(1, len(x)):
-            # the local alignment recurrance rule:
             A[i][j] = max(
             A[i][j-1] + score.gap,
             A[i-1][j] + score.gap,
