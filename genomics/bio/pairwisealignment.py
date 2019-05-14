@@ -376,3 +376,36 @@ def fd(a, b):
         M[i, j] = max(c, d, v, 0) # add the maximum of the possible scores
     bb, pos = loopstep(M, b) # loop through the second string locally until the final matrix index is 0
     return (pos, pos + len(bb))
+
+"""
+To find the score of the optimal local alignment with linear space is easy. You can run
+Smith-Waterman with only two rows (call it linear-space SW algorithm), and keep track of
+the best score you have found so far. To find the corresponding alignment in linear space is
+tricky. The Hirschberg algorithm for global alignment can not be used directly - since the
+optimal local alignment might not pass the middle point of either string (for example, see the
+figure below). The key point, however, is that if we know the start and end points of the
+optimal local alignment, (I1, J1) and (I2, J2), we can easily recover the actual alignment with
+linear space by running the Hirschberg algorithm on the small rectangle constrained by the
+two points (see figure below).
+
+To find the end point of the optimal local alignment with linear space is easy too. Above
+we have discussed how to find the score for the optimal alignment using linear space SW. If
+we also keep track of the location of the cell associated with the currently best score, we will
+have the end point of an optimal alignment when the linear-space SW finishes.
+So the only tricky part is how to find the start point of an optimal local alignment. There
+are two options. First, after we have found the end point (I2, J2) of an optimal local alignment,
+we can run the linear space SW backwards, starting from (I2, J2). We terminate this backward
+linear-space SW when we have reached the same optimal score as found in the forward iteration. 
+The cell (I1, J1) with the optimal score is a valid start point, since the alignment between
+(I1, J1) and (I2, J2) has the optimal score. In the second option, we run the linear-space SW in
+the forward direction only. For each cell in the two rows that we do keep track of, we record
+(1) a score for the best local alignment ending in that cell and (2) the starting point for that
+best local alignment. Initially the starting point of each cell is just itself. When an alignment
+path continues, each cell copies the starting point from its preceding cell on the path. The
+starting point is set to a cell itself whenever a score zero is reached.
+
+When the local alignment is relatively short compared to the sequences, the first option is
+more efficient. When there are multiple optimal (or near optimal) alignments that need to
+be traced back, the second option may be better because the first strategy would require a
+separate backward iteration for each alignment that need to be traced back.
+"""
