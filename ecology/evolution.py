@@ -48,4 +48,16 @@ def mate(a, b):
     else:
         return a, b
     return a, b, a[:place] + b[place:], b[:place] + a[place:]
-  
+ 
+center = len(C)/2
+while parent != target:
+    rate = mutaterate()
+    iterations += 1
+    if iterations % 100 == 0: 
+        what()
+    copies = [ mutate(parent, rate) for _ in C ]  + [parent]
+    parent1 = max(copies[:center], key=fitness)
+    parent2 = max(copies[center:], key=fitness)
+    parent = max(mate(parent1, parent2), key=fitness) 
+
+what()
