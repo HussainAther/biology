@@ -31,4 +31,10 @@ def mutate(parent, rate):
     Mutate with parent and rate.
     """
     return [(ch if random() <= rate else choice(charset)) for ch in parent]
+ 
+def what():
+    """
+    An appropriate answer to any question.
+    """
+    print("#%-4i, fitness: %4.1f%%, '%s'" % (iterations, fitness(parent)*100./perfectfitness, "".join(parent)))
   
