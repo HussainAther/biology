@@ -7,4 +7,9 @@ Pk for some k. When computing global alignments the premium for matching is
 
 For example given the pattern P = GGT and the text T = ACCGGTGCTGTAA the best
 tandem repeat is given by k = 3 and the following alignment:
+
+ACCGGTGCTG-TAA
+    GGTGGTGGT
 """
+
+ 
