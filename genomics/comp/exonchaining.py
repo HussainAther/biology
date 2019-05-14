@@ -12,10 +12,6 @@ in the graph. We have 3n - 1 edges (an edge between each li and ri fo weight wi 
 make a path in the graph from v1 to v2n.
 """
 
-import sys
-import fileinput
-import math
-
 class Node:
     """
     Define nodes on the graph.
@@ -28,14 +24,14 @@ class Node:
 
 def buildGraphFromInput(lines):
     """
-    For a list of lines l, we initialize the node
+    For a list of lines l of a garph, we initialize the node
     using the start and end to construct a graph.
     """
     graph = []
     # Read file and initializes nodes in graph
     for line in lines:
         # Parse line
-        start,end,score = [int(num.strip()) for num in line.split()]
+        start, end, score = [int(num.strip()) for num in line.split()]
         # Initialize node
         startNode = Node(start, score)
         endNode = Node(end, score, startNode)
