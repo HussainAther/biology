@@ -12,7 +12,12 @@ ACCGGTGCTG-TAA
    GGTGGTGGT
 """
 
-def tandem(p, t):
+def tandem(p, t, score):
     """
     Fill an array D with normal recursion for the tandem repeat alignment problem.
+    For some pattern p and text t, we determine the best tandem repeat when aligning
+    p to t.
     """ 
+    for i in p:
+        if i < p: 
+            score -= 1
