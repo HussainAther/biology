@@ -26,3 +26,9 @@ def mutaterate():
     """
     return 1-((perfectfitness - fitness(parent)) / perfectfitness * (1 - minmutaterate))
  
+def mutate(parent, rate):
+    """
+    Mutate with parent and rate.
+    """
+    return [(ch if random() <= rate else choice(charset)) for ch in parent]
+  
