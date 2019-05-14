@@ -32,40 +32,33 @@ def buildGraphFromInput(lines):
     using the start and end to construct a graph.
     """
     graph = []
-    #read file and initializes nodes in graph
+    # Read file and initializes nodes in graph
     for line in lines:
-        if len(line.strip()) == 0:
-            continue
-
-        #parse line
+        # Parse line
         start,end,score = [int(num.strip()) for num in line.split()]
-
-        #initialize node
+        # Initialize node
         startNode = Node(start, score)
         endNode = Node(end, score, startNode)
-
-        #add nodes to graph
+        # Add nodes to graph
         graph.extend([startNode, endNode])
-
-    #sort graph and initialize index references on each node
+    # Sort the graph and initialize index references on each node
     graph.sort(key=lambda a: (a.location, a.startNode.location if a.startNode else -1))
-
-    for i,n in enumerate(graph):
+    for i, n in enumerate(graph):
         n.index = i
-
     return graph
 
 def getScore(graph):
+    """
+    We get the score of the length of the longest path in the grpah
+    that ends at the vertices vi.
+    """
     scores = [0]
-
     for node in graph:
         if not node.isEnd:
             scores.append(scores[-1])
         else:
             scoreIndex = node.startNode.index
             score = node.score
-
             newScore = max(scores[scoreIndex] + score, scores[-1])
             scores.append(newScore)
-
     return scores[-1]
