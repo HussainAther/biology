@@ -17,7 +17,7 @@ class ScoreParam:
         self.match = match
         self.mismatch = mismatch
 
-def local_align(x, y, score=ScoreParam(-7, 10, -5)):
+def align(x, y, score=ScoreParam(-7, 10, -5)):
     """
     Do a local alignment between x and y.
     """
