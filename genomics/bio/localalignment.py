@@ -8,6 +8,15 @@ in the entire array. To find the actual local alignment: start at an entry with 
 as usual, stop when we reach an entry with a score of .0
 """
 
+class ScoreParam:
+    """
+    The parameters for an alignment scoring function.
+    """
+    def __init__(self, gap, match, mismatch):
+        self.gap = gap
+        self.match = match
+        self.mismatch = mismatch
+
 def local_align(x, y, score=ScoreParam(-7, 10, -5)):
     """
     Do a local alignment between x and y.
