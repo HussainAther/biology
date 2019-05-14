@@ -24,7 +24,7 @@ class ScoreParam:
         self.mismatch = mismatch
 
 
-def local_align(x, y, score=ScoreParam(-7, 10, -5)):
+def local_align(x, y, score=ScoreParam(0, 1, -1)):
     """
     Fill an alignment matrix A with normal recursion for the tandem repeat alignment problem.
     For some pattern x and text y, we determine the best tandem repeat when aligning
