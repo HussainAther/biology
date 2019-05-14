@@ -7,7 +7,9 @@ Given a set of putative exons, find a maximum set of nonoverlapping putative exo
 We use dynamic programming to solve the Exon Chaining (exon chaining) problem across various 
 intervals. For a graph G with 2n vertices, n which represents the starting interval position
 and the ending position. For the intervals in increasing order, we get an array of vertices
-
+in the graph. We have 3n - 1 edges (an edge between each li and ri fo weight wi for i from 
+1 to n and 2n - 1 more edges of weight 0 that connect adjacent vertices (vi, vi+1) that all
+make a path in the graph from v1 to v2n.
 """
 
 import sys
