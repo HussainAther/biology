@@ -19,3 +19,10 @@ def fitness(trial):
     Sum of matching chars by position across a trial for our target.
     """
     return sum(t==h for t,h in zip(trial, target)) 
+
+def mutaterate():
+    """
+    Less mutation the closer the fit of the parent.
+    """
+    return 1-((perfectfitness - fitness(parent)) / perfectfitness * (1 - minmutaterate))
+ 
