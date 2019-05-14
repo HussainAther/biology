@@ -37,4 +37,15 @@ def what():
     An appropriate answer to any question.
     """
     print("#%-4i, fitness: %4.1f%%, '%s'" % (iterations, fitness(parent)*100./perfectfitness, "".join(parent)))
+ 
+def mate(a, b):
+    """
+    Mate a and b individuals.
+    """
+    place = 0
+    if choice(xrange(10)) < 7:
+        place = choice(xrange(len(target)))
+    else:
+        return a, b
+    return a, b, a[:place] + b[place:], b[:place] + a[place:]
   
