@@ -7,9 +7,22 @@ RNA folding problem, one tries to find a maximum set of noninterleaving bonds. T
 attempting to find a fold with the minimum energy, is much more difficult.
 """
 
+def isNoninter(l):
+    """
+    For a list of bond positions, determine if they're noninterleaving.
+    """
+
 def noninter(a, b):
     """
     For two lists of RNA positions a and b, find the maximum set of noninterleaving bonds.
     """
     bonds = []
-
+    samplebond = []
+    for i in a:
+        for j in b:
+            if samplebond == []:
+                samplebond.append((i, j))
+            elif len(samplebond) == 1:
+                samplebond.append((i, j))
+                if samplebond[0][1] 
+   
