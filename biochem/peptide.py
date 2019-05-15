@@ -46,9 +46,10 @@ def predictPeptide(spectrum, prefix=""):
         peptideList.append(prefix)
     elif (current < target):
         for residue in Daltons.iterkeys():
-            if (Daltons[residue] not in spectrum):
-                continue
             extend = prefix + residue
-            if (sum([Daltons[res] for res in extend]) not in spectrum):
-                continue
-            predictPeptide(spectrum, extend)
+            suffix = [extend[i:] for i in xrange(len(extend))]
+            for fragment in suffix:
+                if (sum([Daltons[res] for res in fragment]) not in spectrum):
+                    break
+            else:
+                predictPeptide(spectrum, extend)
