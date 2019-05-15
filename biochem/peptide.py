@@ -53,3 +53,16 @@ def predictPeptide(spectrum, prefix=""):
                     break
             else:
                 predictPeptide(spectrum, extend)
+
+def convolution(spectrum):
+    """
+    For a given noisy spectrum, we can compute the spectral convolution,
+    add frequent masses above the same threshold to the spectrum,
+    and use thta to infer the peptide sequence. convolve 
+    """
+    delta = {}
+    for i in xrange(len(spectrum)-1):
+        for j in xrange(i+1,len(spectrum)):
+            diff = abs(spectrum[j] - spectrum[i])
+            delta[diff] = delta.get(diff, 0) + 1
+    return delta
