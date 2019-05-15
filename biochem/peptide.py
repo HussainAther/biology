@@ -66,3 +66,13 @@ def convolution(spectrum):
             diff = abs(spectrum[j] - spectrum[i])
             delta[diff] = delta.get(diff, 0) + 1
     return delta
+
+experimentalSpectrum = sorted(set([mass for mass in spectrum if mass not in missingMass] + falseMass))
+specConv = SpectralConvolution(sorted(experimentalSpectrum))
+
+for delta, count in sorted(specConv.iteritems()):
+    if (count >= 2) and (delta not in experimentalSpectrum) and (delta > min(Daltons.values())):
+        print("Adding", delta, "appeared", count, "times", "*" if delta in missingMass else "")
+        experimentalSpectrum.append(delta)
+
+print(sorted(missingMass))
