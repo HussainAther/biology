@@ -24,7 +24,6 @@ AminoAbbrv = {
     "*": "STP"
 }
 
-# Now it"s time to use this dictionary!
 Daltons = { 
     "A":  71, "C": 103, "D": 115, "E": 129,
     "F": 147, "G":  57, "H": 137, "I": 113,
@@ -33,3 +32,23 @@ Daltons = {
     "T": 101, "V":  99, "W": 186, "Y": 163
 }
 
+def predictPeptide(spectrum, prefix=""):
+    """
+    Predict possibly peptides from a given spectrum (list of molecular weights of a
+    petide chain).
+    """
+    global peptideList
+    if (len(prefix) == 0):
+        peptideList = []
+    current = sum([Daltons[res] for res in prefix])
+    target = max(spectrum)
+    if (current == target):
+        peptideList.append(prefix)
+    elif (current < target):
+        for residue in Daltons.iterkeys():
+            if (Daltons[residue] not in spectrum):
+                continue
+            extend = prefix + residue
+            if (sum([Daltons[res] for res in extend]) not in spectrum):
+                continue
+            predictPeptide(spectrum, extend)
