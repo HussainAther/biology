@@ -9,8 +9,13 @@ attempting to find a fold with the minimum energy, is much more difficult.
 
 def isNoninter(l):
     """
-    For a list of bond positions, determine if they're noninterleaving.
+    For a list of two two-length tuple bond positions, determine if they're noninterleaving.
     """
+    if l[0][0] < l[0][1] < l[1][0] < l[1][1]:
+        return False
+    elif l[1][0] < l[1][1] < l[0][0] < l[0][1]:
+        return False
+    return True 
 
 def noninter(a, b):
     """
@@ -24,5 +29,8 @@ def noninter(a, b):
                 samplebond.append((i, j))
             elif len(samplebond) == 1:
                 samplebond.append((i, j))
-                if samplebond[0][1] 
+                if isNoninter(samplebond):
+                    bond.append(samplebond)
+                samplebond = []
+    return samplebond   
    
