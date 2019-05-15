@@ -6,3 +6,10 @@ noninterleaving bonds corresponds to a potential RNA structure. In a very naive 
 RNA folding problem, one tries to find a maximum set of noninterleaving bonds. The more adequate model, 
 attempting to find a fold with the minimum energy, is much more difficult.
 """
+
+def noninter(a, b):
+    """
+    For two lists of RNA positions a and b, find the maximum set of noninterleaving bonds.
+    """
+    bonds = []
+
