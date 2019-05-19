@@ -31,3 +31,16 @@ for x in xrange(n):
         u[x, y] = 1 + uniform(-.03, .03) # small noise
         v[x, y] = 1 + uniform(-.03, .03)
 nextu = np.zeros([n, n]) 
+nextv = np.zeros([n, n]) 
+
+# Plot
+subplot(1, 2, 1)
+cla()
+imshow(u, vmin=0, vmax=2, cmap=cm.binary)
+title("u")
+subplot(1, 2, 2)
+cla()
+imshow(v, vmin=0, vmax=2, cmap=cm.binary)
+title("v")
+
+# Update
