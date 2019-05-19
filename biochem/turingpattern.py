@@ -44,3 +44,8 @@ imshow(v, vmin=0, vmax=2, cmap=cm.binary)
 title("v")
 
 # Update
+for x in xrange(n):
+    for y in xrange(n):
+        # state-transition
+        uC, uR, uL, uU, uD = u[x, y], y[(x+1)%n, y], u[(x-1)%n, y], u[x, (y+1)%n], u[x, (y-1)%n]
+        vC, vR, vL, vU, vD = 
