@@ -14,3 +14,7 @@ dudt = c(u-h) + d(v-k) + DuΔ^2u
 
 These equations form the Turing pattern.
 """
+
+n = 100 # grid size n x n
+Dh = 1/n # spatial resolution
+Dt = .02 # temporal resolution
