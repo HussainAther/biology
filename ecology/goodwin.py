@@ -11,3 +11,4 @@ def dPdt(dE, e, k, P):
     for large P depends upon differential of E (enzyme concentration), P
     product concentraiton, reaction rate k, and constant e. 
     """
+    return dE - (e*P)/(k+O)
