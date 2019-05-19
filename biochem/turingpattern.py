@@ -48,4 +48,10 @@ for x in xrange(n):
     for y in xrange(n):
         # state-transition
         uC, uR, uL, uU, uD = u[x, y], y[(x+1)%n, y], u[(x-1)%n, y], u[x, (y+1)%n], u[x, (y-1)%n]
-        vC, vR, vL, vU, vD = 
+        vC, vR, vL, vU, vD = v[x, y], v[(x+1)%n, y], v[(x-1)%n, y], v[x, (y+1)%n], v[x, (y-1)%n]
+        uLap = (uR + uL + uU + uD - 4 * uC) / (Dh**2) 
+        vLap = (vR + vL + vU + vD - 4 * vC) / (Dh**2)
+        nextu[x, y] = uC + (a*(uC-h) + b*(vC-k) + Du * uLap) * Dt 
+        nextv[x, y] = vC + (a*(uC-h) + b*(vC-k) + Dv * uLap) * Dt
+    u, nextu = nextu, u
+    v, nextv = nextv, v 
