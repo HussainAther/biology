@@ -53,3 +53,13 @@ def complete_wfst(wfst, tokens, trace=False):
                                (start, nt1, mid, nt2, end, start, index[(nt1,nt2)], end))
                         wfst[start][end] = index[(nt1,nt2)]
     return wfst 
+
+def display(wfst, tokens):
+    """
+    Display WFST table.
+    """
+    print("\nWFST " + " ".join([("%-4d" % i) for i in range(1, len(wfst))]))
+    for i in range(len(wfst)-1):
+        print("%d " % i),
+    for j in range(1, len(wfst)):
+        print("%-4s" % wfst[i][j]),
