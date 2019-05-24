@@ -9,3 +9,8 @@ S(A,T) = S(T,A) = S(A,C) = S(C,A)
 
 with gap-open cost d = 3 and gap-extension cost e = 2.
 """
+
+def cl(a):
+    """
+    For an array a of sequences, align using Carrillo-Lopman multiple alignment.
+    """
