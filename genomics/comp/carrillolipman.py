@@ -30,10 +30,11 @@ def align(x, y):
             if gap == False:
                 score += 3
                 gap = True
-        elif gap == True:
-            gap = False 
-        s = x[i] + y[i] 
-        score += aligndict[s] 
+        else:
+            if gap == True:
+                gap = False
+            s = x[i] + y[i] 
+            score += aligndict[s] 
     return score 
     
 def all_substrings(string):
@@ -47,6 +48,7 @@ def cl(a):
     """
     For a string a, align possible substrings with Carrillo-Lipman algorithm.
     """
+    a += "-"
     b = all_substrsings(a)
     c = itertools.combinations(b, 2)
     scores = {}
