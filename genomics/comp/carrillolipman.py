@@ -1,3 +1,7 @@
+import operator
+
+from itertools import combinations
+
 """
 Carrillo–Lipman multiple alignment algorithm (carrillo lipman).
 
@@ -32,14 +36,21 @@ def align(x, y):
         score += aligndict[s] 
     return score 
     
+def all_substrings(string):
+    """
+    Return all possible substrings for a given string.
+    """
+    n = len(string)
+    return {string[i:j+1] for i in range(n) for j in range(i,n)}
 
 def cl(a):
     """
-    For an array a of sequences, align using Carrillo-Lopman multiple alignment.
+    For a string a, align possible substrings with Carrillo-Lipman algorithm.
     """
-    c = a
-    n = len(a)   
-    while len(c) > 1:    
-        align = [c[0], c[1]] # choose two sub-alignments
-        as = 
-   
+    b = all_substrsings(a)
+    c = itertools.combinations(b, 2)
+    scores = {}
+    for i in c:
+         scores[i[0], i[1]] = align(i[0], i[1])
+    return min(scores.iteritems(), key=operator.itemgetter(1))[0] # Return the lowest score
+
