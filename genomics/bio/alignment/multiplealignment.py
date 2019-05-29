@@ -46,3 +46,11 @@ def multiple_alignment(word_list):
 
     # Quick lambda function to insert indels.
     insert_indel = lambda word, i: word[:i] + "-" + word[i:]
+
+    # Insert indels to get the alignment.
+    while reduce(mul, current_index) != 0:
+        for i, perm_value in enumerate(perm_list[backtrack[tuple(current_index)]]):
+            if perm_value == 0:
+                alignment[i] = insert_indel(alignment[i], current_index[i])
+            else:
+                current_index[i] -= 1
