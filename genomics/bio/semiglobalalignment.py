@@ -51,3 +51,11 @@ def smgb(v, w, sigma):
         else:
             i -= 1
             j -= 1
+
+    # Prepend the necessary preceeding indels to get to (0,0).
+    for _ in xrange(i):
+        w_aligned = insert_indel(w_aligned, 0)
+    for _ in xrange(j):
+        v_aligned = insert_indel(v_aligned, 0)
+
+    return str(max_score), v_aligned, w_aligned
