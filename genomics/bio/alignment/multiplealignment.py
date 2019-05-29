@@ -54,3 +54,4 @@ def multiple_alignment(word_list):
                 alignment[i] = insert_indel(alignment[i], current_index[i])
             else:
                 current_index[i] -= 1
+    return [str(max_score)] + [aligned[1:] for aligned in alignment]
