@@ -48,7 +48,18 @@ def sbh(x, l):
     """
     For a list x of all l-mers of a string s, return string s such that Spectrum(s, l) = x. 
     """
+    a = len(x)
     s = ""
-    t = iter(x)
-    for i in t:
-        print(i, next(t))
+    while a != 1:
+        max = 0
+        for i in range(a):
+            for j in range(i+1, a):
+                length = lcs(i, j)
+                string = superstring(i, j)
+                if max < length:
+                    max = length
+                    s = string
+                    l = i
+                    r = j 
+        a -= 1 
+    return s
