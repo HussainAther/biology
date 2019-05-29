@@ -17,3 +17,11 @@ def local_alignment_affine_gap_penalty(v, w, scoring_matrix, sigma, epsilon):
     max_score = -1
     max_i, max_j = 0, 0
 
+    # Fill in the Score and Backtrack matrices.
+    for i in xrange(1, len(v)+1):
+        for j in xrange(1, len(w)+1):
+            S_lower[i][j] = max([S_lower[i-1][j] - epsilon, S_middle[i-1][j] - sigma])
+            S_upper[i][j] = max([S_upper[i][j-1] - epsilon, S_middle[i][j-1] - sigma])
+            middle_scores = [S_lower[i][j], S_middle[i-1][j-1] + scoring_matrix[v[i-1], w[j-1]], S_upper[i][j], 0]
+            S_middle[i][j] = max(middle_scores)
+            backtrack[i][j] = middle_scores.index(S_middle[i][j])
