@@ -18,3 +18,5 @@ for i in A:
 	else:
 	    spec[element] = 1
 
+# Get the maximum multiplicity from the spectral convolution.
+max_multiplicty = max([i for i in spec.values()])
