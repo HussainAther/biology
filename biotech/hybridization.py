@@ -12,7 +12,40 @@ in s and is written Spectrum(s, l). If l = 3 and s = TATGGTGC, then Spectrum(s, 
 We can now formulate the problem of sequencing a target DNA fragment from its DNA array data.
 """
 
-def sbh(x, s):
+def superstring(a, b): 
+    """
+    Return the shortest common supersequence (superstring) between a and b.
+    """
+    m = len(a) 
+    n = len(b) 
+    l = lcs(a, b, m, n) 
+    # Result is sum of input string 
+    # lengths - length of lcs 
+    return (m + n - l)
+
+def lcs(a, b, m, n):
+    """
+    Return lcs length for a and b of lengths m and n respectively.
+    """ 
+    L = [[0] * (n + 2) for i in
+                    range(m + 2)] 
+    # Following steps build L[m + 1][n + 1] 
+    # in bottom up fashion. Note that L[i][j] 
+    # contains length of LCS of a[0..i - 1] 
+    # and b[0..j - 1] 
+    for i in range(m + 1): 
+        for j in range(n + 1): 
+            if (i == 0 or j == 0) : L[i][j] = 0
+            elif (a[i - 1] == b[j - 1]) : 
+                L[i][j] = L[i - 1][j - 1] + 1
+            else : L[i][j] = max(L[i - 1][j], 
+                                 L[i][j - 1]) 
+    # L[m][n] contains length of 
+    # LCS for a[0..n - 1] and b[0..m - 1] 
+    return L[m][n]  
+
+def sbh(x, l):
     """
     For a list x of all l-mers of a string s, return string s such that Spectrum(s, l) = x. 
     """
+    
