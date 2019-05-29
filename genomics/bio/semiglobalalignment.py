@@ -29,13 +29,25 @@ def smgb(v, w, sigma):
     max_score = S[i][j]
 
     # Quick lambda function to insert indels.
-    insert_indel = lambda word, i: word[:i] + '-' + word[i:]
+    insert_indel = lambda word, i: word[:i] + "-" + word[i:]
 
     # Initialize the aligned strings as the input strings.
     v_aligned, w_aligned = v, w
 
     # Append indels as necessary.
     for _ in xrange(len(v) - i):
-        w_aligned += '-'
+        w_aligned += "-"
     for _ in xrange(len(w) - j):
-        v_aligned += '-'
+        v_aligned += "-"
+
+    # Backtrack to the edge of the matrix starting at the highest scoring cell.
+    while i*j != 0:
+        if backtrack[i][j] == 0:
+            i -= 1
+            w_aligned = insert_indel(w_aligned, j)
+        elif backtrack[i][j] == 1:
+            j -= 1
+            v_aligned = insert_indel(v_aligned, i)
+        else:
+            i -= 1
+            j -= 1
