@@ -28,3 +28,6 @@ def local_alignment_affine_gap_penalty(v, w, scoring_matrix, sigma, epsilon):
             if S_middle[i][j] > max_score:
                 max_score = S_middle[i][j]
                 max_i, max_j = i, j
+
+    # Initialize the indices to start at the position of the high score.
+    i, j = max_i, max_j
