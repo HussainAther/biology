@@ -31,3 +31,6 @@ def local_alignment_affine_gap_penalty(v, w, scoring_matrix, sigma, epsilon):
 
     # Initialize the indices to start at the position of the high score.
     i, j = max_i, max_j
+
+    # Initialize the aligned strings as the input strings up to the position of the high score.
+    v_aligned, w_aligned = v[:i], w[:j]
