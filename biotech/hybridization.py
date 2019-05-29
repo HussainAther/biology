@@ -6,6 +6,10 @@ target DNA fragment, the target will hybridize with the probe if the probe is a 
 of the target’s Watson-Crick complement. When the probe and the target are mixed together, 
 they form a weak chemical bond and stick together. For example, a probe ACCGTGGA
 will hybridize to CCCTGGCACCTA since it's complementary to the substring TGGCACCT of the target.
+
+For a string s of length n, the l-mer composition, or spectrum, of s, is the multiset of n − l + 1 l-mers 
+in s and is written Spectrum(s, l). If l = 3 and s = TATGGTGC, then Spectrum(s, l) = {TAT, ATG, TGG, GGT, GTG, TGC}. 
+We can now formulate the problem of sequencing a target DNA fragment from its DNA array data.
 """
 
 def sbh(x, s):
