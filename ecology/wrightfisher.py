@@ -12,6 +12,9 @@ of the 2N chromosomes in the next generation selects the allele with probability
 First we determine the probabiliy of a given of recessive allels in the 
 first generation. We use a binomial random variable with the given parameters.
 We omit the 0th term throughout the problem, as it has no contribution to the desired probability.
+Then, we determine the probabiliy of a given of recessive allels in the 2nd to k-th generations.
+Use the total law of probability, along with the probabilities from the previous generation.
+Finally, we sum to get the desired probability.
 """
 
 def wf(N, m, g, k):
@@ -20,5 +23,13 @@ def wf(N, m, g, k):
     possessing m copies of a dominant allele, we will observe after g generations at 
     least k copies of a recessive allele. All using the Wright-Fisher model.
     """
-    p_rec = 1.0 - (m/(2.0*N))
-    p = [comb(2*N, i)*((p_rec)**i)*(1.0-p_rec)**(2*N-i) for i in range(1,2*N+1)]
+    p_rec = 1.0 - (m / (2.0*N))
+    p = [comb(2*N, i) * ((p_rec)**i) * (1.0 - p_rec)**(2 * N-i) for i in range(1, 2 * N+1)]
+    for gen in range(2,g+1):
+        temp_p = []
+        for j in range(1,2*N+1):
+            temp_term = [comb(2*N, j)*((x/(2.0*N))**j)*(1.0-(x/(2.0*N)))**(2*N-j) for x in range(1,2*N+1)]
+            temp_p.append(sum([temp_term[i]*p[i] for i in range(len(temp_term))]))
+        p = temp_p
+   prob = sum(p[k-1:])
+   return prob
