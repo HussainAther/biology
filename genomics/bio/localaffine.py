@@ -44,3 +44,9 @@ def local_alignment_affine_gap_penalty(v, w, scoring_matrix, sigma, epsilon):
             j -= 1
         elif backtrack[i][j] == 2:
             j -= 1
+
+    # Cut the strings at the ending point of the backtrack.
+    v_aligned = v_aligned[i:]
+    w_aligned = w_aligned[j:]
+
+    return str(max_score), v_aligned, w_aligned
