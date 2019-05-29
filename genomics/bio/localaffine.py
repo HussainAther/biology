@@ -12,3 +12,8 @@ def local_alignment_affine_gap_penalty(v, w, scoring_matrix, sigma, epsilon):
     S_middle = [[0 for j in xrange(len(w)+1)] for i in xrange(len(v)+1)]
     S_upper = [[0 for j in xrange(len(w)+1)] for i in xrange(len(v)+1)]
     backtrack = [[0 for j in xrange(len(w)+1)] for i in xrange(len(v)+1)]
+
+    # Initialize the maximum score below the lowest possible score.
+    max_score = -1
+    max_i, max_j = 0, 0
+
