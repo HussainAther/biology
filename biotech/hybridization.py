@@ -7,3 +7,8 @@ of the target’s Watson-Crick complement. When the probe and the target are mix
 they form a weak chemical bond and stick together. For example, a probe ACCGTGGA
 will hybridize to CCCTGGCACCTA since it's complementary to the substring TGGCACCT of the target.
 """
+
+def sbh(x, s):
+    """
+    For a list x of all l-mers of a string s, return string s such that Spectrum(s, l) = x. 
+    """
