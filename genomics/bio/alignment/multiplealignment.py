@@ -27,4 +27,12 @@ def multiple_alignment(word_list):
             else:
                 # Make it smaller than the lowest possible score.
                 S[index] = 2*base_score*reduce(add, map(len, word_list))
-
+        else:
+            # Use previous scores to determine the best score for the current index.
+            previous_scores = [S[tuple(map(add, index, perm))] for perm in perm_list]
+            current_index_scores = []
+            for perm in perm_list:
+                chars = [word_list[i][index[i]-1] if perm_value == -1 else '-' for i, perm_value in enumerate(perm)]
+                current_index_scores.append(base_score + sum([comb(chars.count(ch), 2, exact=True) for ch in set(chars)]))
+            scores = map(add, previous_scores, current_index_scores)
+            backtrack[index], S[index] = max(enumerate(scores), key=lambda p: p[1])
