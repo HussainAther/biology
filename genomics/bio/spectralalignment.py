@@ -20,3 +20,7 @@ for i in A:
 
 # Get the maximum multiplicity from the spectral convolution.
 max_multiplicty = max([i for i in spec.values()])
+
+# Get the keys corresponding to the maximum multiplicities.
+max_x = [item[0] for item in spectral_convolution.items() if item[1] == max_multiplicty]
+
