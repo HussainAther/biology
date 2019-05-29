@@ -34,3 +34,13 @@ def local_alignment_affine_gap_penalty(v, w, scoring_matrix, sigma, epsilon):
 
     # Initialize the aligned strings as the input strings up to the position of the high score.
     v_aligned, w_aligned = v[:i], w[:j]
+
+    # Backtrack to start of the local alignment starting at the highest scoring cell.
+    while backtrack[i][j] != 3 and i*j != 0:
+        if backtrack[i][j] == 0:
+            i -= 1
+        elif backtrack[i][j] == 1:
+            i -= 1
+            j -= 1
+        elif backtrack[i][j] == 2:
+            j -= 1
