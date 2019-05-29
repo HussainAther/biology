@@ -32,7 +32,17 @@ def multiple_alignment(word_list):
             previous_scores = [S[tuple(map(add, index, perm))] for perm in perm_list]
             current_index_scores = []
             for perm in perm_list:
-                chars = [word_list[i][index[i]-1] if perm_value == -1 else '-' for i, perm_value in enumerate(perm)]
+                chars = [word_list[i][index[i]-1] if perm_value == -1 else "-" for i, perm_value in enumerate(perm)]
                 current_index_scores.append(base_score + sum([comb(chars.count(ch), 2, exact=True) for ch in set(chars)]))
             scores = map(add, previous_scores, current_index_scores)
             backtrack[index], S[index] = max(enumerate(scores), key=lambda p: p[1])
+
+    # Initialize the alignment and indicies.
+    alignment = word_list
+    current_index = map(len, word_list)
+
+    # Get the max score.
+    max_score = S[tuple(current_index)]
+
+    # Quick lambda function to insert indels.
+    insert_indel = lambda word, i: word[:i] + "-" + word[i:]
