@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
 
-from vpython.graph import *
-import random
+import vpython as vp
 import numpy as np
+
+from random import random
 
 """
 Conway's Game of Life. A cell can either be dead (0) or alive (1).
@@ -15,13 +16,16 @@ Conway's Game of Life. A cell can either be dead (0) or alive (1).
 + A dead cell will be alive if 3 of its 8 neighbors are alive.
 """
 
-scene = display(width=500, height=500, title="Game of Life")
+scene = vp.graph.display(width=500, height=500, title="Game of Life")
 cell = np.zeros((50, 50))
 cellu = np.zeros((50,50))
-curve(pos=[(-49, -49), (-49, 49), (49, 49), (49, -49), (-49, -49)], color=color.white)
+vp.graph.curve(pos=[(-49, -49), (-49, 49), (49, 49), (49, -49), (-49, -49)], color=color.white)
 boxes = points(shape="square", size=8, color=color.cyan)
 
-def drawcells(ce):
+def drawcells(cell):
+    """
+    Draw each cell.
+    """
     boxes.pos = []
     for j in range(0, 50):
         for i in range(0, 50):
@@ -31,13 +35,19 @@ def drawcells(ce):
                 boxes.append(pos=(xx, yy))
 
 def initial():
+    """
+    Initialize the board.
+    """
     for j in range(20, 28):
         for i in range(20, 28):
-            r = int(random.random()*2)
+            r = int(random()*2)
             cell[j, i] = r
     return cell
 
 def gameoflife(cell):
+    """
+    Run the Game of Life simulator and check for each cell.
+    """
     for i in range(1, 49):
         for j in range(1, 49):
             sum1 = cell[i−1][j−1] + cell[i][j−1] + cell[i+1][j−1] # sum 8 neighbors
@@ -59,7 +69,7 @@ def gameoflife(cell):
 temp = initial()
 drawcells(temp)
 while True:
-    rate(6)
+    vp.rate(6)
     cell = temp
     temp = gameoflife(cell)
     drawcells(cell)
