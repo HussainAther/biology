@@ -1,6 +1,15 @@
+import sys
+import numpy as np
+
 """
 Given a pop, return the best individual and the associated value.
 """
+
+def fitness_function(w, x, y, z):
+    """
+    Fitness_function of four variables with a maximum at (w=-.25, x=3, y=-1, z=2)
+    """
+    return -2 * (w ** 2) + np.sqrt(abs(w)) - (x ** 2) + (6 * x) - (y ** 2) - (2 * y) - (z ** 2) + (4 * z)
 
 def simple_fitness_function(x, y):
     """
