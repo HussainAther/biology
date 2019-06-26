@@ -1,10 +1,13 @@
 import numpy as np
 
 """
-We use a feed-backward Hidden Markov Model in predicting probabilities for how proteins fold.
+We use a feed-backward Hidden Markov Model (HMM) in predicting probabilities for how proteins fold.
 """
 
 def forwardBackward(obs, pStart, pTrans, pEmit):
+    """
+    Move forward or backward in the Hidden Markov Model.
+    """
     n = len(obs)
     nStates = len(pStart)
     I = identity(nStates)
