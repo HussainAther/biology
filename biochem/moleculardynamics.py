@@ -140,7 +140,6 @@ def timevolution():
             xc = 2*x[i] - 4
             yc = 2*y[i] - 4
             atoms[i].pos=(xc, yc)
-            
         PE = 0
         t2 =1
         PE = Forces(t2, w, PE, 1)
