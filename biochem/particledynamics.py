@@ -16,6 +16,10 @@ chemBonds = {"H1": ["01",], "01" : ["H1", "C1"], "C1" : ["01", "C2", "C6"],
 }
 
 def chemParticleDynamics(bondDict, numSteps=5000, bondLen=1.0, timeStep=0.01):
+    """
+    Iterate through steps of the atoms in the molecule interacting
+    with one another.
+    """
     atoms = list(bond.keys())
     numAtoms = len(atoms)
     atomCoords = uniform(-10.0, 10.0, (numAtoms, 3))
