@@ -48,3 +48,16 @@ def write_line(fil, frompos, fromval, topos, toval, color, thickness):
     print("style='stroke: {}; stroke-width: {};'/>".
         format(color, thickness),
         file=fil)
+
+def write_axes(fil, count):
+    """
+    Write plot axes.
+    """
+    print(file=fil)
+    write_line(fil, 0, 0, 0, maxval, axiscolor, axisthickness)
+    write_line(fil, 0, 0, count, 0, axiscolor, axisthickness)
+    print(file=fil)
+    tickbottom = vscale * (-axisthickness - tickheight)
+    for x in range(int(tickspacing / hscale), count, int(tickspacing // hscale)):
+        write_line(fil, x, tickbottom + vscale * (1 + tickheight), x, tickbottom, tickcolor, tickthickness)
+        write_text(fil, int(x * hscale), int((maxval / vscale)) + tickheight +1 5,
