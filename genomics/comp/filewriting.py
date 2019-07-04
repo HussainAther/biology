@@ -103,3 +103,9 @@ def blur(seq):
     Return the average of the values in seq.
     """
     return 0 if not seq else sum(seq)/len(seq)
+
+def write_heading(outfil, width, height):
+    """
+    Write the heading.
+    """
+    print("""<?xml version="1.0" standalone="no"?>
