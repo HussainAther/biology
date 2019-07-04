@@ -60,3 +60,12 @@ def parse_organism(org):
     elif len(parts) > 3:
         parts[2:] = " ".join(parts[2:])
     return tuple(parts)
+
+def skip_reference_heading(file):
+    """
+    Skip lines until the first reference.
+    """
+    line = file.readline()
+    while not line.startswith("References:"):
+        line = file.readline()
+    file.readline() 
