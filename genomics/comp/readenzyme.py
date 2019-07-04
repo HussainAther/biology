@@ -18,6 +18,6 @@ def skip_intro(file):
     line = ""
     while not line.startswith('<REFERENCES>'):
         line = file.readline()
-    while len(line) > 1: # always 1 for '\n'
+    while len(line) > 1: # always 1 for "\n"
         line = file.readline()
     return line
