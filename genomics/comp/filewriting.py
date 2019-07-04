@@ -134,3 +134,9 @@ def write_heading(outfil, width, height):
      </style>
      </defs>
     """, file = outfil, end='\n')
+
+def write_closing(outfil):
+    """
+    Close.
+    """
+    print('\n</svg>', file = outfil)
