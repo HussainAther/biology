@@ -49,3 +49,14 @@ def next_enzyme(file):
         fields[7] = [int(num) for num in fields[7].split(',')]
         file.readline() # skip blank line
         return fields
+
+def parse_organism(org):
+    """
+    Parse the organism details.
+    """
+    parts = org.split(" ")
+    if len(parts) == 2:
+        parts.append(None)
+    elif len(parts) > 3:
+        parts[2:] = " ".join(parts[2:])
+    return tuple(parts)
