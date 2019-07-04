@@ -79,3 +79,18 @@ def next_reference(file):
         return (None, None)
     else:
         return (int(line[:4]), line[7:-1])
+
+def get_references(file):
+   """
+    Return a dictionary of (refnum, reftext) items from the
+    references section of file.
+    """
+    # using a dictionary here because there are many references
+    # and an enzyme may reference several of them
+    refs = {}
+    skip_reference_heading(file)
+    refnum, ref = next_reference(file)
+    while refnum:
+        refs[refnum] = ref
+        refnum, ref = next_reference(file)
+    return refs
