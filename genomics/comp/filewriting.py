@@ -18,3 +18,10 @@ topmargin = 20
 yzero = 100
 hscale = 5/2 
 vscale = 14
+
+def read_data(infilname):
+    """
+    Read input file.
+    """
+    with open(infilname) as infil:
+        return [eval(line) for line in infil.readlines()]
