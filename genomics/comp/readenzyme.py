@@ -32,3 +32,6 @@ def get_enzymes(src):
         enzymes[enzyme[0]] = enzyme # dict key is enzyme's name
         enzyme = next_enzyme(src)
     return enzymes
+
+def read_field(file):
+    return file.readline()[3:-1]
