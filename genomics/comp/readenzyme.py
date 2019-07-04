@@ -21,3 +21,14 @@ def skip_intro(file):
     while len(line) > 1: # always 1 for "\n"
         line = file.readline()
     return line
+
+def get_enzymes(src):
+    """
+    Get the enzymes.
+    """
+    enzymes = {}
+    enzyme = next_enzyme(src)
+    while enzyme:
+        enzymes[enzyme[0]] = enzyme # dict key is enzyme's name
+        enzyme = next_enzyme(src)
+    return enzymes
