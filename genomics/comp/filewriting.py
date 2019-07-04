@@ -90,3 +90,10 @@ def write_curve(outfil, vals, color):
             print(20*' ', file=outfil, end='')
         print_point(outfil, pos/span, blur(vals[pos:pos+span]))
     print(" ' />", file=outfil) 
+
+def write_curves(outfil, data,):
+    """
+    Curves.
+    """
+    for d, clr in zip(data, colors):
+        write_curve(outfil, d, clr)
