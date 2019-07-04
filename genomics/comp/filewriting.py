@@ -25,3 +25,11 @@ def read_data(infilname):
     """
     with open(infilname) as infil:
         return [eval(line) for line in infil.readlines()]
+
+def write_text(fil, x, y, txt, cls):
+    """
+    Write text to file.
+    """
+    print(" <text class='{}' x='{}' y='{}'>{}</text>".
+        format(cls, x+leftmargin, y+topmargin, txt),
+        file=fil)
