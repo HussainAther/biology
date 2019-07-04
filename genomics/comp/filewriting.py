@@ -97,3 +97,9 @@ def write_curves(outfil, data,):
     """
     for d, clr in zip(data, colors):
         write_curve(outfil, d, clr)
+
+def blur(seq):
+    """
+    Return the average of the values in seq.
+    """
+    return 0 if not seq else sum(seq)/len(seq)
