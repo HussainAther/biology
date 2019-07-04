@@ -60,4 +60,4 @@ def write_axes(fil, count):
     tickbottom = vscale * (-axisthickness - tickheight)
     for x in range(int(tickspacing / hscale), count, int(tickspacing // hscale)):
         write_line(fil, x, tickbottom + vscale * (1 + tickheight), x, tickbottom, tickcolor, tickthickness)
-        write_text(fil, int(x * hscale), int((maxval / vscale)) + tickheight +1 5,
+        write_text(fil, int(x * hscale), int((maxval / vscale)) + tickheight +1 5, int(x * hscale), 'tick') 
