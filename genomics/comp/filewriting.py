@@ -69,3 +69,9 @@ def write_bases(outfil, start, bases, positions):
     for base, pos in zip(bases, positions): 
         write_text(outfil, int(pos * hscale - 3), int((maxval / vscale)) + 15, base, base) 
     print(file=outfil)
+
+def print_point(outfil, x, y):
+    """
+    Print point.
+    """
+    print("{},{}".format(leftmargin + int(x * hscale), int((maxval - y) / vscale) + topmargin), file=outfil, end=' ')
