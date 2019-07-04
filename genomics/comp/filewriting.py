@@ -33,3 +33,18 @@ def write_text(fil, x, y, txt, cls):
     print(" <text class='{}' x='{}' y='{}'>{}</text>".
         format(cls, x+leftmargin, y+topmargin, txt),
         file=fil)
+
+def write_line(fil, frompos, fromval, topos, toval, color, thickness):
+    """
+    Write line as we want it.
+    """
+    print(" <line x1='{}' y1='{}' x2='{}' y2='{}'".
+        format(leftmargin + int(frompos * hscale),
+        int(((maxval - fromval) / vscale)) + topmargin,
+        leftmargin + int(topos * hscale),
+        int(((maxval - toval) / vscale)) + topmargin),
+        end=' ',
+        file=fil),
+    print("style='stroke: {}; stroke-width: {};'/>".
+        format(color, thickness),
+        file=fil)
