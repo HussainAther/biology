@@ -35,3 +35,17 @@ def get_enzymes(src):
 
 def read_field(file):
     return file.readline()[3:-1]
+
+def next_enzyme(file):
+    """
+    Read the data for the next enzyme, returning a list of the
+    form: [enzyme_name, prototype, source, recognition_tuple,
+    (genus, species, subspecies), references_tuple].
+    """
+    name = read_field(file)
+    if name: # otherwise last enzyme read
+        fields = [name] + read_other_fields(file)
+        fields[2] = parse_organism(fields[2])
+        fields[7] = [int(num) for num in fields[7].split(',')]
+        file.readline() # skip blank line
+        return fields
