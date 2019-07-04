@@ -69,3 +69,13 @@ def skip_reference_heading(file):
     while not line.startswith("References:"):
         line = file.readline()
     file.readline() 
+
+def next_reference(file):
+    """
+    Return tuple (refnum, reftext) or, if no more, (None, None).
+    """
+    line = file.readline()
+    if len(line) < 2: # end of file or blank line
+        return (None, None)
+    else:
+        return (int(line[:4]), line[7:-1])
