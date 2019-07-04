@@ -118,7 +118,7 @@ def write_heading(outfil, width, height):
      <defs>
      <style type='text/css'><![CDATA[
      text {
-     font-family: Futura, 'Andale Mono', Verdana, sans-serif;
+     font-family: Futura, "Andale Mono", Verdana, sans-serif;
      fill:black;
      font-weight: normal;
      font-size: 8pt;
@@ -133,10 +133,28 @@ def write_heading(outfil, width, height):
      ]]>
      </style>
      </defs>
-    """, file = outfil, end='\n')
+    """, file = outfil, end="\n")
 
 def write_closing(outfil):
     """
     Close.
     """
-    print('\n</svg>', file = outfil)
+    print("\n</svg>', file = outfi")
+
+def write_svg_file(infilname, outfilname):
+    """
+    Do it.
+    """
+    data = read_data(infilname)
+    start = data[0]
+    bases = data[1]
+    positions = data[2]
+    values = data[3:]
+    with open(outfilname, "w") as outfil:
+        write_heading(outfil, len(values[0]) // span, maxval // vscale)
+        write_axes(outfil, len(values[0]) // span)
+        write_bases(outfil, start, bases, positions)
+        write_curves(outfil, values)
+        write_closing(outfil)
+ 
+write_svg_file("seqdata", "abi-trace.xml")
