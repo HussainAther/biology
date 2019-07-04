@@ -75,3 +75,18 @@ def print_point(outfil, x, y):
     Print point.
     """
     print("{},{}".format(leftmargin + int(x * hscale), int((maxval - y) / vscale) + topmargin), file=outfil, end=' ')
+
+def write_curve(outfil, vals, color):
+    print("""
+    <polyline style='fill: none; stroke: {}; stroke-width: 1;'
+    points='""".
+    format(color),
+    file=outfil,
+    end=''),
+    # span is a file-level parameter that specifies the number of points to average to compute
+    # a value rather than having a value for every point on the x axis; blur does the averaging
+    for pos in range(0, len(vals)-1, span):
+        if not pos % 6: # 5-digit x's at the end
+            print(20*' ', file=outfil, end='')
+        print_point(outfil, pos/span, blur(vals[pos:pos+span]))
+    print(" ' />", file=outfil) 
