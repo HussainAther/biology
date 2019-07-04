@@ -109,3 +109,28 @@ def write_heading(outfil, width, height):
     Write the heading.
     """
     print("""<?xml version="1.0" standalone="no"?>
+    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+    "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+    <svg xmlns='http://www.w3.org/2000/svg' version='1.1'
+     width='{0}' height='{1}'
+    >""".format(width+(2*leftmargin), height+yzero+20),
+    """
+     <defs>
+     <style type='text/css'><![CDATA[
+     text {
+     font-family: Futura, 'Andale Mono', Verdana, sans-serif;
+     fill:black;
+     font-weight: normal;
+     font-size: 8pt;
+     font-style: normal;
+     text-rendering:optimizeLegibility;
+     }
+     text.tick { }
+     text.T { fill: red; }
+     text.C { fill: blue; }
+     text.A { fill: green; }
+     text.G { fill: black; }
+     ]]>
+     </style>
+     </defs>
+    """, file = outfil, end='\n')
