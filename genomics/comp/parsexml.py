@@ -38,3 +38,17 @@ class GenomeBinomialParser:
                  self.genus = text.strip()
              elif self.current_tag == 'BinomialOrgName_species':
                  self.species = text.strip()
+
+    def find_binomial(self, filename):
+        """
+        Return (genus, species) as found in the XML genome file named filename.
+        """
+        # read only ChunkSize characters at a time in case we find it relatively early
+        # and to not take up an enormous amount of memory with file contents
+        with open(filename) as file:
+            try:
+                while True:
+                    self.parser.Parse(file.read(self.ChunkSize))
+            except StopIteration:
+                pass
+        return self.genus, self.species
