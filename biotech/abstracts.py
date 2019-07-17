@@ -1,6 +1,11 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
 from Bio import Entrez
 from Bio import Medline
 from tqdm import tqdm
+from collections import Counter
 
 """
 Biopython work for fetching abstracts.
