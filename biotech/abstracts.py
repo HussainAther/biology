@@ -176,3 +176,9 @@ sns.barplot(x="Value", y="Name", data=top_df, hue="Parameter", palette="Blues")
 plt.title("Top 10 Authors, normalized parameters")
 plt.show()
 
+paths = list(
+    nx.all_shortest_paths(G, source="Ha, Taekjip", target="Bustamante, Carlos")
+)
+
+for path in paths:
+    print(path)
