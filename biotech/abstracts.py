@@ -58,3 +58,20 @@ authors_flat = [
     for authors in list(publication_data["FAU"].dropna())
     for author in authors
 ]
+
+top10authors = pd.DataFrame.from_records(
+    Counter(authors_flat).most_common(10), columns=["Name", "Count"]
+)
+sns.barplot(x="Count", y="Name", data=top10authors, palette="RdBu_r")
+plt.title("Top 10 Authors")
+
+# Publications over Time
+plt.subplot(2, 2, 2)
+yearly = pd.DataFrame(publication_data["Year"].value_counts().reset_index())
+yearly.columns = ["Year", "Count"]
+sns.lineplot(x="Year", y="Count", data=yearly)
+plt.title("Publications over Time")
+plt.xlim([1986, 2020])
+
+plt.subplot(2, 2, 3)
+
