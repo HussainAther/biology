@@ -18,3 +18,20 @@ print(
     )
 )
 
+# Fetch all ids
+MAX_COUNT = result["Count"]
+result = Entrez.read(
+    Entrez.esearch(db="pubmed", retmax=result["Count"], term=keyword)
+)
+
+ids = result["IdList"]
+
+batch_size = 100
+batches = [ids[x: x + 100] for x in range(0, len(ids), batch_size)]
+
+record_list = []
+for batch in tqdm(batches):
+    h = Entrez.efetch(db="pubmed", id=batch, rettype="medline", retmode="text")
+    records = Medline.parse(h)
+    record_list.extend(list(records))
+print("Complete.")
