@@ -106,3 +106,19 @@ plt.title("Top 10 Associated Keywords")
 plt.subplots_adjust(top=1, bottom=0, left=0, right=1, hspace=0.3, wspace=0.3)
 plt.show()
 
+# Extract author connections
+authors = publication_data["FAU"].dropna()
+author_connections = list(
+    map(lambda x: list(combinations(x[::-1], 2)), authors)
+)
+flat_connections = [item for sublist in author_connections for item in sublist]
+
+# Create a dataframe with the connections
+df = pd.DataFrame(flat_connections, columns=["From", "To"])
+df_graph = df.groupby(["From", "To"]).size().reset_index()
+df_graph.columns = ["From", "To", "Count"]
+
+
+G = nx.from_pandas_edgelist(
+    df_graph, source="From", target="To", edge_attr="Count"
+)
