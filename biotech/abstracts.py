@@ -75,3 +75,31 @@ plt.xlim([1986, 2020])
 
 plt.subplot(2, 2, 3)
 
+# TOP 10 Journals
+top10journals = pd.DataFrame.from_records(
+    Counter(publication_data["TA"]).most_common(10),
+    columns=["Journal", "Count"],
+)
+
+sns.barplot(x="Count", y="Journal", data=top10journals, palette="RdBu_r")
+plt.title("Top 10 Journals")
+
+# Top associated keywords
+plt.subplot(2, 2, 4)
+
+flat_kw = [
+    _.lower()
+    for kws in list(publication_data["OT"].dropna())
+    for kw in kws
+    for _ in kw.split(" ")
+]
+
+top10kw = pd.DataFrame.from_records(
+    Counter(flat_kw).most_common(10), columns=["Keyword", "Count"]
+)
+
+sns.barplot(x="Count", y="Keyword", data=top10kw, palette="RdBu_r")
+plt.title("Top 10 Associated Keywords")
+plt.subplots_adjust(top=1, bottom=0, left=0, right=1, hspace=0.3, wspace=0.3)
+plt.show()
+
