@@ -113,3 +113,20 @@ def gillespie_ssa(params, propensity_func, update, population_0,
         # Increment index
         i_time = i
     return pop_out
+
+# Specify parameters for calculation.
+params = np.array([10, 10, 0.4])
+time_points = np.linspace(0, 50, 101)
+population_0 = np.array([0, 0])
+n_simulations = 100
+
+# Seed random number generator for reproducibility.
+np.random.seed(42)
+
+# Initialize output array.
+pops = np.empty((n_simulations, len(time_points), 2))
+
+# Run the calculations.
+for i in range(n_simulations):
+    pops[i,:,:] = gillespie_ssa(params, simple_propensity, simple_update,
+                                population_0, time_points)
