@@ -158,3 +158,15 @@ ax[1].set_xlabel("dimensionless time")
 ax[0].set_ylabel("number of mRNAs")
 ax[1].set_ylabel("number of proteins")
 plt.tight_layout()
+
+print("mRNA mean copy number =", pops[:,-50:,0].mean())
+print("protein mean copy number =", pops[:,-50:,1].mean())
+print("mRNA variance =", pops[:,-50:,0].std()**2)
+print("protein variance =", pops[:,-50:,1].std()**2)
+print("mRNA noise =", pops[:,-50:,0].std() / pops[:,-50:,0].mean())
+print("protein noise =", pops[:,-50:,1].std() / pops[:,-50:,1].mean())
+print("protein Fano factor =", 
+      pops[:,-50:,1].std()**2 / pops[:,-50:,1].mean())
+print("mRNA Fano factor =", pops[:,-50:,0].std()**2 / pops[:,-50:,0].mean())
+print("protein Fano factor =", 
+      pops[:,-50:,1].std()**2 / pops[:,-50:,1].mean())
