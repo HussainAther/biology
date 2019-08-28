@@ -69,7 +69,7 @@ print("\nResult from hand-coded method:")
 
 def gillespie_draw(params, propensity_func, population):
     """
-    Draws a reaction and the time it took to do that reaction.
+    Draw a reaction and the time it took to do that reaction.
     """
     # Compute propensities
     props = propensity_func(params, population)
@@ -86,5 +86,6 @@ def gillespie_draw(params, propensity_func, population):
 def gillespie_ssa(params, propensity_func, update, population_0, 
                   time_points):
     """
-    Stochastic simulation algorithm.
+    Stochastic simulation algorithm. Use the Gillespie stochastic simulation algorithm to sample
+    from proability distribution of particle counts over time.
     """
