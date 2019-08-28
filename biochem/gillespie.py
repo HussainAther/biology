@@ -8,3 +8,5 @@ import seaborn as sns
 """
 Gillespie algorithm simulation on a simple production of a protein.
 """
+
+%load_ext line_profiler
