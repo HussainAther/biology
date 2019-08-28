@@ -130,3 +130,31 @@ pops = np.empty((n_simulations, len(time_points), 2))
 for i in range(n_simulations):
     pops[i,:,:] = gillespie_ssa(params, simple_propensity, simple_update,
                                 population_0, time_points)
+
+# Set up subplots
+fig, ax = plt.subplots(1, 2, figsize=(14, 5))
+
+# Plot mRNA trajectories
+for i in range(n_simulations):
+    ax[0].plot(time_points, pops[i,:,0], "-", lw=0.3, alpha=0.2, 
+               color=sns.color_palette()[0])
+
+# Plot mRNA mean
+ax[0].plot(time_points, pops[:,:,0].mean(axis=0), "-", lw=6, 
+           color=sns.color_palette()[2])
+
+# Plot protein trajectories
+for i in range(n_simulations):
+    ax[1].plot(time_points, pops[i,:,1], "k-", lw=0.3, alpha=0.2,
+               color=sns.color_palette()[0])
+
+# Plot protein mean
+ax[1].plot(time_points, pops[:,:,1].mean(axis=0), "r-", lw=6, 
+           color=sns.color_palette()[2])
+
+# Label axes
+ax[0].set_xlabel("dimensionless time")
+ax[1].set_xlabel("dimensionless time")
+ax[0].set_ylabel("number of mRNAs")
+ax[1].set_ylabel("number of proteins")
+plt.tight_layout()
