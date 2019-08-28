@@ -66,3 +66,19 @@ print("Result from scipy.stats:")
 
 print("\nResult from hand-coded method:")
 %timeit sample_discrete(probs)
+
+def gillespie_draw(params, propensity_func, population):
+    """
+    Draws a reaction and the time it took to do that reaction.
+    """
+    # Compute propensities
+    props = propensity_func(params, population)
+    # Sum of propensities
+    props_sum = props.sum()
+    # Compute time
+    time = np.random.exponential(1.0 / props_sum)
+    # Compute discrete probabilities of each reaction
+    rxn_probs = props / props_sum
+    # Draw reaction from this distribution
+    rxn = sample_discrete(rxn_probs)
+    return rxn, time
