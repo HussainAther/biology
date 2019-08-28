@@ -37,3 +37,9 @@ def simple_propensity(params, population):
                      m, 
                      beta_p * m, 
                      gamma * p])
+
+def sample_discrete_scipy(probs):
+    """
+    Randomly sample an index with probability given by probs.
+    """
+    return st.rv_discrete(values=(range(len(probs)), probs)).rvs()
