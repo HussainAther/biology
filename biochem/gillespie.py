@@ -89,3 +89,27 @@ def gillespie_ssa(params, propensity_func, update, population_0,
     Stochastic simulation algorithm. Use the Gillespie stochastic simulation algorithm to sample
     from proability distribution of particle counts over time.
     """
+    # Initialize output
+    pop_out = np.empty((len(time_points), update.shape[1]), dtype=np.int)
+    # Initialize and perform simulation
+    i_time = 1
+    i = 0
+    t = time_points[0]
+    population = population_0.copy()
+    pop_out[0,:] = population
+    while i < len(time_points):
+        while t < time_points[i_time]:
+            # draw the event and time step
+            event, dt = gillespie_draw(params, propensity_func, population)
+            # Update the population
+            population_previous = population.copy()
+            population += update[event,:]
+            # Increment time
+            t += dt
+        # Update the index
+        i = np.searchsorted(time_points > t, True)
+        # Update the population
+        pop_out[i_time:min(i,len(time_points))] = population_previous
+        # Increment index
+        i_time = i
+    return pop_out
