@@ -23,3 +23,17 @@ simple_update = np.array([[1, 0],
                           [-1, 0],
                           [0, 1],
                           [0, -1]], dtype=np.int)
+
+def simple_propensity(params, population):
+    """
+    Return an array of propensities given a set of parameters
+    and an array of populations.
+    """
+    # Unpack parameters
+    beta_m, beta_p, gamma = params
+    # Unpack population
+    m, p = population
+    return np.array([beta_m, 
+                     m, 
+                     beta_p * m, 
+                     gamma * p])
