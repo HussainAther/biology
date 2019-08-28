@@ -170,3 +170,22 @@ print("protein Fano factor =",
 print("mRNA Fano factor =", pops[:,-50:,0].std()**2 / pops[:,-50:,0].mean())
 print("protein Fano factor =", 
       pops[:,-50:,1].std()**2 / pops[:,-50:,1].mean())
+
+# Set up subplots
+fig, ax = plt.subplots(1, 2, figsize=(14, 5))
+
+# Plot histogram of mRNA profile with Poisson overlayed
+mbins = np.arange(pops[:,-50:,0].max()+1) - 0.5
+m = mbins[:-1] + 0.5
+ax[0].hist(pops[:,-50:,0].flatten(), mbins, normed=True)
+ax[0].plot(m, st.poisson.pmf(m, params[0]), ".-", markersize=12, 
+           color=sns.color_palette()[2])
+ax[0].set_xlabel("mRNA copy number")
+ax[0].set_ylabel("P(m)")
+ax[0].margins(0.02)
+
+# Plot histogram of protein profile
+ax[1].hist(pops[:,-50:,1].flatten(), bins=30, normed=True)
+ax[1].set_xlabel("protein copy number")
+ax[1].set_ylabel("P(p)")
+ax[1].margins(0.02)
