@@ -82,3 +82,9 @@ def gillespie_draw(params, propensity_func, population):
     # Draw reaction from this distribution
     rxn = sample_discrete(rxn_probs)
     return rxn, time
+
+def gillespie_ssa(params, propensity_func, update, population_0, 
+                  time_points):
+    """
+    Stochastic simulation algorithm.
+    """
