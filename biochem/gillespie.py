@@ -17,3 +17,9 @@ rc = {"lines.linewidth": 2,
       "axes.facecolor": "DFDFE5"}
 sns.set_context("notebook", rc=rc)
 sns.set_style("darkgrid", rc=rc)
+
+# Each step
+simple_update = np.array([[1, 0],
+                          [-1, 0],
+                          [0, 1],
+                          [0, -1]], dtype=np.int)
