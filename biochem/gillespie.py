@@ -189,3 +189,6 @@ ax[1].hist(pops[:,-50:,1].flatten(), bins=30, normed=True)
 ax[1].set_xlabel("protein copy number")
 ax[1].set_ylabel("P(p)")
 ax[1].margins(0.02)
+
+sns.jointplot(pops[:,-50:,0].flatten(), pops[:,-50:,1].flatten(), kind="scatter",
+              stat_func=None, alpha=0.05).set_axis_labels("m", "p")
