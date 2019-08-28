@@ -43,3 +43,17 @@ def sample_discrete_scipy(probs):
     Randomly sample an index with probability given by probs.
     """
     return st.rv_discrete(values=(range(len(probs)), probs)).rvs()
+
+def sample_discrete(probs):
+    """
+    Randomly sample an index with probability given by probs.
+    """
+    # Generate random number
+    q = np.random.rand()
+    # Find index
+    i = 0
+    p_sum = 0.0
+    while p_sum < q:
+        p_sum += probs[i]
+        i += 1
+    return i - 1
