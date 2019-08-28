@@ -57,3 +57,12 @@ def sample_discrete(probs):
         p_sum += probs[i]
         i += 1
     return i - 1
+
+# Make dummy probs
+probs = np.array([0.1, 0.3, 0.4, 0.05, 0.15])
+
+print("Result from scipy.stats:")
+%timeit sample_discrete_scipy(probs)
+
+print("\nResult from hand-coded method:")
+%timeit sample_discrete(probs)
