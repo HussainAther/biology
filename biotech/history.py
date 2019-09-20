@@ -16,3 +16,7 @@ for start in range(0,count,batch_size):
                                  retmax=batch_size,
                                  webenv=search_results["WebEnv"],
                                  query_key=search_results["QueryKey"])
+    data = fetch_handle.read()
+    fetch_handle.close()
+    out_handle.write(data)
+out_handle.close()
