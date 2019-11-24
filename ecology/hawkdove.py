@@ -11,7 +11,7 @@ starthawks = 100
 startpop = starthawks + startdoves
 
 rounds = 20
-startenergy = 100;
+startenergy = 100
 
 minfoodround = 20
 maxfoodround = 70
