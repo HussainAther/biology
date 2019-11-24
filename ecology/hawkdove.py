@@ -95,12 +95,8 @@ def main():
         # Plot
         graph_hawk_points.append(getAgentCountByType(hawk))
         graph_dove_points.append(getAgentCountByType(dove))
-
         current_round += 1
-
-
     main_toc = time.clock()
-
     print("=============================================================")
     print("Total dead agents      : %d" % death_count)
     print("Total breeding agents  : %d" % breed_count)
@@ -131,19 +127,15 @@ def getTimeFormatted(seconds):
     m, s = divmod(seconds, 60)
     return "%02d:%02d" % (m, s)    
 
-
 def getFood():
     return randint(minfoodround, maxfoodround)
-
 
 def getPercByType(agent_type):
     perc = float(getAgentCountByType(agent_type)) / float(len(agents))
     return "{percent:.2%}".format(percent=perc)
 
-
 def getAliveAgentsCount():
     return getAgentCountByStatus(statusactive) + getAgentCountByStatus(statusasleep)
-
 
 def getRandomAgents():
     nemesis = None
@@ -156,39 +148,31 @@ def getRandomAgents():
         n = active_agents[ randint(0, max_index) ]
         if n is not agent:
             nemesis = n
-
     return agent, nemesis
-
 
 def awakenAgents():
     for agent in agents:
         agent.status = statusactive
-
 
 def generateAgentsByType(agent_type):
     for agent in agents:
         if agent.agent_type == agent_type:
             yield agent
 
-
 def generateAgentsByStatus(status):
     for agent in agents:
         if agent.status == status:
             yield agent
 
-
 def getEnergyFromFood(food):
     return food # 1 to 1
-
 
 def getAgentCountByStatus(status):
     count = len( list(generateAgentsByStatus(status)) )
     return count
 
-
 def getAgentCountByType(agent_type):
     return len( list(generateAgentsByType(agent_type)) )
-
 
 def compete(agent, nemesis, food):
     """
@@ -253,7 +237,7 @@ def cull():
 main()
 
 try:
-    from pylab import *
+    from pylab import plot
 except ImportError:
     exit()
 else:
