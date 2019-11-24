@@ -112,3 +112,16 @@ def main():
 	print("=============================================================")
 
 
+def init():
+
+	for x in xrange(0,startdoves):
+		a = Agent()
+		a.agent_type = dove
+		agents.append(a)
+
+	for x2 in xrange(0,starthawks):
+		a2 = Agent()
+		a2.agent_type = hawk
+		agents.append(a2)
+
+
