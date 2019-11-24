@@ -36,7 +36,6 @@ graph_dove_points = []
 
 # Profiling
 
-
 class Agent:
     """  
     Characteristics of each hawk or dove.
@@ -45,8 +44,6 @@ class Agent:
     agent_type = None
     status = statusactive
     energy = startenergy
-
-
 
 def main():
     """
@@ -81,10 +78,7 @@ def main():
         round_hawk_babies, round_dove_babies = breed()
         death_count += (round_dead_hawks + round_dead_doves)
         breed_count += (round_hawk_babies + round_dove_babies)
-
-
         toc = time.clock()
-
         print("ROUND %d" % current_round)
         print("Food produced          : %d" % food)
         print("Population             : Hawks-> %d, Doves-> %d" % (getAgentCountByType(hawk), getAgentCountByType(dove)))
@@ -116,7 +110,6 @@ def main():
     print("Doves                  : %s" % getPercByType(dove))
     print("Processing time        : %s" % getTimeFormatted(main_toc - main_tic))
     print("=============================================================")
-
 
 def init():
 
@@ -240,18 +233,12 @@ def breed():
         if agent.energy > repenergy:
             baby_agent_a = getNewAgent(agent.agent_type, (agent.energy/2))
             baby_agent_b = getNewAgent(agent.agent_type, (agent.energy/2))
-
             agents.append(baby_agent_b)
             agents.append(baby_agent_a)
-
             agent.energy /= 2
-
             if agent.agent_type == dove: dove_babies += 2
             if agent.agent_type == hawk: hawk_babies += 2
-
-
     return hawk_babies, dove_babies
-
 
 def cull():
     """
