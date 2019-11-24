@@ -191,28 +191,26 @@ def getAgentCountByType(agent_type):
 
 
 def compete(agent, nemesis, food):
+    """
+    Determine what happens based on two agents competing for food
+    against one another.
+    """
     winner = choice([agent, nemesis])
     loser = agent if (winner is nemesis) else nemesis
-
     if agent.agent_type == hawk and nemesis.agent_type == hawk:
         # Random winner chosen, loser gets injured, winner gets food
         winner.energy += getEnergyFromFood(food)
         loser.energy  -= energylossfight
-
     if agent.agent_type == hawk and nemesis.agent_type == dove:
         agent.energy += getEnergyFromFood(food)
         nemesis.energy -= energybluffcost
-
     if agent.agent_type == dove and nemesis.agent_type == hawk:
         nemesis.energy += getEnergyFromFood(food)
         agent.energy -= energybluffcost
-
     if agent.agent_type == dove and nemesis.agent_type == dove:
         winner.energy += getEnergyFromFood(food)
         loser.energy  -= energybluffcost
-
     nemesis.status = agent.status = statusasleep
-
 
 def getNewAgent(agent_type, starting_energy=startenergy, status=statusasleep):
     agent = Agent()
@@ -220,7 +218,6 @@ def getNewAgent(agent_type, starting_energy=startenergy, status=statusasleep):
     agent.status = status
     agent.energy = starting_energy
     return agent
-
 
 def breed():
     """
