@@ -30,3 +30,16 @@ dove = "dove"
 
 agents = []
 
+# Graph stuff
+graph_hawk_points = []
+graph_dove_points = []
+
+# Profiling
+
+
+class Agent:
+ 	id = 0
+	agent_type = None
+	status = statusactive
+	energy = startenergy
+
