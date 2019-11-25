@@ -1,7 +1,7 @@
 import re
 
 """
-Chemical (chemistry) functions.
+Chemical (chemistry) functions and regex practice.
 """
  
 ATOMIC_MASS = {H:1.008, C:12.011, O:15.999, Na:22.98976928, S:32.06, Uue:315}
