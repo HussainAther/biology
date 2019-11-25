@@ -5,5 +5,10 @@ Global optimization of evolutionary game algorithm.
 """
 
 t = 1
+tmax = 100
 
-while t > tmax:
+Ia = 0
+Ip = 0
+
+while t < tmax:
+     
