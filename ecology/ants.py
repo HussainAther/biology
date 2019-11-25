@@ -1,6 +1,6 @@
 import numpy as np
-import wx
 import random
+import wx
 
 """
 Grooming an ant colony.
