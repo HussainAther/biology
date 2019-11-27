@@ -1,5 +1,10 @@
+import numpy as np
+
 """
-Dual-Population Genetic Algorithm (dgpa) for Adaptive Diversity Control
+Dual-Population Genetic Algorithm (dgpa) 
+Park, Taejin and and Kwang Ryel Ryu "A Dual-Population Genetic Algorithm
+for Adaptive Diversity Control" IEEE Transactions on Evolutionary Computation,
+Vol 14. No. 6, Dec 2010.
 """
 
 m = 10 # main population initial amount
@@ -24,17 +29,24 @@ def rosenbrock(X):
 def fm(M):
     """
     Use a fitness function to evaluate the main population.
+    The paper tested many functions. Here, we use the Rosenbrock
+    function to show the control.
     """
     return 1.00001*max(M) - rosenbrock(M) 
 
-def fr(R):
+def fr(R, M, sigma=.5):
     """
-    Same for the reserve population.
+    Same for the reserve population for sigma distance between the
+    two populations.
     """
-    frvalues = []
+    frvalues = [] # fitness values
+    Mavg = sum(M)/len(M) # average of the main population
     for i in range(R):
-        frvalues.append(
-    return 1 - abs(10-
+        # Calculate each fitness value with the sigma and Euclidean
+        # distance. The paper goes into more distances such as the normalized
+        # average binary distance.
+        frvalues.append(1 - abs(sigma - np.linalg.norm(M-i)))
+    return frvalues
 
 def dpga(tmax):
     """
@@ -43,4 +55,4 @@ def dpga(tmax):
     Loop until tmax.
     """
     for i in range(tmax):
-        GG  
+          
