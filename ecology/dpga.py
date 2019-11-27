@@ -62,6 +62,19 @@ def GenIO(X, x):
         c += 1
     return o
 
+def GenOO(M, R, x):
+    """
+    Generate crossbred offspring via crossover and mutation
+    for x individuals between the populations M and R.
+    """
+    c = 0 # count of how many individuals
+    o = [] # offspring
+    X = M + R # both populations together
+    while c < x: # Iterate until you have enough individuals from the population.
+        o.append(max(X))
+        c += 1
+    return o
+
 def dpga(M, R, m, n, tmax):
     """
     Maintain population diversity with genetic algorithms. Dual-population
@@ -71,5 +84,5 @@ def dpga(M, R, m, n, tmax):
     for i in range(tmax):
         IM = GenIO(M, m) # inbred offspring from M
         IR = GenIO(R, n) # inbred offspring from R
-         
+        C = GenOO(M, R, n-m) # crossbred offspring 
           
