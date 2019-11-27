@@ -1,4 +1,5 @@
 import numpy as np
+import random
 
 """
 Dual-Population Genetic Algorithm (dgpa) 
@@ -81,7 +82,10 @@ def ss(OM, m, fmo):
     and fitness values fmo, select the individuals who will survive. 
     """
     s = [] # ye shall live
-     
+    for j in OM:
+        if j*random.random > fmo:
+            s.append(j)
+    return s
 
 def dpga(M, R, m, n, tmax):
     """
