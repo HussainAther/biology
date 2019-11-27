@@ -48,11 +48,28 @@ def fr(R, M, sigma=.5):
         frvalues.append(1 - abs(sigma - np.linalg.norm(M-i)))
     return frvalues
 
-def dpga(tmax):
+def GenIO(X, x):
+    """
+    For some population X and number of individuals to generate x,
+    generate inbred offspring by selecting two offspring (both from
+    a single population) by fitness and generates new offspring
+    via crossover and mutation.
+    """
+    c = 0 # count of how many individuals
+    o = [] # offspring
+    while c < x: # Iterate until you have enough individuals from the population.
+        o.append(max(X))
+        c += 1
+    return o
+
+def dpga(M, R, m, n, tmax):
     """
     Maintain population diversity with genetic algorithms. Dual-population
     genetic algorithm does that using an extra population for more diversity.
     Loop until tmax.
     """
     for i in range(tmax):
+        IM = GenIO(M, m) # inbred offspring from M
+        IR = GenIO(R, n) # inbred offspring from R
+         
           
