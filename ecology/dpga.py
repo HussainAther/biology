@@ -75,6 +75,14 @@ def GenOO(M, R, x):
         c += 1
     return o
 
+def ss(OM, m, fmo):
+    """
+    For OM offspring from M, m number of individuals of M population,
+    and fitness values fmo, select the individuals who will survive. 
+    """
+    s = [] # ye shall live
+     
+
 def dpga(M, R, m, n, tmax):
     """
     Maintain population diversity with genetic algorithms. Dual-population
@@ -85,4 +93,9 @@ def dpga(M, R, m, n, tmax):
         IM = GenIO(M, m) # inbred offspring from M
         IR = GenIO(R, n) # inbred offspring from R
         C = GenOO(M, R, n-m) # crossbred offspring 
-          
+        OM = IM + C
+        OR = IR + C
+        fmo = fm(OM)
+        fro = fr(OR)
+        M = ss(OM, m, fmo) # survival selection
+        R = fro   
