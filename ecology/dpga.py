@@ -25,7 +25,16 @@ def fm(M):
     """
     Use a fitness function to evaluate the main population.
     """
-    1.00001*max(M) - rosenbrock(M) 
+    return 1.00001*max(M) - rosenbrock(M) 
+
+def fr(R):
+    """
+    Same for the reserve population.
+    """
+    frvalues = []
+    for i in range(R):
+        frvalues.append(
+    return 1 - abs(10-
 
 def dpga(tmax):
     """
@@ -34,5 +43,4 @@ def dpga(tmax):
     Loop until tmax.
     """
     for i in range(tmax):
-        
-     
+        GG  
