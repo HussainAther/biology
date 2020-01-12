@@ -82,3 +82,41 @@ index <- which(qvals<0.1)
 cat("Total genes with q-value < 0.1: ",length(index),"\n",
     "Number of selected genes on chrY: ", sum(chr[index]=="chrY",na.rm=TRUE),"\n",
     "Number of selected genes on chrX: ", sum(chr[index]=="chrX",na.rm=TRUE),sep="")
+
+# Perform surrogate variable analysis by fitting models with covariate of interest
+# and batches.
+
+# The algorithm iterates this procedure several times 
+# (controlled by `B` argument) and returns an estimate of the 
+# surrogate variables, which are analogous to the hidden factors 
+# of factor analysis.
+# To actually run SVA, we run the `sva` function. In this case, 
+# SVA picks the number of surrogate values or factors for us.
+
+library(sva)
+library(limma)
+mod <- model.matrix(~sex)
+cind <- order( as.Date(sampleInfo$date) )
+dates <- gsub("2005-","",sampleInfo$date)
+weights=rep(1,nrow(y))
+par(mar = c(4.1, 2.1, 3.5, 2.1), 
+    mgp = c(1.5, 0.5, 0))
+layout(matrix(c(1:6),nrow=2,byrow=TRUE),widths=c(5,1.5,5))
+for(b in 1:2){
+    image(1:ncol(mat),1:nrow(mat),t(mat[,cind]*weights[geneindex]),xaxt="n",yaxt="n",col=icolors,xlab="",ylab="")
+    axis(side=1,seq(along=dates),dates[cind],las=2)
+    abline(v=12.5)
+    
+    svafit <- sva(y,mod,B=b,n.sv=5)
+    weights = svafit$pprob.gam*(1-svafit$pprob.b)
+    
+    surrogate <- svd( y*weights)$v[,1]#Weighted SVD
+    
+    image(matrix(weights[geneindex],nrow=1),xaxt="n",yaxt="n",col=brewer.pal(9,"Blues"))
+    plot(surrogate[cind],bg=sex[cind]+1,pch=21,xlab="",xaxt="n",ylab="Surrogate variable",ylim=c(-.5,.5),cex=1.5)
+    axis(side=1,seq(along=dates),dates[cind],las=2)
+    abline(v=12.5)
+    text(1,0.5,"June")
+    text(13.5,0.5,"Oct")
+    legend("bottomright",c("0","1"),col=c(1,2),pch=16)
+}
