@@ -146,3 +146,16 @@ index <- which(qvals<0.1)
 cat("Total genes with q-value < 0.1: ",length(index),"\n",
     "Number of selected genes on chrY: ", sum(chr[index]=="chrY",na.rm=TRUE),"\n",
     "Number of selected genes on chrX: ", sum(chr[index]=="chrX",na.rm=TRUE),sep="")
+
+# Visualize.
+Batch<- lmfit$coef[geneindex,3:7]%*%t(svaX[,3:7])
+Signal<-lmfit$coef[geneindex,1:2]%*%t(svaX[,1:2])
+error <- geneExpression[geneindex,]-Signal-Batch
+##demean for plot
+Signal <-Signal-rowMeans(Signal)
+mat <- geneExpression[geneindex,]-rowMeans(geneExpression[geneindex,])
+mypar(1,4,mar = c(2.75, 4.5, 2.6, 1.1))
+image(t(mat),col=icolors,zlim=c(-5,5),xaxt="n",yaxt="n")
+image(t(Signal),col=icolors,zlim=c(-5,5),xaxt="n",yaxt="n")
+image(t(Batch),col=icolors,zlim=c(-5,5),xaxt="n",yaxt="n")
+image(t(error),col=icolors,zlim=c(-5,5),xaxt="n",yaxt="n")
