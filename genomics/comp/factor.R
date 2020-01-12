@@ -41,3 +41,11 @@ times <-sampleInfo$date
 mypar(1,1)
 o=order(times)
 plot(times[o],pch=21,bg=as.numeric(batch)[o],ylab="Date")
+
+# Plot the first principal component ordered by date.
+s <- svd(y)
+mypar(1,1)
+o<-order(times)
+cols <- as.numeric( batch)
+plot(s$v[o,1],pch=21,cex=1.25,bg=cols[o],ylab="First PC",xlab="Date order")
+legend("topleft",c("Month 1","Month 2"),col=1:2,pch=16,box.lwd=0)
