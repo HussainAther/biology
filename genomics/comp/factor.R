@@ -60,3 +60,8 @@ for(i in 1:12){
   days <- gsub("2005-","",times)  
   boxplot(split(s$v[,i],gsub("2005-","",days)))
 }
+
+# Remove the top six principal components and perform t-test.
+D <- s$d; D[1:4]<-0 #take out first 2
+cleandat <- sweep(s$u,2,D,"*")%*%t(s$v)
+res <-rowttests(cleandat,factor(sex))
