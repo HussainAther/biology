@@ -19,6 +19,7 @@ tt<-rowttests(geneExpression,batch)
 ind1 <- which(chr=="chrY") # real differences
 ind2 <- setdiff(c(order(tt$dm)[1:25],order(-tt$dm)[1:25]),ind1)
 
+# Get the gene expression information coded by color.
 set.seed(1)
 ind0 <- setdiff(sample(seq(along=tt$dm),50),c(ind2,ind1))
 geneindex<-c(ind2,ind0,ind1)
@@ -26,6 +27,7 @@ mat<-geneExpression[geneindex,]
 mat <- mat -rowMeans(mat)
 icolors <- colorRampPalette(rev(brewer.pal(11,"RdYlBu")))(100)
 
+# Prepare hte plot.
 mypar(1,2)
 image(t(mat),xaxt="n",yaxt="n",col=icolors)
 y <- geneExpression - rowMeans(geneExpression)
@@ -33,3 +35,9 @@ image(1:ncol(y),1:ncol(y),cor(y),col=icolors,zlim=c(-1,1),
        xaxt="n",xlab="",yaxt="n",ylab="")
 axis(2,1:ncol(y),sex,las=2)
 axis(1,1:ncol(y),sex,las=2)
+
+# Plot date for each sample to show batches.
+times <-sampleInfo$date 
+mypar(1,1)
+o=order(times)
+plot(times[o],pch=21,bg=as.numeric(batch)[o],ylab="Date")
