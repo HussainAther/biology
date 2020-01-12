@@ -120,3 +120,29 @@ for(b in 1:2){
     text(13.5,0.5,"Oct")
     legend("bottomright",c("0","1"),col=c(1,2),pch=16)
 }
+
+# Run it.
+library(limma)
+svafit <- sva(geneExpression,mod)
+svaX<-model.matrix(~sex+svafit$sv)
+lmfit <- lmFit(geneExpression,svaX)
+tt<- lmfit$coef[,2]*sqrt(lmfit$df.residual)/(2*lmfit$sigma)
+
+res <- data.frame(dm= -lmfit$coef[,2],
+                  p.value=2*(1-pt(abs(tt),lmfit$df.residual[1]) ) )
+mypar(1,2)
+hist(res$p.value[which(!chr%in%c("chrX","chrY") )],main="",ylim=c(0,1300))
+
+plot(res$dm,-log10(res$p.value))
+points(res$dm[which(chr=="chrX")],-log10(res$p.value[which(chr=="chrX")]),col=1,pch=16)
+points(res$dm[which(chr=="chrY")],-log10(res$p.value[which(chr=="chrY")]),col=2,pch=16,
+       xlab="Effect size",ylab="-log10(p-value)")
+legend("bottomright",c("chrX","chrY"),col=1:2,pch=16)
+
+
+qvals <- qvalue(res$p.value)$qvalue
+index <- which(qvals<0.1)
+
+cat("Total genes with q-value < 0.1: ",length(index),"\n",
+    "Number of selected genes on chrY: ", sum(chr[index]=="chrY",na.rm=TRUE),"\n",
+    "Number of selected genes on chrX: ", sum(chr[index]=="chrX",na.rm=TRUE),sep="")
