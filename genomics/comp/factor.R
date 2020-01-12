@@ -1,8 +1,9 @@
+library(genefilter)
+library(GSE5859Subset)
 library(knitr)
 library(rafalib)
 library(RColorBrewer)
-library(genefilter)
-library(GSE5859Subset)
+library(qvalue)
 opts_chunk$set(fig.path=paste0("figure/", sub("(.*).Rmd","\\1",basename(knitr:::knit_concord$get('infile'))), "-"))
 
 # Model batch effects with factor analysis
@@ -65,3 +66,19 @@ for(i in 1:12){
 D <- s$d; D[1:4]<-0 #take out first 2
 cleandat <- sweep(s$u,2,D,"*")%*%t(s$v)
 res <-rowttests(cleandat,factor(sex))
+
+mypar(1,2)
+hist(res$p.value[which(!chr%in%c("chrX","chrY") )],main="",ylim=c(0,1300))
+
+plot(res$dm,-log10(res$p.value))
+points(res$dm[which(chr=="chrX")],-log10(res$p.value[which(chr=="chrX")]),col=1,pch=16)
+points(res$dm[which(chr=="chrY")],-log10(res$p.value[which(chr=="chrY")]),col=2,pch=16,
+       xlab="Effect size",ylab="-log10(p-value)")
+legend("bottomright",c("chrX","chrY"),col=1:2,pch=16)
+
+qvals <- qvalue(res$p.value)$qvalue
+index <- which(qvals<0.1)
+
+cat("Total genes with q-value < 0.1: ",length(index),"\n",
+    "Number of selected genes on chrY: ", sum(chr[index]=="chrY",na.rm=TRUE),"\n",
+    "Number of selected genes on chrX: ", sum(chr[index]=="chrX",na.rm=TRUE),sep="")
