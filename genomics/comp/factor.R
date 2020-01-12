@@ -49,3 +49,14 @@ o<-order(times)
 cols <- as.numeric( batch)
 plot(s$v[o,1],pch=21,cex=1.25,bg=cols[o],ylab="First PC",xlab="Date order")
 legend("topleft",c("Month 1","Month 2"),col=1:2,pch=16,box.lwd=0)
+
+# Day is highly correlated with the first principal component.
+mypar(1,1)
+plot(s$d^2/sum(s$d^2),ylab="% variance explained",xlab="Principal component")
+
+# And same for the next ones...
+mypar(3,4)
+for(i in 1:12){
+  days <- gsub("2005-","",times)  
+  boxplot(split(s$v[,i],gsub("2005-","",days)))
+}
