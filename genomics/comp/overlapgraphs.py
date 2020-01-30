@@ -6,13 +6,13 @@ circular genome from a given input list of DNA transcripts.
 """
 
 class suffixarray:
-    def __init__( self, text ):
+    def __init__(self, text):
         """
         Initialize a suffix array of the text.
         """
-        self.seq = self.buildsuffix(text)
+       self.seq = self.buildsuffix(text)
 
-    def cc( self, S, seq ):
+    def cc(self, S, seq ):
         """
         Create the class of characters.
         """
@@ -26,7 +26,7 @@ class suffixarray:
                 cclass[seq[i]] = cclass[seq[i - 1]]
         return cclass
 
-    def sortit( self, S ):
+    def sortit(self, S):
         """
         Determine the sorted string. 
         """
@@ -36,32 +36,36 @@ class suffixarray:
         for i in range(l):
             count[S[i]] = count.get(S[i], 0) + 1
         charList = sorted(count.keys())
-        prevChar = charList[0]
+        pChar = charList[0]
         for char in charList[1:]:
-            count[char] += count[prevChar]
-            prevChar = char
+            count[char] += count[pChar]
+            pChar = char
         for i in range(l - 1, -1, -1):
             c = S[i]
             count[c] = count[c] - 1
             seq[count[c]] = i
         return seq
 
-    def dsort( self, S, L, seq, _class ):
-        los = len(S)
+    def dsort(self, S, L, seq, classa):
+        """
+        Sorting algorithm to get the right order works on 
+        string S, sequence seq, and class classa. 
+        """
+        los = len(S) # length of string
         count = [0] * los
         orderv2 = [0] * los
         for i in range(los):
-            count[_class[i]] += 1
+            count[classa[i]] += 1
         for j in range(1, los):
             count[j] += count[j - 1]
         for i in range(los - 1, -1, -1):
             start = (seq[i] - L + los) % los
-            cl = _class[start]
+            cl = classa[start]
             count[cl] -= 1
             orderv2[count[cl]] = start
         return orderv2
 
-    def update( self, orderv2, _class, L ):
+    def update(self, orderv2, classa, L ):
         """
         Update the classes.
         """
@@ -69,43 +73,43 @@ class suffixarray:
         n = [0] * n
         n[orderv2[0]] = 0
         for i in range(1, n):
-            curr = orderv2[i]
-            prev = orderv2[i - 1]
-            mid = curr + L
-            midPrev = (prev + L) % n
-            if _class[curr] != _class[prev] or _class[mid] != _class[midPrev]:
-                n[curr] = n[prev] + 1
+            c = orderv2[i]
+            p = orderv2[i - 1]
+            mid = c + L
+            midPrev = (p + L) % n
+            if classa[c] != classa[p] or classa[mid] != classa[midPrev]:
+                n[c] = n[p] + 1
             else:
-                n[curr] = n[prev]
+                n[c] = n[p]
         return n
 
-    def buildsuffix( self, S ):
+    def buildsuffix(self, S ):
         """
         Build a suffix array for the string S.
         """
         los = len(S) # length of string
         seq = self.sortit(S)
-        _class = self.cc(S, seq)
+        classa = self.cc(S, seq)
         L = 1
         while L < los:
-            seq = self.dsort(S, L, seq, _class)
-            _class = self.update(seq, _class, L)
+            seq = self.dsort(S, L, seq, classa)
+            classa = self.update(seq, classa, L)
             L = 2 * L
         return seq
 
 class runit:
-    def __init__( self ):
+    def __init__(self):
         reads = self.readData()
         genome = self.assembly(reads)
         print(genome)
 
-    def readData( self ):
+    def readData(self):
         """
         Read the input text file of transcripts.
         """
         return list(set(sys.stdin.read().strip().split()))
 
-    def getbwt( self, text, seq, alphabet=["$", "A", "C", "G", "T"] ):
+    def getbwt(self, text, seq, alphabet=["$", "A", "C", "G", "T"] ):
         """
         Burrows–Wheeler transform of the suffix array.
         """
@@ -123,13 +127,13 @@ class runit:
             for char, count in counts.items():
                 counts[char][i + 1] = counts[char][i]
             counts[cuurent_Char][i + 1] += 1
-        current_index = 0
+        cent_index = 0
         for char in sorted(alphabet):
-            starts[char] = current_index
-            current_index += counts[char][l]
+            starts[char] = cent_index
+            cent_index += counts[char][l]
         return bwt, starts, counts
 
-    def getoverlap( self, text, patterns, k=12 ):
+    def getoverlap(self, text, patterns, k=12 ):
         """
         Return the longest overlap for the list of patterns
         in the text.
@@ -165,18 +169,21 @@ class runit:
                     return i, l - pos
         return i, overlap
 
-    def assembly( self, reads ):
-        index = 0
-        genome = reads[0]
-        firstRead = reads[index]
+    def assembly(self, reads):
+        """
+        Assemble!
+        """
+        index = 0 # start here
+        genome = reads[0] # output genome
+        fread = reads[index] # first read
         while True:
-            current_Read = reads[index]
+            cead = reads[index] # cent read
             if 1 == len(reads):
                 break
             del reads[index]
-            index, overlap = self.getoverlap(current_Read + "$", reads)
+            index, overlap = self.getoverlap(cead + "$", reads)
             genome += reads[index][overlap:]
-        index, overlap = self.getoverlap(reads[0] + "$", [firstRead])
+        index, overlap = self.getoverlap(reads[0] + "$", [fread])
         if overlap > 0:
             return genome[:-overlap]
         else:
