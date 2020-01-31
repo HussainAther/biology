@@ -1,193 +1,163 @@
+# python3
 import sys
 
 """
-Create an error-free genome assembly method to create a 
-circular genome from a given input list of DNA transcripts.
+Reconstruct genome assembly from transcripts 
+of DNA fragments.
 """
 
-class suffixarray:
-    def __init__(self, text):
-        """
-        Initialize a suffix array of the text.
-        """
-       self.seq = self.buildsuffix(text)
+class sarray:
+    def __init__(self, letters):
+        self.seq = self.bsa(letters)
 
-    def cc(self, S, seq ):
-        """
-        Create the class of characters.
-        """
-        l = len(S)
-        cclass = [0] * l
-        cclass[seq[0]] = 0
-        for i in range(1, l):
-            if S[seq[i]] != S[seq[i - 1]]:
-                cclass[seq[i]] = cclass[seq[i - 1]] + 1
-            else:
-                cclass[seq[i]] = cclass[seq[i - 1]]
-        return cclass
-
-    def sortit(self, S):
-        """
-        Determine the sorted string. 
-        """
-        l = len(S)
+    def sortit(self, x):
+        l = len(x)
         seq = [0] * l
-        count = dict()
+        r = {}
         for i in range(l):
-            count[S[i]] = count.get(S[i], 0) + 1
-        charList = sorted(count.keys())
-        pChar = charList[0]
-        for char in charList[1:]:
-            count[char] += count[pChar]
-            pChar = char
-        for i in range(l - 1, -1, -1):
-            c = S[i]
-            count[c] = count[c] - 1
-            seq[count[c]] = i
+            r[x[i]] = r.get(x[i], 0) + 1
+        clist = sorted(r.keys())
+        p = clist[0]
+        for char in clist[1:]:
+            r[char] += r[p]
+            p = char
+        for i in range(l-1, -1, -1):
+            c = x[i]
+            r[c] = r[c] - 1
+            seq[r[c]] = i
         return seq
 
-    def dsort(self, S, L, seq, classa):
-        """
-        Sorting algorithm to get the right order works on 
-        string S, sequence seq, and class classa. 
-        """
-        los = len(S) # length of string
-        count = [0] * los
-        orderv2 = [0] * los
-        for i in range(los):
-            count[classa[i]] += 1
-        for j in range(1, los):
-            count[j] += count[j - 1]
-        for i in range(los - 1, -1, -1):
-            start = (seq[i] - L + los) % los
-            cl = classa[start]
-            count[cl] -= 1
-            orderv2[count[cl]] = start
-        return orderv2
-
-    def update(self, orderv2, classa, L ):
-        """
-        Update the classes.
-        """
-        n = len(orderv2)
-        n = [0] * n
-        n[orderv2[0]] = 0
-        for i in range(1, n):
-            c = orderv2[i]
-            p = orderv2[i - 1]
-            mid = c + L
-            midPrev = (p + L) % n
-            if classa[c] != classa[p] or classa[mid] != classa[midPrev]:
-                n[c] = n[p] + 1
+    def cg(self, x, seq):
+        l = len(x)
+        groupa = [0] * l
+        groupa[seq[0]] = 0
+        for i in range(1, l):
+            if x[seq[i]] != x[seq[i-1]]:
+                groupa[seq[i]] = groupa[seq[i-1]] + 1
             else:
-                n[c] = n[p]
-        return n
-
-    def buildsuffix(self, S ):
-        """
-        Build a suffix array for the string S.
-        """
-        los = len(S) # length of string
-        seq = self.sortit(S)
-        classa = self.cc(S, seq)
-        L = 1
-        while L < los:
-            seq = self.dsort(S, L, seq, classa)
-            classa = self.update(seq, classa, L)
-            L = 2 * L
+                groupa[seq[i]] = groupa[seq[i-1]]
+        return groupa        
+    
+    def dsort(self, x, e, seq, classa):
+        sl = len(x)
+        r = [0] * sl
+        new = [0] * sl
+        for i in range(sl):
+            r[classa[i]] += 1
+        for j in range(1, sl):
+            r[j] += r[j-1]
+        for i in range(sl-1, -1, -1):
+            start = (seq[i]-e+sl) % sl
+            cl = classa[start]
+            r[cl] -= 1
+            new[r[cl]] = start
+        return new
+    
+    def up(self, new, classa, e):
+        n = len(new)
+        u = [0] * n
+        u[new[0]] = 0
+        for i in range(1, n):
+            curr = new[i]
+            prev = new[i-1]
+            q = curr + e
+            m = (prev + e) % n
+            if classa[curr] != classa[prev] or classa[q] != classa[m]:
+                u[curr] = u[prev] + 1
+            else:
+                u[curr] = u[prev]
+        return u
+    
+    def bsa(self, x):
+        sl = len(x)
+        seq = self.sortit(x)
+        classa = self.cg(x, seq)
+        e = 1
+        while e < sl:
+            seq = self.dsort(x, e, seq, classa)
+            classa = self.up(seq, classa, e)
+            e = 2 * e
         return seq
 
-class runit:
+class doit:
     def __init__(self):
-        reads = self.readData()
-        genome = self.assembly(reads)
-        print(genome)
+        reads = self.datain()
+        output = self.ass(reads)     
+        print(output)   
 
-    def readData(self):
-        """
-        Read the input text file of transcripts.
-        """
+    def datain(self):
         return list(set(sys.stdin.read().strip().split()))
 
-    def getbwt(self, text, seq, alphabet=["$", "A", "C", "G", "T"] ):
-        """
-        Burrows–Wheeler transform of the suffix array.
-        """
-        l = len(text)
+    def makebwt(self, letters, seq, dnabases = ["$", "A", "C", "G", "T"]):
+        l = len(letters)
         bwt = [""] * l
         for i in range(l):
-            bwt[i] = text[(seq[i] + l - 1) % l]
+            bwt[i] = letters[(seq[i]+l-1)%l]
 
-        counts = dict()
-        starts = dict()
-        for char in alphabet:
-            counts[char] = [0] * (l + 1)
+        y = {}
+        a = {}
+        for char in dnabases:
+            y[char] = [0] * (l + 1)
         for i in range(l):
-            cuurent_Char = bwt[i]
-            for char, count in counts.items():
-                counts[char][i + 1] = counts[char][i]
-            counts[cuurent_Char][i + 1] += 1
-        cent_index = 0
-        for char in sorted(alphabet):
-            starts[char] = cent_index
-            cent_index += counts[char][l]
-        return bwt, starts, counts
+            currChar = bwt[i]
+            for char, r in y.items():
+                y[char][i+1] = y[char][i]
+            y[currChar][i+1] += 1
+        cind = 0
+        for char in sorted(dnabases):
+            a[char] = cind
+            cind += y[char][l]
+        return bwt, a, y
 
-    def getoverlap(self, text, patterns, k=12 ):
-        """
-        Return the longest overlap for the list of patterns
-        in the text.
-        """
-        seq = suffixarray(text).seq
-        bwt, starts, counts = self.getbwt(text, seq)
-        l = len(text) - 1
-        occs = dict()
-        for i, pattern_list in enumerate(patterns):
-            pattern = pattern_list[:k]
-            top = 0
-            bottom = len(bwt) - 1
-            index = len(pattern) - 1
-            while top <= bottom:
-                if index >= 0:
-                    symbol = pattern[index]
-                    index -= 1
-                    if counts[symbol][bottom + 1] - counts[symbol][top] > 0:
-                        top = starts[symbol] + counts[symbol][top]
-                        bottom = starts[symbol] + counts[symbol][bottom + 1] - 1
+    def getoverlap(self, letters, ps, k = 12):
+        seq = sarray(letters).seq
+        bwt, a, y = self.makebwt(letters, seq)        
+        l = len(letters)-1
+
+        f = {}
+        for i, p in enumerate(ps):
+            pt = p[:k]
+            t = 0
+            b = len(bwt) - 1
+            cind = len(pt) - 1
+            while t <= b:
+                if cind >= 0:
+                    sym = pt[cind]
+                    cind -= 1
+                    if y[sym][b+1] - y[sym][t] > 0:
+                        t = a[sym] + y[sym][t]
+                        b = a[sym] + y[sym][b+1] - 1
                     else:
                         break
                 else:
-                    for j in range(top, bottom + 1):
-                        if not seq[j] in occs:
-                            occs[seq[j]] = []
-                        occs[seq[j]].append(i)
+                    for j in range(t, b + 1):
+                        if not seq[j] in f:
+                            f[seq[j]] = []
+                        f[seq[j]].append(i)
                     break
         overlap = 0
-        for pos, iList in sorted(occs.items()):
-            for i in iList:
-                if text[pos:-1] == patterns[i][:l - pos]:
-                    return i, l - pos
+        for pos, il in sorted(f.items()):
+            for i in il:
+                if letters[pos:-1] == ps[i][:l-pos]:
+                    return i, l-pos
         return i, overlap
 
-    def assembly(self, reads):
-        """
-        Assemble!
-        """
-        index = 0 # start here
-        genome = reads[0] # output genome
-        fread = reads[index] # first read
+    def ass(self, reads):
+        output = reads[0]
+        currInd = 0
+        firstRead = reads[currInd]
         while True:
-            cead = reads[index] # cent read
+            currRead = reads[currInd]
             if 1 == len(reads):
                 break
-            del reads[index]
-            index, overlap = self.getoverlap(cead + "$", reads)
-            genome += reads[index][overlap:]
-        index, overlap = self.getoverlap(reads[0] + "$", [fread])
+            del reads[currInd]
+            currInd, overlap = self.getoverlap(currRead+"$", reads)
+            output += reads[currInd][overlap:]
+        currInd, overlap = self.getoverlap(reads[0]+"$", [firstRead])
         if overlap > 0:
-            return genome[:-overlap]
+            return output[:-overlap]
         else:
-            return genome
+            return output
 
 if __name__ == "__main__":
-    runit()
+    doit()
