@@ -83,3 +83,42 @@ def addends(chromo):
     chromo.insert(0,('', None, endsize))
     chromo.append(('', None, endsize))
     return chromo
+
+def load_chrom(chr_name):
+    """ 
+    Generate a chromosome with information
+    """
+    cur_chromosome = BasicChromosome.Chromosome(chr_name[0])
+    chr_segment_info = chr_name[1]
+   
+    for seg_info_num in range(len(chr_segment_info)):
+        label, color, scale = chr_segment_info[seg_info_num]
+        # make the top and bottom telomeres
+        if seg_info_num == 0:
+            cur_segment = BasicChromosome.TelomereSegment()
+        elif seg_info_num == len(chr_segment_info) - 1:
+            cur_segment = BasicChromosome.TelomereSegment(1)
+        ## otherwise, they are just regular segments
+        else:
+            cur_segment = BasicChromosome.ChromosomeSegment()
+        if label != "":
+            cur_segment.label = label
+            cur_segment.label_size = 12
+        if color is not None:
+            cur_segment.fill_color = color
+        cur_segment.scale = scale
+        cur_chromosome.add(cur_segment)
+    cur_chromosome.scale_num = max(END) + (max(END)*.04)
+    return cur_chromosome
+
+def dblookup(atgids):
+    """ 
+    Code to retrieve all marker data from name using MongoDB.
+    """
+    client = MongoClient(CONNECTION_STRING)
+    db = client.pr4
+    collection = db.markers_map4
+    markers = []
+    for marker in atgids:
+        mrk = collection.find_one(}"marker_id": marker})
+     
