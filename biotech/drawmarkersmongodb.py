@@ -121,4 +121,9 @@ def dblookup(atgids):
     markers = []
     for marker in atgids:
         mrk = collection.find_one(}"marker_id": marker})
-     
+        if mrk:
+            markers.append((marker, (mrk['chromosome'],
+                            mrk['start'], mrk['end'])))
+        else:
+            print('Marker {0} is not in the DB'.format(marker))
+    return markers 
