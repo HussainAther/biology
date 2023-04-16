@@ -10,3 +10,9 @@ def retseq(seq_fh):
     :seq_fh: File handle of the input seqeuce
     :return: A list with non empty sequences
     """
+
+    fullseqs = []
+    for record in SeqIO.parse(seq_fh, 'fasta'):
+        if len(record.seq):
+            fullseqs.append(record)
+    return fullseqs
