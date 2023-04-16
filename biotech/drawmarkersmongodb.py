@@ -11,3 +11,7 @@ def sortmarkers(crms,end):
     """
     Sort markers into chromosomes.
     """
+    i = 0
+    crms_o = [[] for r in range(len(end))]
+    crms_fo = [[] for r in range(len(end))]
+ 
