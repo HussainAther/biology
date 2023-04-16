@@ -33,3 +33,8 @@ def sortmarkers(crms,end):
                         pass
            i += 1
     return crms_o 
+
+def getchromo(crms_o, end):
+    """
+    From an ordered list of markers, generate chromosomes.
+    """
