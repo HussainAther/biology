@@ -24,3 +24,12 @@ def sortmarkers(crms,end):
         for order in crms_fo:
             # Using the marker order set in crms_fo, fill crms_o
             # with all the marker information.
+            for pos in order:
+                for mark in crms[i]:
+                    try:
+                        if pos==mark[1]:
+                            crms_o[i].append(mark)
+                    except:
+                        pass
+           i += 1
+    return crms_o 
