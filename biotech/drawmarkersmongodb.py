@@ -127,3 +127,8 @@ def dblookup(atgids):
         else:
             print('Marker {0} is not in the DB'.format(marker))
     return markers 
+
+# Size of each chromosome
+END = (30427563, 19696817, 23467989, 18581571, 26986107)
+gids = []
+rx_rid = re.compile('^AT[1-5]G\d{5}$')
