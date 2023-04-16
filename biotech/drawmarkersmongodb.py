@@ -38,3 +38,14 @@ def getchromo(crms_o, end):
     """
     From an ordered list of markers, generate chromosomes.
     """
+    chromo = [[] for r in range(len(end))]
+    i = 0
+    for crm_o in crms_o:
+        j = 0
+        if len(crm_o)>1:
+            for mark in crm_o:
+                if mark==crm_o[0]: # first marker
+                    chromo[i].append(('',None,mark[1]))
+                    chromo[i].append((mark[0],colors.red,mark[2]-mark[1]))
+                    ant = mark[2]
+                elif mark==crm_o[-1]: # last marker
