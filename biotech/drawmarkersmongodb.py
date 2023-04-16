@@ -74,3 +74,12 @@ def addends(chromo):
     """
     Adds a 3% of blank region at both ends for better76graphic output.
     """
+    size = 0
+    for x in chromo:
+        size += x[2]
+    # get 3% of size of each chromosome:
+    endsize = int(float(size)*.03)
+    # add this size to both ends in chromo:
+    chromo.insert(0,('', None, endsize))
+    chromo.append(('', None, endsize))
+    return chromo
