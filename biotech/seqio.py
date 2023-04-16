@@ -16,3 +16,7 @@ def retseq(seq_fh):
         if len(record.seq):
             fullseqs.append(record)
     return fullseqs
+
+with open(INPUT_FILE) as in_fh:
+    with open(OUTPUT_FILE, 'w') as out_fh:
+        SeqIO.write(retseq(in_fh), out_fh, 'fasta')
