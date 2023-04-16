@@ -14,4 +14,7 @@ def sortmarkers(crms,end):
     i = 0
     crms_o = [[] for r in range(len(end))]
     crms_fo = [[] for r in range(len(end))]
- 
+    for crms in crms:
+        for marker in crm:
+            # Add the marker start position at each chromosome
+            crms_fo[i].append(marker[1])
